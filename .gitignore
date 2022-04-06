@@ -14,12 +14,16 @@ tmp/
 *.bak
 *.swp
 *~.nib
-.classpath
-.project
 local.properties
 .settings/
 .loadpath
 .recommenders
+
+# Eclipse Core
+.project
+
+#JDT-specific (Eclipse JAVA Development Tools)
+.classpath
 
 # External tool builders
 .externalToolBuilders/
