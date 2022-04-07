@@ -1,4 +1,4 @@
-package SongDB;
+package song.search;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +15,9 @@ public class Main extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("songSearch.fxml"));
 		Parent searchForm = loader.load();
+		
+		SongSearchController searchController = loader.getController();
+		searchController.setSearchForm(searchForm);
 		
 		Scene scene = new Scene(searchForm);
 		primaryStage.setTitle("search");
