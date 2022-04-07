@@ -21,4 +21,5 @@ public class RoomChoiceController implements Initializable {
 //		CommonService.windowClose(imsi2);	//임시 테스트
 	}
 
+
 }
