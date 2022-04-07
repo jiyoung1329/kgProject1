@@ -13,7 +13,7 @@ public class Main {
 		try {
 			Class.forName("oracle.jdbc.OracleDriver");
 			Connection con = DriverManager.getConnection(url, user, pwd);
-			System.out.println("¼º°ø");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
