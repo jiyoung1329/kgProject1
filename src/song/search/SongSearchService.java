@@ -10,6 +10,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 public class SongSearchService {
 	private songSearchDAO searchDAO;
@@ -58,15 +59,14 @@ public class SongSearchService {
 		// 검색 결과 테이블에 추가
 		TableView<SongSearchDTO> songTable = (TableView<SongSearchDTO>) searchForm.lookup("#songTable");
 //		TableColumn<SongSearchDTO, String> songNumber = (TableColumn) songTable.getColumns().get(0);
-//		TableColumn<SongSearchDTO, String> songTitle = (TableColumn) songTable.getColumns().get(1);
-//		TableColumn<SongSearchDTO, String> songSinger = (TableColumn) songTable.getColumns().get(2);
-		
 //		songNumber.setCellValueFactory(new PropertyValueFactory<SongSearchDTO, String>("songNum"));
-//		songTitle.setCellValueFactory(new PropertyValueFactory<SongSearchDTO, String>("songTitle"));
-//		songSinger.setCellValueFactory(new PropertyValueFactory<SongSearchDTO, String>("songSinger"));
 		songTable.setItems(songDatas);
 		
-		
+	}
+	
+	public void windowClose(Parent searchForm) {
+		Stage stage = (Stage)searchForm.getScene().getWindow();
+		stage.close();
 		
 	}
 	
