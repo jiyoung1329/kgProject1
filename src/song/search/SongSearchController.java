@@ -72,10 +72,7 @@ public class SongSearchController implements Initializable{
 	public void songReserveProc() {
 		if (searchDTO != null) {
 			System.out.println(searchDTO.getSongNum() + ", " + searchDTO.getSongTitle() + ", " + searchDTO.getSongSinger() + ", "  + searchDTO.getSongLink());
-		} else {
-			Alert alert = new Alert(AlertType.WARNING);
-			alert.setContentText("노래가 선택되지 않았습니다.");
-		}
+		} 
 		
 	}
 	
