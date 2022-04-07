@@ -2,6 +2,24 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/jykim/Project/lib/ojdbc8.jar"/>
+	<classpathentry kind="lib" path="C:/Users/KimSC/Desktop/ojdbc8-full/ojdbc8-full/dms.jar"/>
+	<classpathentry kind="lib" path="C:/Users/KimSC/Desktop/ojdbc8-full/ojdbc8-full/JDBC-javadoc-21c.jar"/>
+	<classpathentry kind="lib" path="C:/Users/KimSC/Desktop/ojdbc8-full/ojdbc8-full/ojdbc8.jar"/>
+	<classpathentry kind="lib" path="C:/Users/KimSC/Desktop/ojdbc8-full/ojdbc8-full/ojdbc8_g.jar"/>
+	<classpathentry kind="lib" path="C:/Users/KimSC/Desktop/ojdbc8-full/ojdbc8-full/ojdbc8dms.jar"/>
+	<classpathentry kind="lib" path="C:/Users/KimSC/Desktop/ojdbc8-full/ojdbc8-full/ojdbc8dms_g.jar"/>
+	<classpathentry kind="lib" path="C:/Users/KimSC/Desktop/ojdbc8-full/ojdbc8-full/ons.jar"/>
+	<classpathentry kind="lib" path="C:/Users/KimSC/Desktop/ojdbc8-full/ojdbc8-full/oraclepki.jar"/>
+	<classpathentry kind="lib" path="C:/Users/KimSC/Desktop/ojdbc8-full/ojdbc8-full/orai18n.jar"/>
+	<classpathentry kind="lib" path="C:/Users/KimSC/Desktop/ojdbc8-full/ojdbc8-full/osdt_cert.jar"/>
+	<classpathentry kind="lib" path="C:/Users/KimSC/Desktop/ojdbc8-full/ojdbc8-full/osdt_core.jar"/>
+	<classpathentry kind="lib" path="C:/Users/KimSC/Desktop/ojdbc8-full/ojdbc8-full/rsi.jar"/>
+	<classpathentry kind="lib" path="C:/Users/KimSC/Desktop/ojdbc8-full/ojdbc8-full/RSI-javadoc-21c.jar"/>
+	<classpathentry kind="lib" path="C:/Users/KimSC/Desktop/ojdbc8-full/ojdbc8-full/simplefan.jar"/>
+	<classpathentry kind="lib" path="C:/Users/KimSC/Desktop/ojdbc8-full/ojdbc8-full/ucp.jar"/>
+	<classpathentry kind="lib" path="C:/Users/KimSC/Desktop/ojdbc8-full/ojdbc8-full/UCP-Javadoc-21c.jar"/>
+	<classpathentry kind="lib" path="C:/Users/KimSC/Desktop/ojdbc8-full/ojdbc8-full/xdb.jar"/>
+	<classpathentry kind="lib" path="C:/Users/KimSC/Desktop/ojdbc8-full/ojdbc8-full/xmlparserv2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/KimSC/Desktop/ojdbc8-full/ojdbc8-full/xmlparserv2_sans_jaxp_services.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
