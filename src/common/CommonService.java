@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package common;
 
 import javafx.scene.Parent;
@@ -11,3 +12,10 @@ public class CommonService {
 	}
 
 }
+=======
+package common;
+
+public class CommonService {
+
+}
+>>>>>>> master
