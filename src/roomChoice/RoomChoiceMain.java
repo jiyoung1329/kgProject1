@@ -6,7 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class RoomChoiceMain extends Application {
+public class RoomChoiceMain extends Application{
 
 	public static void main(String[] args) {
 		launch(args);
@@ -19,7 +19,7 @@ public class RoomChoiceMain extends Application {
 		Parent root = loader.load();
 		Scene scene = new Scene(root);
 		
-		primaryStage.setTitle("rcForm");
+		primaryStage.setTitle("방선택");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
