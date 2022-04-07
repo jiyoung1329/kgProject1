@@ -18,7 +18,7 @@ public class SongMain extends Application{
 		Parent songForm = loader.load();
 		Scene scene = new Scene(songForm);
 		
-		primaryStage.setTitle("노래방 화면");
+		primaryStage.setTitle("노래방");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 				
