@@ -25,7 +25,7 @@ public class Member_Service {
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 		String user = "oracle";
 		String pw = "oracle";
-//		String url ="jdbc:oracle:thin:@kgproject_high?TNS_ADMIN=C:\\Wallet_kgProject";
+//		String url = "jdbc:oracle:thin:@kgproject_high?TNS_ADMIN=C:/Wallet_kgProject";
 //		String user = "admin";
 //		String pw = "KGproject1234!";
 		try {
@@ -45,7 +45,12 @@ public class Member_Service {
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while (rs.next()) {
-				list.getItems().add(rs.getString("ID"));
+				if(rs.getString("ID").length()>=5) {
+				list.getItems().add(rs.getString("ID")+"\t\t"+rs.getString("phone")+"\t\t"+rs.getString("song"));
+				}else {
+				list.getItems().add(rs.getString("ID")+"\t\t\t"+rs.getString("phone")+"\t\t"+rs.getString("song"));
+				}
+					
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -70,7 +75,7 @@ public class Member_Service {
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while (rs.next()) {
-				list.getItems().add(rs.getString("id"));
+				list.getItems().add(rs.getString("ID"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -105,7 +110,8 @@ public class Member_Service {
 	public void delete(ListView list2) {
 		ArrayList<String> array = new ArrayList(list2.getItems());
 		for (String i : array) {
-			String sql = "delete FROM member where id ='"+i+"'";
+			String[] del_list = i.split("\t");
+			String sql = "delete FROM member where id ='"+del_list[0]+"'";
 			try {
 				ps = con.prepareStatement(sql);
 				ps.executeUpdate();

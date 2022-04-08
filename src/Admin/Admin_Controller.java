@@ -9,12 +9,21 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 import Member.Member_Controler;
-import Song.Song_Controller;
+import Songregister.Song_Controller;
 
 public class Admin_Controller {
 	Parent memberform;
 	Parent songform;
+	Parent adminForm;
 	
+	public Parent getAdminForm() {
+		return adminForm;
+	}
+
+	public void setAdminForm(Parent adminForm) {
+		this.adminForm = adminForm;
+	}
+
 	public Parent getMemberform() {
 		return memberform;
 	}
@@ -41,7 +50,7 @@ public class Admin_Controller {
 			}
 	}			
 	public void song(){
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Song/SongForm.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Songregister/SongForm.fxml"));
 
 		try {
 			songform = loader.load();
@@ -58,7 +67,6 @@ public class Admin_Controller {
 			e.printStackTrace();
 		}
 	}
-	
 	
 }
 
