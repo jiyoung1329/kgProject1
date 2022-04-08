@@ -22,12 +22,12 @@ public class Member_Service {
 	private ResultSet rs;
 	
 	public Member_Service() {
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";
-		String user = "oracle";
-		String pw = "oracle";
-//		String url = "jdbc:oracle:thin:@kgproject_high?TNS_ADMIN=C:/Wallet_kgProject";
-//		String user = "admin";
-//		String pw = "KGproject1234!";
+//		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+//		String user = "oracle";
+//		String pw = "oracle";
+		String url = "jdbc:oracle:thin:@kgproject_high?TNS_ADMIN=C:/Wallet_kgProject";
+		String user = "admin";
+		String pw = "KGproject1234!";
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 
