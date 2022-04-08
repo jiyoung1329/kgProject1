@@ -52,5 +52,9 @@ public class Youtube {
         System.out.println("www.youtube.com/watch?v=" + videoId);
         return videoId;
     }
+    
+    public void makePlayList() {
+    	
+    }
 
 }
