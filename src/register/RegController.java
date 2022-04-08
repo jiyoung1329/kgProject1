@@ -3,6 +3,7 @@ package register;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import common.CommonService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -10,7 +11,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import login.LoginDTO;
-import main.CommonService;
 import main.MainController;
 
 public class RegController implements Initializable {
@@ -44,37 +44,37 @@ public class RegController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		registerButton.setDisable(true); //È¸¿ø°¡ÀÔ ¹öÆ° ºñÈ°¼ºÈ­
-		regPw.setDisable(true);			// ºñ¹Ð¹øÈ£ ÇÊµå ºñÈ°¼ºÈ­
-		regConfirmPw.setDisable(true);  // ºñ¹Ð¹øÈ£ È®ÀÎ ÇÊµå ºñÈ°¼ºÈ­
-		regMobile.setDisable(true);		// ÀüÈ­¹øÈ£ ÇÊµå ºñÈ°¼ºÈ­
-		regSame.setDisable(true);		// Áßº¹È®ÀÎ ¹öÆ° ºñÈ°¼ºÈ­
+		registerButton.setDisable(true); //È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ° ï¿½ï¿½È°ï¿½ï¿½È­
+		regPw.setDisable(true);			// ï¿½ï¿½Ð¹ï¿½È£ ï¿½Êµï¿½ ï¿½ï¿½È°ï¿½ï¿½È­
+		regConfirmPw.setDisable(true);  // ï¿½ï¿½Ð¹ï¿½È£ È®ï¿½ï¿½ ï¿½Êµï¿½ ï¿½ï¿½È°ï¿½ï¿½È­
+		regMobile.setDisable(true);		// ï¿½ï¿½È­ï¿½ï¿½È£ ï¿½Êµï¿½ ï¿½ï¿½È°ï¿½ï¿½È­
+		regSame.setDisable(true);		// ï¿½ßºï¿½È®ï¿½ï¿½ ï¿½ï¿½Æ° ï¿½ï¿½È°ï¿½ï¿½È­
 		regSvc = new RegisterService();
 		regId.textProperty().addListener((attribute, before, after) -> {
-			idLengthCheck();	// È¸¿ø°¡ÀÔ ID±æÀÌ È®ÀÎ 8ÀÚÁ¦ÇÑ
-			if(regId.getText().length()>0) { //IDÇÊµå¿¡ °ªÀÌ ÀÖÀ» °æ¿ì¿¡¸¸ Áßº¹È®ÀÎ ¹öÆ° È°¼ºÈ­
+			idLengthCheck();	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ IDï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ 8ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			if(regId.getText().length()>0) { //IDï¿½Êµå¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ì¿¡ï¿½ï¿½ ï¿½ßºï¿½È®ï¿½ï¿½ ï¿½ï¿½Æ° È°ï¿½ï¿½È­
 				regSame.setDisable(false);
 			}
 			emptyCheck();
 		});
 		regPw.textProperty().addListener((attribute, before, after) -> {
-			pwLengthCheck(); //ºñ¹Ð¹øÈ£ ±æÀÌ È®ÀÎ 10ÀÚÁ¦ÇÑ
+			pwLengthCheck(); //ï¿½ï¿½Ð¹ï¿½È£ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ 10ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			emptyCheck();
 		});
 		
 		regMobile.textProperty().addListener((attribute, before, after) -> {
-			emptyCheck(); // ÀüÈ­¹øÈ£ÇÊµå±îÁö °ªÀÌ ÀÖ¾î¾ß¸¸ È¸¿ø°¡ÀÔ ¹öÆ° È°¼ºÈ­
+			emptyCheck(); // ï¿½ï¿½È­ï¿½ï¿½È£ï¿½Êµï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ß¸ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ° È°ï¿½ï¿½È­
 		});
 	}
-	public void regSameProc() { //Áßº¹¹öÆ° Å¬¸¯½Ã ½ÇÇàµÇ´Â ¸Þ¼Òµå
+	public void regSameProc() { //ï¿½ßºï¿½ï¿½ï¿½Æ° Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½Þ¼Òµï¿½
 
 		RegDAO regDao = new RegDAO();
 		LoginDTO login = regDao.selectId(regId.getText());
 			if (login != null) {
-				CommonService.msg("Áßº¹µÈ ¾ÆÀÌµðÀÔ´Ï´Ù.");
+				CommonService.msg("ï¿½ßºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ï¿½Ô´Ï´ï¿½.");
 				return;
-			} else { //Áßº¹ÀÌ ¾Æ´Ò °æ¿ì¿¡¸¸ ºñÈ°¼ºÈ­µÈ ÇÊµåµéÀÌ È²¼ºÈ­·Î º¯°æ
-				CommonService.msg("È¸¿ø°¡ÀÔÀÌ °¡´ÉÇÑ ¾ÆÀÌµðÀÔ´Ï´Ù.");
+			} else { //ï¿½ßºï¿½ï¿½ï¿½ ï¿½Æ´ï¿½ ï¿½ï¿½ì¿¡ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­ï¿½ï¿½ ï¿½Êµï¿½ï¿½ï¿½ï¿½ È²ï¿½ï¿½È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+				CommonService.msg("È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ï¿½Ô´Ï´ï¿½.");
 				regPw.setDisable(false);
 				regConfirmPw.setDisable(false);
 				regMobile.setDisable(false);

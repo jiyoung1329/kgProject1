@@ -14,8 +14,8 @@ public class MainService {
 		this.mainController = mainController;
 	}
 
-	public void rcOpen() {	// È¸¿ø ·Î±×ÀÎ ¼º°ø½Ã RoomChoice ÆûÀ» ½ÇÇàÇÏ´Â ¸Þ¼Òµå
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/roomChoice/rcForm.fxml"));
+	public void rcOpen() {	// È¸ï¿½ï¿½ ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ RoomChoice ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼Òµï¿½
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/room/choice/rcForm.fxml"));
 
 		Parent roomChoiceForm;
 
@@ -36,7 +36,7 @@ public class MainService {
 
 	}
 
-	public void regOpen() {  //È¸¿ø°¡ÀÔ ¹öÆ° Å¬¸¯½Ã RegisterÆûÀ» ½ÇÇàÇÏ´Â ¸Þ¼Òµå
+	public void regOpen() {  //È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ° Å¬ï¿½ï¿½ï¿½ï¿½ Registerï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼Òµï¿½
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/register/regForm.fxml"));
 
 		Parent regForm;
@@ -58,5 +58,31 @@ public class MainService {
 			e.printStackTrace();
 		}
 	}
-	// °ü¸®ÀÚ ·Î±×ÀÎ ¼º°ø½Ã °ü¸®ÀÚ ÆûÀ» ½ÇÇàÇÏ´Â ¸Þ¼Òµå¸¦ ÀÛ¼ºÇØ¾ßÇÔ
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼Òµå¸¦ ï¿½Û¼ï¿½ï¿½Ø¾ï¿½ï¿½ï¿½
+
+	public void adminOpen() {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Admin/AdminForm.fxml"));
+		
+		Parent adminForm;
+		try {
+		adminForm = loader.load();
+		
+		mainController.setAdminForm(adminForm);
+		mainController.setAdminController(loader.getController());
+		
+		Scene scene = new Scene(adminForm);
+
+		Stage stage = new Stage();
+		stage.setTitle("adminForm");
+		stage.setScene(scene);
+		stage.show();
+
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
+
+		
+
+		
+	}
 }

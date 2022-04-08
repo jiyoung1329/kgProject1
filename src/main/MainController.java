@@ -1,16 +1,19 @@
 package main;
 
+import admin.AdminController;
 import javafx.scene.Parent;
 import login.LoginController;
 import register.RegController;
 
-public class MainController { //°¢Á¾ µ¥ÀÌÅÍ¸¦ º¸°üÇÔ
+public class MainController { //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	private MainService mainSvc;
 	private Parent loginForm;
 	private LoginController loginController;
 	private Parent roomChoiceForm;
 	private Parent regForm;
 	private RegController regController;
+	private Parent adminForm;
+	private AdminController adminController;
 	
 	public MainController() {
 		mainSvc = new MainService();
@@ -43,14 +46,24 @@ public class MainController { //°¢Á¾ µ¥ÀÌÅÍ¸¦ º¸°üÇÔ
 		return regForm;
 	}
 	
-	public void open(String division) { //·Î±×ÀÎ ÄÁÆ®·Ñ·¯¿¡¼­ division°ªÀ» Àü¼ÛÇØÁÖ¸é ±× °ª¿¡ µû¶ó ¸ÞÀÎ¼­ºñ½ºÀÇ ÆûÀ» ¿ÀÇÂÇÏ´Â ¸Þ¼Òµå¸¦ ½ÇÇàÇÏ´Â ¸Þ¼Òµå
+	public void open(String division) { //ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ï¿½ï¿½ï¿½ï¿½ divisionï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼Òµå¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼Òµï¿½
 		if("RoomChoice".equals(division)) {
 			mainSvc.rcOpen();
 		}else if("Register".equals(division)) {
 			mainSvc.regOpen();
 		}else if("Admin".equals(division)) {
-			System.out.println("°ü¸®ÀÚ");
+			mainSvc.adminOpen();
 		}
+	}
+
+	public void setAdminForm(Parent adminForm) {
+		 this.adminForm = adminForm;
+		
+	}
+
+	public void setAdminController(AdminController Admincontroller) {
+		this.adminController = Admincontroller;
+		Admincontroller.setAdminForm(adminForm);
 	}
 	
 

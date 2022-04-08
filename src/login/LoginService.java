@@ -1,18 +1,19 @@
 package login;
 
+import common.CommonService;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import main.CommonService;
+
 
 public class LoginService {
 	
-	public LoginDTO loginProc(String id, String pw) { // ·Î±×ÀÎÄÁÆ®·Ñ·¯¿¡¼­ id,pw°ªÀ» ¹Ş¾Æ¿Í¼­ µ¥ÀÌÅÍº£ÀÌ½º Á¢¼Ó½ÇÇà
+	public LoginDTO loginProc(String id, String pw) { // ï¿½Î±ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ï¿½ï¿½ï¿½ï¿½ id,pwï¿½ï¿½ï¿½ï¿½ ï¿½Ş¾Æ¿Í¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Íºï¿½ï¿½Ì½ï¿½ ï¿½ï¿½ï¿½Ó½ï¿½ï¿½ï¿½
 		LoginDAO loginDao = new LoginDAO();
-		LoginDTO loginDto = loginDao.selectId(id); //loginDAOÀÇ selectID¸Ş¼Òµå ½ÇÇàÇÏ¿© LoginDTOÀÚ·áÇü¿¡ °ªÀ» ÀúÀå
-		if(loginDto != null && loginDto.getPw().equals(pw)) {  //°ªÀÌ ÀÖ°í ºñ¹Ğ¹øÈ£°¡ °°À¸¸é LoginDTOÀÚ·áÇü °ª ¹İÈ¯
+		LoginDTO loginDto = loginDao.selectId(id); //loginDAOï¿½ï¿½ selectIDï¿½Ş¼Òµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ LoginDTOï¿½Ú·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		if(loginDto != null && loginDto.getPw().equals(pw)) {  //ï¿½ï¿½ï¿½ï¿½ ï¿½Ö°ï¿½ ï¿½ï¿½Ğ¹ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ LoginDTOï¿½Ú·ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½È¯
 			return loginDto;
-		}else {										// °ªÀÌ ¾øÀ» °æ¿ì ¸Ş½ÃÁö¿Í ÇÔ²² null°ª ¹İÈ¯
-			CommonService.msg("·Î±×ÀÎ ½ÇÆĞ");
+		}else {										// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ş½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô²ï¿½ nullï¿½ï¿½ ï¿½ï¿½È¯
+			CommonService.msg("ë¡œê·¸ì¸ ì‹¤íŒ¨");
 			
 			return null;
 		}

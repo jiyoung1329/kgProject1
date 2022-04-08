@@ -3,6 +3,7 @@ package login;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import common.CommonService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -12,7 +13,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import main.MainController;
-import main.CommonService;
 import login.LoginDTO;
 
 public class LoginController implements Initializable {
@@ -40,21 +40,21 @@ public class LoginController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		loginSvc = new LoginService();
-		loginButton.setDisable(true);	// ±âº»ÀûÀ¸·Î ºñÈ°¼ºÈ­µÇ¾îÀÖÀ½.
+		loginButton.setDisable(true);	// ï¿½âº»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½.
 		id.textProperty().addListener((attribute, before, after)->{
-			idLengthCheck();		// ¾ÆÀÌµð ±æÀÌÃ¼Å©
-			emptyCheck();			// ¾ÆÀÌµðÇÊµå°¡ ºñ¾îÀÖ´ÂÁö Ã¼Å©
+			idLengthCheck();		// ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½Ã¼Å©
+			emptyCheck();			// ï¿½ï¿½ï¿½Ìµï¿½ï¿½Êµå°¡ ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½ï¿½ Ã¼Å©
 		});
 		pw.textProperty().addListener((attribute,before,after)->{
-			pwLengthCheck();		// ºñ¹Ð¹øÈ£ ±æÀÌÃ¼Å©
-			emptyCheck();			// ºñ¹Ð¹øÈ£ÇÊµå ºñ¾îÀÖ´ÂÁö Ã¼Å©
+			pwLengthCheck();		// ï¿½ï¿½Ð¹ï¿½È£ ï¿½ï¿½ï¿½ï¿½Ã¼Å©
+			emptyCheck();			// ï¿½ï¿½Ð¹ï¿½È£ï¿½Êµï¿½ ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½ï¿½ Ã¼Å©
 		});
-		anchor.setOnKeyPressed(event->{	//enterÀÔ·Â½Ã ·Î±×ÀÎ ½ÇÇà
+		anchor.setOnKeyPressed(event->{	//enterï¿½Ô·Â½ï¿½ ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			if(event.getCode().equals(KeyCode.ENTER)) {
 				loginProc();
 			}
 		});
-//		loginButton.setOnMousePressed(event->{ ¹öÆ° ¾ç°¨ ±¸Çö½Ãµµ
+//		loginButton.setOnMousePressed(event->{ ï¿½ï¿½Æ° ï¿½ç°¨ ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½
 //			
 //			loginButton.setStyle("-fx-padding : 15, 10, 10, 10");
 //		});
@@ -74,15 +74,15 @@ public class LoginController implements Initializable {
 	
 	public void loginProc() {
 		LoginDTO loginDto = loginSvc.loginProc(id.getText(), pw.getText());
-		if(loginDto != null) {					// id,pw¸¦ ·Î±×ÀÎ¼­ºñ½º¿¡ Àü´ÞÇÏ¿© µ¥ÀÌÅÍº£ÀÌ½º Á¢¼Ó ÈÄ loginDTO ÀÚ·áÇü ÆÄÀÏÀ» ¹ÝÈ¯ÇÏ¿© null°ªÀÌ ¾Æ´Ò°æ¿ì
-			if(loginDto.getIsAdmin() == 1){		// ¹Þ¾Æ¿Â ÀÚ·á¿¡ Admin ÀÚ·á°¡ 1ÀÏ °æ¿ì Admin Æû ½ÇÇà
+		if(loginDto != null) {					// id,pwï¿½ï¿½ ï¿½Î±ï¿½ï¿½Î¼ï¿½ï¿½ñ½º¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Íºï¿½ï¿½Ì½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ loginDTO ï¿½Ú·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ï¿½Ï¿ï¿½ nullï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Ò°ï¿½ï¿½
+			if(loginDto.getIsAdmin() == 1){		// ï¿½Þ¾Æ¿ï¿½ ï¿½Ú·á¿¡ Admin ï¿½Ú·á°¡ 1ï¿½ï¿½ ï¿½ï¿½ï¿½ Admin ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				mainController.open("Admin");
-			}else {								// ±× ÀÌ¿Ü¿¡´Â ¸ðµÎ RoomChoiceÆû ½ÇÇà
-			CommonService.windowClose(loginForm); // ·Î±×ÀÎ ¼º°ø½Ã ·Î±×ÀÎ Æû Á¾·á
+			}else {								// ï¿½ï¿½ ï¿½Ì¿Ü¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ RoomChoiceï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+			CommonService.windowClose(loginForm); // ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			mainController.open("RoomChoice");
 			}
 		}else {
-			id.clear();pw.clear(); // ¾ø´Â È¸¿øÀÏ °æ¿ì ÇÊµå Å¬¸®¾î,¾ÆÀÌµðÇÊµå Æ÷Ä¿½º
+			id.clear();pw.clear(); // ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Êµï¿½ Å¬ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Ìµï¿½ï¿½Êµï¿½ ï¿½ï¿½Ä¿ï¿½ï¿½
 			id.requestFocus();
 		}
 		
@@ -90,10 +90,14 @@ public class LoginController implements Initializable {
 	
 	public void regProc(){
 
-		mainController.open("Register"); // È¸¿ø°¡ÀÔ¹öÆ° Å¬¸¯½Ã RegisterÆû ½ÇÇà
+		mainController.open("Register"); // È¸ï¿½ï¿½ï¿½ï¿½ï¿½Ô¹ï¿½Æ° Å¬ï¿½ï¿½ï¿½ï¿½ Registerï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	}
 	
-	public void idLengthCheck() {	//idÇÊµå ±æÀÌÃ¼Å© 8ÀÚ¸®·Î ±æÀÌÁ¦ÇÑ
+	public void adminOpen() {
+		mainController.open("Admin");
+	}
+	
+	public void idLengthCheck() {	//idï¿½Êµï¿½ ï¿½ï¿½ï¿½ï¿½Ã¼Å© 8ï¿½Ú¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		if(id.getLength() > 8){
 			String tmp = id.getText();
 			tmp = tmp.substring(0,8);
@@ -101,14 +105,14 @@ public class LoginController implements Initializable {
 		}
 	}
 	
-	public void pwLengthCheck() {	//ÆÐ½º¿öµåÇÊµå ±æÀÌÃ¼Å© 10ÀÚ¸®·Î ±æÀÌÁ¦ÇÑ
+	public void pwLengthCheck() {	//ï¿½Ð½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ ï¿½ï¿½ï¿½ï¿½Ã¼Å© 10ï¿½Ú¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		if(pw.getLength() > 10){
 			String tmp = pw.getText();
 			tmp = tmp.substring(0,10);
 			pw.setText(tmp);
 		}
 	}
-	public void emptyCheck() {		// ID/PW ÇÊµå°¡ ºñ¾îÀÖÀ» °æ¿ì ·Î±×ÀÎ¹öÆ° ºñÈ°¼ºÈ­, µÎ ÇÊµå ¸ðµÎ °ªÀÌ ÀÖ¾î¾ß¸¸ ·Î±×ÀÎ¹öÆ°ÀÌ È°¼ºÈ­
+	public void emptyCheck() {		// ID/PW ï¿½Êµå°¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Î±ï¿½ï¿½Î¹ï¿½Æ° ï¿½ï¿½È°ï¿½ï¿½È­, ï¿½ï¿½ ï¿½Êµï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ß¸ï¿½ ï¿½Î±ï¿½ï¿½Î¹ï¿½Æ°ï¿½ï¿½ È°ï¿½ï¿½È­
 		if (id.getText().isEmpty() || pw.getText().isEmpty()) {
 			loginButton.setDisable(true);
 		} else {

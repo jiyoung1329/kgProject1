@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="435.0" prefWidth="608.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="admin.AdminController">
+   <children>
+      <Button layoutX="526.0" layoutY="14.0" mnemonicParsing="false" text="X" textFill="#d30000" />
+      <Button fx:id="reg_button" layoutX="59.0" layoutY="96.0" mnemonicParsing="false" onAction="#reg" prefHeight="244.0" prefWidth="245.0" text="회원 관리">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Button>
+      <Button fx:id="song_button" layoutX="320.0" layoutY="96.0" mnemonicParsing="false" onAction="#song" prefHeight="244.0" prefWidth="245.0" text="노래 등록">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

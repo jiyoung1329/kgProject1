@@ -1,44 +1,45 @@
 package register;
 
 
+import common.CommonService;
 import javafx.scene.Parent;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import login.LoginDTO;
-import main.CommonService;
+
 
 public class RegisterService {
 	
 	public void regProc(Parent regForm) {
-		TextField idField = (TextField) regForm.lookup("#regId"); // regForm¿¡¼­ regIdÀÌ¸§À» Ã£À½
-		PasswordField pwField = (PasswordField)regForm.lookup("#regPw"); // regForm¿¡¼­ regPwÀÌ¸§À» Ã£À½
-		PasswordField confirmField = (PasswordField)regForm.lookup("#regConfirmPw"); // regForm¿¡¼­ regConfirmPwÀÌ¸§À» Ã£À½
-		TextField mobileField = (TextField) regForm.lookup("#regMobile"); // regForm¿¡¼­ regMobileÀÌ¸§À» Ã£À½
+		TextField idField = (TextField) regForm.lookup("#regId"); // regFormï¿½ï¿½ï¿½ï¿½ regIdï¿½Ì¸ï¿½ï¿½ï¿½ Ã£ï¿½ï¿½
+		PasswordField pwField = (PasswordField)regForm.lookup("#regPw"); // regFormï¿½ï¿½ï¿½ï¿½ regPwï¿½Ì¸ï¿½ï¿½ï¿½ Ã£ï¿½ï¿½
+		PasswordField confirmField = (PasswordField)regForm.lookup("#regConfirmPw"); // regFormï¿½ï¿½ï¿½ï¿½ regConfirmPwï¿½Ì¸ï¿½ï¿½ï¿½ Ã£ï¿½ï¿½
+		TextField mobileField = (TextField) regForm.lookup("#regMobile"); // regFormï¿½ï¿½ï¿½ï¿½ regMobileï¿½Ì¸ï¿½ï¿½ï¿½ Ã£ï¿½ï¿½
 		 
-		String id = idField.getText(); // ÇÊµå¿¡¼­ °ªÀ» °¡Á®¿È
+		String id = idField.getText(); // ï¿½Êµå¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		String pw = pwField.getText();
 		String confirm = confirmField.getText();
 		String mobile = mobileField.getText();
 		
-		if(pw.equals(confirm)) { // ºñ¹Ð¹øÈ£ °ª°ú ºñ¹Ð¹øÈ£ È®ÀÎ °ªÀÌ °°À» °æ¿ì
+		if(pw.equals(confirm)) { // ï¿½ï¿½Ð¹ï¿½È£ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ð¹ï¿½È£ È®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 			RegDAO regDao = new RegDAO();
-			//Áßº¹È®ÀÎ ¹öÆ°?
-			LoginDTO login = regDao.selectId(id); //id°ªÀ¸·Î ÇØ´ç È¸¿øÀÌ Á¸ÀçÇÏ´ÂÁö °Ë»ö
-			if(login == null) { // id(pk)°ªÀÌ Á¸ÀçÇÏÁö ¾ÊÀ»°æ¿ì RegDTO ÀÚ·áÇü¿¡ °ªÀ» ÀúÀå
+			//ï¿½ßºï¿½È®ï¿½ï¿½ ï¿½ï¿½Æ°?
+			LoginDTO login = regDao.selectId(id); //idï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø´ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½
+			if(login == null) { // id(pk)ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ RegDTO ï¿½Ú·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				RegDTO regDto = new RegDTO();
 				regDto.setId(id);
 				regDto.setPw(pw);
 				regDto.setMobile(mobile);
-				regDao.insert(regDto); // ÇØ´ç °ªÀ¸·Î RegDAOÀÇ insert¸Þ¼Òµå ½ÇÇà
+				regDao.insert(regDto); // ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ RegDAOï¿½ï¿½ insertï¿½Þ¼Òµï¿½ ï¿½ï¿½ï¿½ï¿½
 				
-				CommonService.msg(id + "È¸¿øÀÌ °¡ÀÔµÇ¾ú½À´Ï´Ù.");
+				CommonService.msg(id + "È¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ÔµÇ¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
 				CommonService.windowClose(regForm);
-			}else { // id°ªÀÌ Á¸ÀçÇÒ °æ¿ì ½ÇÇà
-				CommonService.msg(id +"´Â Áßº¹µÈ ¾ÆÀÌµðÀÔ´Ï´Ù.");
+			}else { // idï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+				CommonService.msg(id +"ï¿½ï¿½ ï¿½ßºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ï¿½Ô´Ï´ï¿½.");
 				return;
 			}
-		}else { // ºñ¹Ð¹øÈ£°ª°ú ºñ¹Ð¹øÈ£ È®ÀÎ °ªÀÌ ´Ù¸¦ °æ¿ì ½ÇÇà
-			CommonService.msg("ÀÔ·ÂÇÑ ºñ¹Ð¹øÈ£¿Í È®ÀÎÇÒ ºñ¹Ð¹øÈ£°¡ ´Ù¸¨´Ï´Ù.");
+		}else { // ï¿½ï¿½Ð¹ï¿½È£ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ð¹ï¿½È£ È®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+			CommonService.msg("ï¿½Ô·ï¿½ï¿½ï¿½ ï¿½ï¿½Ð¹ï¿½È£ï¿½ï¿½ È®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ð¹ï¿½È£ï¿½ï¿½ ï¿½Ù¸ï¿½ï¿½Ï´ï¿½.");
 			pwField.clear();confirmField.clear();
 			pwField.requestFocus();
 		}
