@@ -25,10 +25,4 @@ hs_err_pid*
 
 .classpath
 
-src/room/choice/rcForm.fxml
-
-src/room/choice/RoomChoiceMain.java
-
-src/room/choice/RoomChoiceController.java
-
 .settings/org.eclipse.core.resources.prefs
