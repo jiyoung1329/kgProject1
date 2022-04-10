@@ -22,8 +22,6 @@ public class Youtube {
         APIURL += "&part=id";
         APIURL += ("&q=" + search);
         
-//        System.out.println(APIURL);
-        
         URL url = new URL(APIURL);
 //        System.out.println(url);
 
@@ -51,6 +49,43 @@ public class Youtube {
         
         System.out.println("www.youtube.com/watch?v=" + videoId);
         return videoId;
+    }
+    
+    public void makePlayList() {
+//    	String API_KEY = "AIzaSyAvK5rxkonXkOiX7S-KuBcvk_zZBB_mV90";
+        String API_KEY = "AIzaSyDBRoxiEmgmfDWxPfN5WAAVkDkh_LFc2pc";
+
+        String APIURL = "https://www.googleapis.com/youtube/v3/playlist";
+        APIURL += "&part=snippet";
+        String AUTHURL = "https://www.googleapis.com/auth/youtube";
+        
+        URL url = new URL(APIURL);
+
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+//        System.out.println(con);
+        con.setRequestMethod("GET");
+//        System.out.println(con.getInputStream());
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+
+        String inputLine;
+        StringBuffer response = new StringBuffer();
+        while ((inputLine = br.readLine()) != null) {
+            response.append(inputLine);
+        }
+        br.close();
+//        System.out.println(response);
+//        System.out.println(response.getClass().getSimpleName());
+        
+        JSONParser jParser = new JSONParser();
+        JSONObject res = (JSONObject) JSONValue.parse(response.toString());
+        JSONArray videos = (JSONArray) res.get("items");
+        JSONObject video = (JSONObject) videos.get(0);
+        String videoId = (String)((JSONObject) video.get("id")).get("videoId");
+        
+        System.out.println("www.youtube.com/watch?v=" + videoId);
+        return videoId;
+    	
     }
 
 }
