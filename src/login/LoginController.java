@@ -40,22 +40,22 @@ public class LoginController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		loginSvc = new LoginService();
-		loginButton.setDisable(true);	// �⺻������ ��Ȱ��ȭ�Ǿ�����.
+		loginButton.setDisable(true);	// 로그인 버튼 비활성화
 		id.textProperty().addListener((attribute, before, after)->{
-			idLengthCheck();		// ���̵� ����üũ
-			emptyCheck();			// ���̵��ʵ尡 ����ִ��� üũ
+			idLengthCheck();		// 길이 제한 메소드
+			emptyCheck();			// 아이디필드가 비었는지 확인
 		});
 		pw.textProperty().addListener((attribute,before,after)->{
-			pwLengthCheck();		// ��й�ȣ ����üũ
-			emptyCheck();			// ��й�ȣ�ʵ� ����ִ��� üũ
+			pwLengthCheck();		// 길이 제한 메소드
+			emptyCheck();			// 비밀번호 필드가 비었는지 확인, id,pw 모두 통과했을시 로그인 버튼 활성화
 		});
-		anchor.setOnKeyPressed(event->{	//enter�Է½� �α��� ����
+		anchor.setOnKeyPressed(event->{	//enter키로 로그인 버튼 클릭가능
 			if(event.getCode().equals(KeyCode.ENTER)) {
 				loginProc();
 			}
 		});
-//		loginButton.setOnMousePressed(event->{ ��ư �簨 �����õ�
-//			
+//		loginButton.setOnMousePressed(event->{ 
+//			loginButton.setStyle("-fx-background-color: #FFB84D");
 //			loginButton.setStyle("-fx-padding : 15, 10, 10, 10");
 //		});
 //		loginButton.setOnMouseReleased(event->{
@@ -63,6 +63,7 @@ public class LoginController implements Initializable {
 //			loginButton.setStyle("-fx-padding : 10, 10, 10, 10");
 //		});
 //		regButton.setOnMousePressed(event->{
+//			regButton.setStyle("-fx-background-color: FFB84D");
 //			regButton.setStyle("-fx-padding : 15, 10, 10, 10");
 //		});
 //		regButton.setOnMouseReleased(event->{
@@ -74,15 +75,15 @@ public class LoginController implements Initializable {
 	
 	public void loginProc() {
 		LoginDTO loginDto = loginSvc.loginProc(id.getText(), pw.getText());
-		if(loginDto != null) {					// id,pw�� �α��μ��񽺿� �����Ͽ� �����ͺ��̽� ���� �� loginDTO �ڷ��� ������ ��ȯ�Ͽ� null���� �ƴҰ��
-			if(loginDto.getIsAdmin() == 1){		// �޾ƿ� �ڷῡ Admin �ڷᰡ 1�� ��� Admin �� ����
+		if(loginDto != null) {					// 메인서비스에서 LoginDTO자료형으로 받아옮. null값이 아닐경우
+			if(loginDto.getIsAdmin() == 1){		// 받아온 LoginDTO의 isAdmin 값이 1일경우 String "Admin"반환
 				mainController.open("Admin");
-			}else {								// �� �̿ܿ��� ��� RoomChoice�� ����
-			CommonService.windowClose(loginForm); // �α��� ������ �α��� �� ����
+			}else {								// isAdmin값이 1이 아닐경우 String "RoomChoice"반환
+			CommonService.windowClose(loginForm); //로그인메뉴 종료
 			mainController.open("RoomChoice");
 			}
 		}else {
-			id.clear();pw.clear(); // ���� ȸ���� ��� �ʵ� Ŭ����,���̵��ʵ� ��Ŀ��
+			id.clear();pw.clear(); // 받아온 값이 null일 경우 id,pw필드를 지우고 id필드 포커스
 			id.requestFocus();
 		}
 		
@@ -90,14 +91,11 @@ public class LoginController implements Initializable {
 	
 	public void regProc(){
 
-		mainController.open("Register"); // ȸ�����Թ�ư Ŭ���� Register�� ����
+		mainController.open("Register"); // 회원가입 버튼 클릭시 String "Register" 받환
 	}
 	
-	public void adminOpen() {
-		mainController.open("Admin");
-	}
 	
-	public void idLengthCheck() {	//id�ʵ� ����üũ 8�ڸ��� ��������
+	public void idLengthCheck() {	// id 길이제한 8자
 		if(id.getLength() > 8){
 			String tmp = id.getText();
 			tmp = tmp.substring(0,8);
@@ -105,14 +103,14 @@ public class LoginController implements Initializable {
 		}
 	}
 	
-	public void pwLengthCheck() {	//�н������ʵ� ����üũ 10�ڸ��� ��������
+	public void pwLengthCheck() {	//비밀번호 길이제한 8자
 		if(pw.getLength() > 10){
 			String tmp = pw.getText();
 			tmp = tmp.substring(0,10);
 			pw.setText(tmp);
 		}
 	}
-	public void emptyCheck() {		// ID/PW �ʵ尡 ������� ��� �α��ι�ư ��Ȱ��ȭ, �� �ʵ� ��� ���� �־�߸� �α��ι�ư�� Ȱ��ȭ
+	public void emptyCheck() {		// ID/PW 필드에 값이 없으면 로그인버튼 비활성화, 모두 값이 있어야 로그인버튼 활성화
 		if (id.getText().isEmpty() || pw.getText().isEmpty()) {
 			loginButton.setDisable(true);
 		} else {

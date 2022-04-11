@@ -8,7 +8,7 @@ import login.LoginDAO;
 
 public class RegDAO extends LoginDAO {
 	
-	public void insert(RegDTO reg) { // RegDTO°ªÀ» ¹Ş¾Æ¿Í¼­ µ¥ÀÌÅÍº£ÀÌ½º¿¡ °ªÀ» Ãß°¡ÇÏ´Â ¸Ş¼Òµå
+	public void insert(RegDTO reg) { // RegDTê°’ì„ ë°›ì•„ì™€ì„œ ì‹¤í–‰
 		String sql = "INSERT INTO member VALUES(?,?,?,?,?)";
 		Connection con = getCon();
 		PreparedStatement ps = null;
@@ -18,8 +18,8 @@ public class RegDAO extends LoginDAO {
 			ps.setString(1, reg.getId());
 			ps.setString(2, reg.getPw());
 			ps.setString(3, reg.getMobile());
-			ps.setInt(4, 0); // songCount ÄÃ·³ ±âº»°ª 0
-			ps.setInt(5, 0); // AdminÈ®ÀÎ ÄÃ·³ ±âº»°ªÀº 0, °ü¸®ÀÚ¸¸ 1
+			ps.setInt(4, 0); // songCountì˜ ê¸°ë³¸ê°’ì€ 0
+			ps.setInt(5, 0); // Adminì€ ê´€ë¦¬ìë§Œ 1, ì™¸ ëª¨ë“  íšŒì›ì€ 0ì˜ ê°’ ê³ ì •
 			ps.executeUpdate();
 
 		} catch (SQLException e) {
