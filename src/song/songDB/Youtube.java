@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
@@ -51,11 +52,11 @@ public class Youtube {
         return videoId;
     }
     
-    public void makePlayList() {
+    public void makePlayList() throws IOException {
 //    	String API_KEY = "AIzaSyAvK5rxkonXkOiX7S-KuBcvk_zZBB_mV90";
         String API_KEY = "AIzaSyDBRoxiEmgmfDWxPfN5WAAVkDkh_LFc2pc";
 
-        String APIURL = "https://www.googleapis.com/youtube/v3/playlist";
+        String APIURL = "https://www.googleapis.com/youtube/v3/playlists";
         APIURL += "&part=snippet";
         String AUTHURL = "https://www.googleapis.com/auth/youtube";
         
@@ -63,7 +64,7 @@ public class Youtube {
 
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
 //        System.out.println(con);
-        con.setRequestMethod("GET");
+        con.setRequestMethod("POST");
 //        System.out.println(con.getInputStream());
 
         BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
@@ -84,7 +85,10 @@ public class Youtube {
         String videoId = (String)((JSONObject) video.get("id")).get("videoId");
         
         System.out.println("www.youtube.com/watch?v=" + videoId);
-        return videoId;
+        return;
+    	
+    }
+    public void insertVideo() {
     	
     }
 
