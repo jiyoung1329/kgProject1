@@ -2,13 +2,19 @@ package song;
 
 import java.io.IOException;
 
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 
 public class SongService {
 	private SongController songController;
+	private MediaPlayer mediaPlayer;
+	@FXML private MediaView songMedia;
 	
 	
 	public void setSongController(SongController songController) {
@@ -18,7 +24,7 @@ public class SongService {
 	
 	// 노래 리스트 창 오픈 메소드
 	public void songSearchOpen() {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/songSearch.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/song/search/songSearch.fxml"));
 		
 		Parent songSearchForm;
 		try {
@@ -47,15 +53,21 @@ public class SongService {
 		
 	}
 	
-	// 시작버튼을 누르면 곡 재생 메소드
-	public void songPlay() {
-		
+	// 곡 재생 
+	public void songPlay(String url) {
+		if(url != null) {
+			Media media = new Media(url);
+			MediaPlayer mediaPlayer = new MediaPlayer(media);
+			songMedia.setMediaPlayer(mediaPlayer);
+			
+			mediaPlayer.play();
+		}
 		
 	}
 	
-	// 취소버튼 누를 시 재생정지 + 대기화면 띄우기 
+	// 재생정지 
 	public void songCancel() {
-		
+		mediaPlayer.pause();
 	}
 
 	

@@ -3,6 +3,7 @@ package song;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 
@@ -38,8 +39,8 @@ public class SongController implements Initializable{
 	}
 	
 	//노래 검색창 오픈
-	public void songSearchOpen() {
-		
+	public void songSearch(ActionEvent event) {
+		songSvc.songSearchOpen();
 	}
 	
 	
