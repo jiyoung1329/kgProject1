@@ -42,32 +42,32 @@
       </Label>
       <HBox alignment="CENTER_LEFT" layoutX="264.0" layoutY="35.0" prefHeight="40.0" prefWidth="472.0" spacing="10.0">
          <children>
-            <Label fx:id="reservSong1">
+            <Label fx:id="num1">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label fx:id="reservSong2">
+            <Label fx:id="num2">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label fx:id="reservSong3">
+            <Label fx:id="num3">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label fx:id="reservSong4">
+            <Label fx:id="num4">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label fx:id="reservSong5">
+            <Label fx:id="num5">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label fx:id="reservSong6">
+            <Label fx:id="num6">
                <font>
                   <Font size="20.0" />
                </font>

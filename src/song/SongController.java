@@ -3,8 +3,10 @@ package song;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
 import song.search.SongSearchController;
 
 public class SongController implements Initializable{
@@ -13,6 +15,13 @@ public class SongController implements Initializable{
 	private SongService songSvc;
 	private SongDTO songDto;
 	private SongSearchController songSearchController;
+	
+	@FXML private Label num1;
+	@FXML private Label num2;
+	@FXML private Label num3;
+	@FXML private Label num4;
+	@FXML private Label num5;
+	@FXML private Label num6;
 	
 	public SongSearchController getSongSearchController() {
 		return songSearchController;
@@ -48,6 +57,10 @@ public class SongController implements Initializable{
 		
 	}
 	
+	//예약된 노래번호 띄우기
+	public void reserveSong() {
+		
+	}
 	
 
 

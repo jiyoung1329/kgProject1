@@ -15,16 +15,7 @@ import song.search.SongSearchController;
 
 public class SongService {
 	private SongController songController;
-
 	private MediaPlayer mediaPlayer;
-	
-	@FXML private MediaView songMedia;
-	@FXML private Label reservSong1;
-	@FXML private Label reservSong2;
-	@FXML private Label reservSong3;
-	@FXML private Label reservSong4;
-	@FXML private Label reservSong5;
-	@FXML private Label reservSong6;
 	
 	
 	public SongController getSongController() {
@@ -33,8 +24,6 @@ public class SongService {
 	
 	public void setSongController(SongController songController) {
 		this.songController = songController;
-		System.out.println("1 : " + songController + ", 2 : " + this.songController);
-		
 	}
 	
 	// 노래 리스트 창 오픈 메소드
@@ -48,6 +37,8 @@ public class SongService {
 			songController.setSongSearchController(loader.getController());
 			songController.getSongSearchController().setSearchForm(songSearchForm);
 			
+			songController.getSongSearchController().setSongController(songController);
+			
 			Scene scene = new Scene(songSearchForm);
 		
 			Stage stage = new Stage();
@@ -58,6 +49,8 @@ public class SongService {
 			e.printStackTrace();
 		}
 	}
+	
+	
 	
 	// 곡 재생 
 	public void songPlay(String url) {
