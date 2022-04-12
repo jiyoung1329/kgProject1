@@ -6,15 +6,12 @@ import java.util.ResourceBundle;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
-import javafx.stage.Stage;
+import song.SongController;
 
 public class SongSearchController implements Initializable{
 	@FXML 
@@ -31,7 +28,12 @@ public class SongSearchController implements Initializable{
 	private Parent searchForm; 
 	private SongSearchService searchService;
 	private SongSearchDTO searchDTO;
+	private SongController songController;
 	
+	public void setSongController(SongController songController) {
+		this.songController = songController;
+	}
+
 	public Parent getSearchForm() {
 		return searchForm;
 	}
@@ -71,8 +73,10 @@ public class SongSearchController implements Initializable{
 	// 예약 버튼 클릭 - searchDTO를 노래방 페이지로 전달
 	public void songReserveProc() {
 		if (searchDTO != null) {
-			System.out.println(searchDTO.getSongNum() + ", " + searchDTO.getSongTitle() + ", " + searchDTO.getSongSinger() + ", "  + searchDTO.getSongLink());
+			//System.out.println(searchDTO.getSongNum() + ", " + searchDTO.getSongTitle() + ", " + searchDTO.getSongSinger() + ", "  + searchDTO.getSongLink());
+			
 		} 
+		
 		
 	}
 	

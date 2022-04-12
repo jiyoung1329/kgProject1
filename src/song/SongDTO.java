@@ -2,7 +2,7 @@ package song;
 
 public class SongDTO {
 	private int songNum;
-	private int songCount;
+	private int songCount; 
 	private String songLink;
 	
 	public int getSongNum() {
