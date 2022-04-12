@@ -5,26 +5,34 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import song.search.SongSearchController;
 
 public class SongController implements Initializable{
-	private SongService songSvc;
 	private Parent songForm;
-	private Parent songSearchForm;
-	private Parent select;
+	private Parent searchForm;
+	private SongService songSvc;
 	private SongDTO songDto;
+	private SongSearchController songSearchController;
 	
-	
+	public SongSearchController getSongSearchController() {
+		return songSearchController;
+	}
+
+	public void setSongSearchController(SongSearchController songSearchController) {
+		this.songSearchController = songSearchController;
+	}
+
 	public SongController() {
 		songSvc = new SongService();
 		songSvc.setSongController(this);
 	}
 	
-	public void setSongForm(Parent songForm) {
+	public void setSong(Parent songForm) {
 		this.songForm = songForm;
 	}
 	
-	public void setSongSearchForm(Parent songSearchForm) {
-		this.songSearchForm = songSearchForm;
+	public void setSongSearchForm(Parent searchForm) {
+		this.searchForm = searchForm;
 	}
 	
 	//재생되고 있는 MediaView 비활성화 
@@ -40,11 +48,10 @@ public class SongController implements Initializable{
 	//노래 검색창 오픈
 	public void songSearch() {
 		songSvc.songSearchOpen();
+		
 	}
 	
 	
-
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		songSvc = new SongService();

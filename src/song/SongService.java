@@ -11,10 +11,12 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
+import song.search.SongSearchController;
 
 public class SongService {
 	private SongController songController;
 	private MediaPlayer mediaPlayer;
+	
 	@FXML private MediaView songMedia;
 	@FXML private Label reservSong1;
 	@FXML private Label reservSong2;
@@ -38,7 +40,10 @@ public class SongService {
 		try {
 			songSearchForm = loader.load();
 			
-			songController.setSongSearchForm(songSearchForm);
+			System.out.println(songSearchForm);
+	
+			songController.setSongSearchController(loader.getController());
+			songController.getSongSearchController().setSearchForm(songSearchForm);
 			
 			Scene scene = new Scene(songSearchForm);
 		
@@ -58,12 +63,7 @@ public class SongService {
 	
 	// 예약 곡 바에 띄울 노래 리스트 메소드
 	public void reservSongReg() {
-		reservSong1.setText("8888");
-		reservSong2.setText("8888");
-		reservSong3.setText("8888");
-		reservSong4.setText("8888");
-		reservSong5.setText("8888");
-		reservSong6.setText("8888");
+	
 	}
 	
 	// 곡 재생 
