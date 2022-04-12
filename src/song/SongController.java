@@ -35,18 +35,14 @@ public class SongController implements Initializable{
 		this.searchForm = searchForm;
 	}
 	
-	//재생되고 있는 MediaView 비활성화 
-	public void songCacelProc() {
-		
-	} 
-	
 	//SongDB 내 Count int +1 등록, 예약곡 리스트 첫번째 곡 삭제, 남은 곡 수 감소, SongDB 내 동영상 MediaView로 재생
 	public void songStartProc() {
-		songSvc.reservSongReg();
+//		songSvc.reservSongReg();
 	}
 	
 	//노래 검색창 오픈
 	public void songSearch() {
+		songSvc.setSongController(this);
 		songSvc.songSearchOpen();
 		
 	}

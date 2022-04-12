@@ -15,6 +15,7 @@ import song.search.SongSearchController;
 
 public class SongService {
 	private SongController songController;
+
 	private MediaPlayer mediaPlayer;
 	
 	@FXML private MediaView songMedia;
@@ -26,22 +27,25 @@ public class SongService {
 	@FXML private Label reservSong6;
 	
 	
+	public SongController getSongController() {
+		return songController;
+	}
 	
 	public void setSongController(SongController songController) {
 		this.songController = songController;
+		System.out.println("1 : " + songController + ", 2 : " + this.songController);
 		
 	}
 	
 	// 노래 리스트 창 오픈 메소드
 	public void songSearchOpen() {
+		System.out.println("this : "  + this);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/song/search/songSearch.fxml"));
-		
 		Parent songSearchForm;
+		
 		try {
 			songSearchForm = loader.load();
 			
-			System.out.println(songSearchForm);
-	
 			songController.setSongSearchController(loader.getController());
 			songController.getSongSearchController().setSearchForm(songSearchForm);
 			
@@ -54,16 +58,6 @@ public class SongService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	// 남은 곡 수 카운트 - deCounting만
-	public void remainNumCount() {
-		
-	}
-	
-	// 예약 곡 바에 띄울 노래 리스트 메소드
-	public void reservSongReg() {
-	
 	}
 	
 	// 곡 재생 
