@@ -58,7 +58,7 @@ public class SongController implements Initializable{
 	}
 	
 	//예약된 노래번호 띄우기
-	public void reserveSong() {
+	public void reserveSong(SongDTO songDTO) {
 		
 	}
 	

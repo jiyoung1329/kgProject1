@@ -35,6 +35,7 @@ public class songSearchDAO {
 				searchDTO.setSongTitle(rs.getString("title"));
 				searchDTO.setSongSinger(rs.getString("singer"));
 				searchDTO.setSongLink(rs.getString("link"));
+				searchDTO.setSongCount(rs.getInt("count"));
 				songs.add(searchDTO);
 			}
 		} catch(Exception e) {
@@ -56,6 +57,7 @@ public class songSearchDAO {
 				searchDTO.setSongNum(rs.getString("num"));
 				searchDTO.setSongTitle(rs.getString("title"));
 				searchDTO.setSongSinger(rs.getString("singer"));
+				searchDTO.setSongCount(rs.getInt("count"));
 				searchDTO.setSongLink(rs.getString("link"));
 				songDatas.add(searchDTO);
 			}

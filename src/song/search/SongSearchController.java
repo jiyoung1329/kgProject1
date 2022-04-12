@@ -12,6 +12,7 @@ import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import song.SongController;
+import song.SongDTO;
 
 public class SongSearchController implements Initializable{
 	@FXML 
@@ -73,6 +74,11 @@ public class SongSearchController implements Initializable{
 	// 예약 버튼 클릭 - searchDTO를 노래방 페이지로 전달
 	public void songReserveProc() {
 		if (searchDTO != null) {
+			SongDTO songdto = new SongDTO();
+			songdto.setSongNum(searchDTO.getSongNum());
+			songdto.setSongCount(searchDTO.getSongCount());
+			songdto.setSongLink(searchDTO.getSongLink());
+			songController.reserveSong(songdto);
 			//System.out.println(searchDTO.getSongNum() + ", " + searchDTO.getSongTitle() + ", " + searchDTO.getSongSinger() + ", "  + searchDTO.getSongLink());
 			
 		} 
