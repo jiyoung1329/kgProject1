@@ -39,7 +39,6 @@ public class SongService {
 	
 	// 노래 리스트 창 오픈 메소드
 	public void songSearchOpen() {
-		System.out.println("this : "  + this);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/song/search/songSearch.fxml"));
 		Parent songSearchForm;
 		
