@@ -22,9 +22,11 @@ public class SongController implements Initializable{
 		this.songSearchController = songSearchController;
 	}
 
-	public SongController() {
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
 		songSvc = new SongService();
 		songSvc.setSongController(this);
+		
 	}
 	
 	public void setSong(Parent songForm) {
@@ -42,17 +44,11 @@ public class SongController implements Initializable{
 	
 	//노래 검색창 오픈
 	public void songSearch() {
-		songSvc.setSongController(this);
 		songSvc.songSearchOpen();
 		
 	}
 	
 	
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		songSvc = new SongService();
-		
-	}
 
 
 }
