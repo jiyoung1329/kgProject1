@@ -1,8 +1,10 @@
 package song;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import common.CommonService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -15,6 +17,7 @@ public class SongController implements Initializable{
 	private SongService songSvc;
 	private SongDTO songDto;
 	private SongSearchController songSearchController;
+	private ArrayList<SongDTO> songNumber = new ArrayList<SongDTO>();
 	
 	@FXML private Label num1;
 	@FXML private Label num2;
@@ -48,7 +51,7 @@ public class SongController implements Initializable{
 	
 	//SongDB 내 Count int +1 등록, 예약곡 리스트 첫번째 곡 삭제, 남은 곡 수 감소, SongDB 내 동영상 MediaView로 재생
 	public void songStartProc() {
-//		songSvc.reservSongReg();
+		//songSvc.reservSongReg();
 	}
 	
 	//노래 검색창 오픈
@@ -60,7 +63,24 @@ public class SongController implements Initializable{
 	//예약된 노래번호 띄우기
 	public void reserveSong(SongDTO songDTO) {
 		
+		if(songNumber.size() >= 6) {
+			CommonService.msg("곡을 더 이상 추가할 수 없습니다.");
+		}else {
+			songNumber.add(songDTO);
+			num1.setText(songNumber.get(0).getSongNum());
+			System.out.println(songNumber.get(1));
+			
+			if(songNumber.get(0) != null) num1.setText(songNumber.get(0).getSongNum());
+			if(songNumber.get(1) != null) num2.setText(songNumber.get(1).getSongNum());
+			if(songNumber.get(2) != null) num3.setText(songNumber.get(2).getSongNum());
+			if(songNumber.get(3) != null) num4.setText(songNumber.get(3).getSongNum());
+			if(songNumber.get(4) != null) num5.setText(songNumber.get(4).getSongNum());
+			if(songNumber.get(5) != null) num6.setText(songNumber.get(5).getSongNum());
+		}
+		
 	}
+	
+	// 남은 곡 디카운팅
 	
 
 
