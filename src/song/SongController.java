@@ -68,14 +68,15 @@ public class SongController implements Initializable{
 		}else {
 			songNumber.add(songDTO);
 			num1.setText(songNumber.get(0).getSongNum());
-			System.out.println(songNumber.get(1));
 			
-			if(songNumber.get(0) != null) num1.setText(songNumber.get(0).getSongNum());
-			if(songNumber.get(1) != null) num2.setText(songNumber.get(1).getSongNum());
-			if(songNumber.get(2) != null) num3.setText(songNumber.get(2).getSongNum());
-			if(songNumber.get(3) != null) num4.setText(songNumber.get(3).getSongNum());
-			if(songNumber.get(4) != null) num5.setText(songNumber.get(4).getSongNum());
-			if(songNumber.get(5) != null) num6.setText(songNumber.get(5).getSongNum());
+			try {
+				num1.setText(songNumber.get(0).getSongNum());
+				num2.setText(songNumber.get(1).getSongNum());
+				num3.setText(songNumber.get(2).getSongNum());
+				num4.setText(songNumber.get(3).getSongNum());
+				num5.setText(songNumber.get(4).getSongNum());
+				num6.setText(songNumber.get(5).getSongNum());
+			} catch(Exception e) {}
 		}
 		
 	}
