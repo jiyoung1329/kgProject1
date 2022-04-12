@@ -34,7 +34,7 @@
          <font>
             <Font name="NanumBarunGothicOTF Bold" size="20.0" />
          </font></Button>
-      <Button fx:id="songSearchButton" layoutX="744.0" layoutY="35.0" mnemonicParsing="false" opacity="0.0" prefHeight="40.0" prefWidth="46.0" style="-fx-background-radius: 50; -fx-background-color: #FFFFFF;" />
+      <Button fx:id="songSearchButton" layoutX="744.0" layoutY="35.0" mnemonicParsing="false" onAction="#songSearch" opacity="0.0" prefHeight="40.0" prefWidth="46.0" style="-fx-background-radius: 50; -fx-background-color: #FFFFFF;" />
       <Label fx:id="remainSong" layoutX="107.0" layoutY="42.0">
          <font>
             <Font name="System Bold" size="20.0" />

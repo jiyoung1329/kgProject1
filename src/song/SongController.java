@@ -34,12 +34,12 @@ public class SongController implements Initializable{
 	
 	//SongDB 내 Count int +1 등록, 예약곡 리스트 첫번째 곡 삭제, 남은 곡 수 감소, SongDB 내 동영상 MediaView로 재생
 	public void songStartProc() {
-		
+		songSvc.reservSongReg();
 	}
 	
 	//노래 검색창 오픈
-	public void songSearchOpen() {
-		
+	public void songSearch() {
+		songSvc.songSearchOpen();
 	}
 	
 	
