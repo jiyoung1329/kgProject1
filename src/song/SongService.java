@@ -60,10 +60,6 @@ public class SongService {
 		System.out.println(songDto);
 	}
 	
-	// 재생정지 
-	/*
-	 * public void songCancel() { mediaPlayer.pause(); }
-	 */
 	
 	
 }

@@ -5,12 +5,11 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import common.CommonService;
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.DoubleProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -25,16 +24,16 @@ public class SongController implements Initializable{
 	private ArrayList<SongDTO> songNumber = new ArrayList<SongDTO>();
 	private int count;
 	private MediaPlayer mediaPlayer;
-	
+	private boolean endOfMedia;
 	@FXML private Label num1;
 	@FXML private Label num2;
 	@FXML private Label num3;
 	@FXML private Label num4;
 	@FXML private Label num5;
 	@FXML private Label num6;
-	
 	@FXML private Label remainSong;
 	@FXML private MediaView songMedia;
+	@FXML private ImageView songDefault;
 	
 	
 	public SongSearchController getSongSearchController() {
@@ -51,6 +50,19 @@ public class SongController implements Initializable{
 		songSvc.setSongController(this);
 		count = 5;
 		remainSong.setText(Integer.toString(count));
+		
+		mediaPlayer.setOnEndOfMedia(()-> {
+			endOfMedia = true;
+			if(endOfMedia) {
+				songDefault.setOpacity(100);
+				if(count == 0) {
+					// 방DB 방 사용여부 변경 메서드
+				}
+			}
+			
+			
+		});
+		
 		
 	}
 	
@@ -123,6 +135,7 @@ public class SongController implements Initializable{
 			//MediaView재생
 			String url = getClass().getResource(songDto.getSongLink()).toString();
 			if(url != null) {
+				songDefault.setOpacity(0);
 				Media media = new Media(url);
 				MediaPlayer mediaPlayer = new MediaPlayer(media);
 				songMedia.setMediaPlayer(mediaPlayer);
@@ -131,16 +144,15 @@ public class SongController implements Initializable{
 			}
 		}
 		
-		
 	}
-	
-	
-	// 남은 곡의 갯수가 0이고 그 곡이 끝나면 방의 사용여부를 0으로 바꾸기 
-	
 	
 	// 취소버튼을 눌렀을 때 남은 곡 수가 0이면 방의 사용여부를 0으로 바꾸기 & 취소버튼 누르면 대기화면 띄우기
 	public void songCancelProc() {
 		mediaPlayer.pause();
+		songDefault.setOpacity(100);
+		if(count == 0) {
+			// 방 번호를 받아서 방DB에 접근하는 DAO 필
+		}
 	}
 
 
