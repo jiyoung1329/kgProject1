@@ -51,6 +51,9 @@ public class SongController implements Initializable{
 		count = 5;
 		remainSong.setText(Integer.toString(count));
 		
+		Media media = new Media("test");
+		mediaPlayer = new MediaPlayer(media);
+		
 		mediaPlayer.setOnEndOfMedia(()-> {
 			endOfMedia = true;
 			if(endOfMedia) {
@@ -59,7 +62,6 @@ public class SongController implements Initializable{
 					// 방DB 방 사용여부 변경 메서드
 				}
 			}
-			
 			
 		});
 		
@@ -137,7 +139,7 @@ public class SongController implements Initializable{
 			if(url != null) {
 				songDefault.setOpacity(0);
 				Media media = new Media(url);
-				MediaPlayer mediaPlayer = new MediaPlayer(media);
+				mediaPlayer = new MediaPlayer(media);
 				songMedia.setMediaPlayer(mediaPlayer);
 				songMedia.setPreserveRatio(false);
 				mediaPlayer.play();
