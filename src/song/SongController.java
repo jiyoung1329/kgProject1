@@ -9,6 +9,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import song.search.SongSearchController;
 
 public class SongController implements Initializable{
@@ -28,6 +31,7 @@ public class SongController implements Initializable{
 	@FXML private Label num6;
 	
 	@FXML private Label remainSong;
+	@FXML private MediaView songMedia;
 	
 	public SongSearchController getSongSearchController() {
 		return songSearchController;
@@ -54,36 +58,9 @@ public class SongController implements Initializable{
 		this.searchForm = searchForm;
 	}
 	
-	//SongDB 내 Count int +1 등록, 예약곡 리스트 첫번째 곡 삭제, 남은 곡 수 감소, SongDB 내 동영상 MediaView로 재생
-	public void songStartProc() {
-		if(songNumber.size() == 0) {
-			CommonService.msg("먼저 곡을 예약해 주세요");
-		}else {
-			remainSong.setText(Integer.toString(--count));
-			System.out.println(count);
-			System.out.println(songNumber.get(0).getSongNum());
-			songNumber.remove(0);
-			num1.setText("");
-			num2.setText("");
-			num3.setText("");
-			num4.setText("");
-			num5.setText("");
-			num6.setText("");
-			try {
-				num1.setText(songNumber.get(0).getSongNum());
-				num2.setText(songNumber.get(1).getSongNum());
-				num3.setText(songNumber.get(2).getSongNum());
-				num4.setText(songNumber.get(3).getSongNum());
-				num5.setText(songNumber.get(4).getSongNum());
-				num6.setText(songNumber.get(5).getSongNum());
-			} catch(Exception e) {}
-		}
-	}
-	
 	//노래 검색창 오픈
 	public void songSearch() {
 		songSvc.songSearchOpen();
-		
 	}
 	
 	//예약된 노래번호 띄우기
@@ -107,6 +84,58 @@ public class SongController implements Initializable{
 		
 	}
 	
+	//SongDB 내 Count int +1 등록, 예약곡 리스트 첫번째 곡 삭제, 남은 곡 수 감소, SongDB 내 동영상 MediaView로 재생
+	public void songStartProc() {
+		// DB카운트
+		SongDAO songDao = new SongDAO();
+		songDto = new SongDTO();
+		songDto = songDao.selectNum(songNumber.get(0).getSongNum());
+		songSvc.songPlay(songDto);
+		
+		//MediaView재생
+		String url = songDto.getSongLink();
+		if(url != null) {
+			Media media = new Media(url);
+			MediaPlayer mediaPlayer = new MediaPlayer(media);
+			songMedia.setMediaPlayer(mediaPlayer);
+			
+			mediaPlayer.play();
+		}
+		
+		// 남은 곡 수 감소 및 예약곡 리스트 업데이트
+		if(songNumber.size() == 0) {
+			CommonService.msg("먼저 곡을 예약해 주세요");
+		}else {
+			remainSong.setText(Integer.toString(--count));
+			//System.out.println(count);
+			//System.out.println(songNumber.get(0).getSongNum());
+			songNumber.remove(0);
+			num1.setText("");
+			num2.setText("");
+			num3.setText("");
+			num4.setText("");
+			num5.setText("");
+			num6.setText("");
+			try {
+				num1.setText(songNumber.get(0).getSongNum());
+				num2.setText(songNumber.get(1).getSongNum());
+				num3.setText(songNumber.get(2).getSongNum());
+				num4.setText(songNumber.get(3).getSongNum());
+				num5.setText(songNumber.get(4).getSongNum());
+				num6.setText(songNumber.get(5).getSongNum());
+			} catch(Exception e) {}
+		}
+	}
+	
+	
+	// 마지막 곡이 끝나면 방의 사용여부를 0으로 바꾸기 
+	
+	
+	// 취소버튼을 눌렀을 때 남은 곡 수가 0이면 방의 사용여부를 0으로 바꾸기 & 취소버튼 누르면 대기화면 띄우기
+	public void songCancelProc() {
+		songSvc.songCancel();
+		
+	}
 
 
 }
