@@ -52,16 +52,11 @@ public class SongService {
 	
 	
 	
-	// 곡 재생 
-	public void songPlay(String url) {
-		if(url != null) {
-			Media media = new Media(url);
-			MediaPlayer mediaPlayer = new MediaPlayer(media);
-			songMedia.setMediaPlayer(mediaPlayer);
-			
-			mediaPlayer.play();
-		}
-		
+	// DB내 카운트 추가
+	public void songPlay(SongDTO songDto) {
+		// DB내 카운트 추가
+		SongDAO songDao = new SongDAO();
+		songDao.addCount(songDto);
 	}
 	
 	// 재생정지 
