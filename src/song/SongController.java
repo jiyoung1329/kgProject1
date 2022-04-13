@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import common.CommonService;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.DoubleProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -86,21 +88,6 @@ public class SongController implements Initializable{
 	
 	//SongDB 내 Count int +1 등록, 예약곡 리스트 첫번째 곡 삭제, 남은 곡 수 감소, SongDB 내 동영상 MediaView로 재생
 	public void songStartProc() {
-		// DB카운트
-		SongDAO songDao = new SongDAO();
-		songDto = new SongDTO();
-		songDto = songDao.selectNum(songNumber.get(0).getSongNum());
-		songSvc.songPlay(songDto);
-		
-		//MediaView재생
-		String url = songDto.getSongLink();
-		if(url != null) {
-			Media media = new Media(url);
-			MediaPlayer mediaPlayer = new MediaPlayer(media);
-			songMedia.setMediaPlayer(mediaPlayer);
-			
-			mediaPlayer.play();
-		}
 		
 		// 남은 곡 수 감소 및 예약곡 리스트 업데이트
 		if(songNumber.size() == 0) {
@@ -125,10 +112,32 @@ public class SongController implements Initializable{
 				num6.setText(songNumber.get(5).getSongNum());
 			} catch(Exception e) {}
 		}
+		
+		// DB카운트
+		SongDAO songDao = new SongDAO();
+		songDto = new SongDTO();
+		songDto = songDao.selectNum(songNumber.get(0).getSongNum());
+		songSvc.songPlay(songDto);
+		
+		//MediaView재생
+		String url = getClass().getResource(songDto.getSongLink()).toString();
+		if(url != null) {
+			Media media = new Media(url);
+			MediaPlayer mediaPlayer = new MediaPlayer(media);
+			songMedia.setMediaPlayer(mediaPlayer);
+			
+			DoubleProperty widthProp = songMedia.fitWidthProperty();
+			DoubleProperty heightProp = songMedia.fitHeightProperty();
+			
+			widthProp.bind(Bindings.selectDouble(songMedia.sceneProperty(), "width"));
+			heightProp.bind(Bindings.selectDouble(songMedia.sceneProperty(), "height"));
+			
+			mediaPlayer.play();
+		}
 	}
 	
 	
-	// 마지막 곡이 끝나면 방의 사용여부를 0으로 바꾸기 
+	// 남은 곡의 갯수가 0이고 그 곡이 끝나면 방의 사용여부를 0으로 바꾸기 
 	
 	
 	// 취소버튼을 눌렀을 때 남은 곡 수가 0이면 방의 사용여부를 0으로 바꾸기 & 취소버튼 누르면 대기화면 띄우기
