@@ -51,19 +51,18 @@ public class SongController implements Initializable{
 		count = 5;
 		remainSong.setText(Integer.toString(count));
 		
-		Media media = new Media("test");
-		mediaPlayer = new MediaPlayer(media);
-		
-		mediaPlayer.setOnEndOfMedia(()-> {
-			endOfMedia = true;
-			if(endOfMedia) {
-				songDefault.setOpacity(100);
-				if(count == 0) {
-					// 방DB 방 사용여부 변경 메서드
+		mediaPlayer = null;
+		if (mediaPlayer != null) {
+			mediaPlayer.setOnEndOfMedia(()-> {
+				endOfMedia = true;
+				if(endOfMedia) {
+					songDefault.setOpacity(100);
+					if(count == 0) {
+						// 방DB 방 사용여부 변경 메서드
+					}
 				}
-			}
-			
-		});
+			});
+		}
 		
 		
 	}
