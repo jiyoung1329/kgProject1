@@ -26,7 +26,7 @@
             <Image url="@../img/Reserve.png" />
          </image>
       </ImageView>
-      <Button fx:id="songCancelButton" layoutX="805.0" layoutY="28.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="80.0" style="-fx-background-radius: 30; -fx-background-color: #FFB84D;" text="취소" textFill="WHITE">
+      <Button fx:id="songCancelButton" layoutX="805.0" layoutY="28.0" mnemonicParsing="false" onAction="#songCancelProc" prefHeight="50.0" prefWidth="80.0" style="-fx-background-radius: 30; -fx-background-color: #FFB84D;" text="취소" textFill="WHITE">
          <font>
             <Font name="NanumBarunGothicOTF Bold" size="20.0" />
          </font></Button>

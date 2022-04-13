@@ -24,6 +24,7 @@ public class SongController implements Initializable{
 	private SongSearchController songSearchController;
 	private ArrayList<SongDTO> songNumber = new ArrayList<SongDTO>();
 	private int count;
+	private MediaPlayer mediaPlayer;
 	
 	@FXML private Label num1;
 	@FXML private Label num2;
@@ -34,6 +35,7 @@ public class SongController implements Initializable{
 	
 	@FXML private Label remainSong;
 	@FXML private MediaView songMedia;
+	
 	
 	public SongSearchController getSongSearchController() {
 		return songSearchController;
@@ -111,29 +113,25 @@ public class SongController implements Initializable{
 				num5.setText(songNumber.get(4).getSongNum());
 				num6.setText(songNumber.get(5).getSongNum());
 			} catch(Exception e) {}
+			
+			// DB카운트
+			SongDAO songDao = new SongDAO();
+			songDto = new SongDTO();
+			songDto = songDao.selectNum(songNumber.get(0).getSongNum());
+			songSvc.songPlay(songDto);
+			
+			//MediaView재생
+			String url = getClass().getResource(songDto.getSongLink()).toString();
+			if(url != null) {
+				Media media = new Media(url);
+				MediaPlayer mediaPlayer = new MediaPlayer(media);
+				songMedia.setMediaPlayer(mediaPlayer);
+				songMedia.setPreserveRatio(false);
+				mediaPlayer.play();
+			}
 		}
 		
-		// DB카운트
-		SongDAO songDao = new SongDAO();
-		songDto = new SongDTO();
-		songDto = songDao.selectNum(songNumber.get(0).getSongNum());
-		songSvc.songPlay(songDto);
 		
-		//MediaView재생
-		String url = getClass().getResource(songDto.getSongLink()).toString();
-		if(url != null) {
-			Media media = new Media(url);
-			MediaPlayer mediaPlayer = new MediaPlayer(media);
-			songMedia.setMediaPlayer(mediaPlayer);
-			
-			DoubleProperty widthProp = songMedia.fitWidthProperty();
-			DoubleProperty heightProp = songMedia.fitHeightProperty();
-			
-			widthProp.bind(Bindings.selectDouble(songMedia.sceneProperty(), "width"));
-			heightProp.bind(Bindings.selectDouble(songMedia.sceneProperty(), "height"));
-			
-			mediaPlayer.play();
-		}
 	}
 	
 	
@@ -142,8 +140,7 @@ public class SongController implements Initializable{
 	
 	// 취소버튼을 눌렀을 때 남은 곡 수가 0이면 방의 사용여부를 0으로 바꾸기 & 취소버튼 누르면 대기화면 띄우기
 	public void songCancelProc() {
-		songSvc.songCancel();
-		
+		mediaPlayer.pause();
 	}
 
 
