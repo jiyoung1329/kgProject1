@@ -46,8 +46,8 @@ public class SongDAO {
 	}
 	
 	public void addCount(SongDTO song) {
-		
-		String sql = "UPDATE song SET count = count+1 WHERE num is ?";
+		System.out.println("널이 뜨는곳 : " + song.getSongNum());
+		String sql = "UPDATE song SET count = count+1 WHERE num = ?";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, song.getSongNum());

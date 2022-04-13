@@ -15,7 +15,7 @@ import song.search.SongSearchController;
 
 public class SongService {
 	private SongController songController;
-	private MediaPlayer mediaPlayer;
+	
 	
 	
 	public SongController getSongController() {
@@ -57,13 +57,9 @@ public class SongService {
 		// DB내 카운트 추가
 		SongDAO songDao = new SongDAO();
 		songDao.addCount(songDto);
+		System.out.println(songDto);
 	}
 	
-	// 재생정지 
-	public void songCancel() {
-		mediaPlayer.pause();
-	}
-
 	
 	
 }
