@@ -66,7 +66,10 @@ public class AdminController {
 		this.adminForm = adminForm;
 		
 	}
-	
+	public void cancel_proc() {
+		Stage stage = (Stage) adminForm.getScene().getWindow();
+		stage.close();
+	}
 	
 }
 
