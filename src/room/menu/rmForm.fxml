@@ -17,7 +17,7 @@
          <children>
             <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <TextField />
+                  <TextField fx:id="roomMenuId" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="회원님">
                      <font>
                         <Font size="20.0" />

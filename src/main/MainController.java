@@ -5,7 +5,7 @@ import javafx.scene.Parent;
 import login.LoginController;
 import register.RegController;
 
-public class MainController { //���� �����͸� ������
+public class MainController { //메인, 로그인, 레지스터 정보 저장소
 	private MainService mainSvc;
 	private Parent loginForm;
 	private LoginController loginController;
@@ -46,7 +46,7 @@ public class MainController { //���� �����͸� �����
 		return regForm;
 	}
 	
-	public void open(String division) { //�α��� ��Ʈ�ѷ����� division���� �������ָ� �� ���� ���� ���μ����� ���� �����ϴ� �޼ҵ带 �����ϴ� �޼ҵ�
+	public void open(String division) { //메인서비스에서 String값을 받아 각 메뉴를 오픈하는 메소드
 		if("RoomChoice".equals(division)) {
 			mainSvc.rcOpen();
 		}else if("Register".equals(division)) {
