@@ -7,15 +7,29 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import login.LoginDTO;
+import main.MainController;
+import room.menu.RoomMenuController;
 
 public class LoginDAO {
 	private Connection con;
-
+	
+	//-----------
+	
+	private MainController mainController;
+	
+	public void setMainController(MainController mainController) {
+		this.mainController = mainController;
+		
+	}
+	//--------------
+	
 	public Connection getCon() {
 		return con;
 	}
+	
 
 	public LoginDAO() { //LoginDAO 인스턴스 생성시 memberDB접속
+
 		String url = "jdbc:oracle:thin:@kgproject_high?TNS_ADMIN=C:/Wallet_kgProject";
 		String user = "admin";
 		String pwd = "KGproject1234!";
@@ -33,6 +47,7 @@ public class LoginDAO {
 		ResultSet rs = null;
 		LoginDTO login = null;
 		String sql = "SELECT * FROM member WHERE id = ?"; // memberDB에서 id가 가진 정보를 모두 가져옴
+
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setString(1, id);
@@ -47,7 +62,8 @@ public class LoginDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
+		} 
+		finally {
 			try {
 				if (rs != null)
 					rs.close();
@@ -57,6 +73,8 @@ public class LoginDAO {
 				e.printStackTrace();
 			}
 		}
+		
 		return login;
+		
 	}
 }
