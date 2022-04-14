@@ -74,5 +74,10 @@
             </Label>
          </children>
       </HBox>
+      <Button fx:id="songOutButton" layoutX="849.0" layoutY="536.0" mnemonicParsing="false" onAction="#songOutProc" prefHeight="50.0" prefWidth="129.0" style="-fx-background-radius: 30; -fx-background-color: FFB84D;" text="나가기→" textFill="WHITE">
+         <font>
+            <Font name="NanumBarunGothicOTF Bold" size="20.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
