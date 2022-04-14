@@ -43,6 +43,12 @@ public class SelectService {
 		
 	}
 	
+	public boolean checkRoomReserve(String room) {
+		int isReservation = selectDAO.checkRoomReserve(room);
+		if (isReservation == 0) return true;
+		else return false;
+	}
+	
 	// 노래방 페이지로 화면 넘기기
 	public void moveSongPage(String count, String room) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/song/Song.fxml"));
@@ -51,6 +57,9 @@ public class SelectService {
 			
 			selectController.setSongController(loader.getController());
 			selectController.getSongController().setSong(songForm);
+			System.out.println(count + " " + room);
+			selectController.getSongController().setCount(count);
+			selectController.getSongController().setRoomNumber(room);
 			
 			Scene scene = new Scene(songForm);
 		

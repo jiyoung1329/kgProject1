@@ -83,6 +83,24 @@ public class SongDAO {
 			}
 		} 
 	}
+	
+	public void roomReserve(String room) {
+		String sql = "update room set isreservation=1 where num=?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, room);
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(ps != null) ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} 
+	}
 		
 
 }
