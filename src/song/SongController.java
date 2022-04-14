@@ -50,6 +50,11 @@ public class SongController implements Initializable{
 		this.songForm = songForm;
 	}
 	
+	
+	public Parent getSongForm() {
+		return songForm;
+	}
+
 	public void setSongSearchForm(Parent searchForm) {
 		this.searchForm = searchForm;
 	}
