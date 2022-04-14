@@ -28,7 +28,7 @@ public class SelectService {
 	// 곡선택하면 DB에 남은 곡수 minus한 상태로 저장
 	public void saveSongCount(Parent selectForm) {
 		String count = ((Label) selectForm.lookup("#songCount")).getText();
-		int room = Integer.parseInt(((Label) selectForm.lookup("#roomNumber")).getText());
+		String room = ((Label) selectForm.lookup("#roomNumber")).getText();
 		
 		LoginDTO dto = selectDAO.callMember();
 
@@ -44,7 +44,7 @@ public class SelectService {
 	}
 	
 	// 노래방 페이지로 화면 넘기기
-	public void moveSongPage(String count, int room) {
+	public void moveSongPage(String count, String room) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/song/Song.fxml"));
 		try {
 			Parent songForm = loader.load();
