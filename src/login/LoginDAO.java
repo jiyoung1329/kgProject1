@@ -15,7 +15,7 @@ public class LoginDAO {
 		return con;
 	}
 
-	public LoginDAO() { //½ÇÇà½Ã È¸¿øµ¥ÀÌÅÍº£ÀÌ½º Á¢¼Ó
+	public LoginDAO() { //LoginDAO ì¸ìŠ¤í„´ìŠ¤ ìƒì„±ì‹œ memberDBì ‘ì†
 		String url = "jdbc:oracle:thin:@kgproject_high?TNS_ADMIN=C:/Wallet_kgProject";
 		String user = "admin";
 		String pwd = "KGproject1234!";
@@ -28,11 +28,11 @@ public class LoginDAO {
 		}
 	}
 
-	public LoginDTO selectId(String id) { //¾ÆÀÌµğ°Ë»ö
+	public LoginDTO selectId(String id) { //idë¡œ DBì— ìˆëŠ” ê°’ì„ ê°€ì ¸ì˜®
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		LoginDTO login = null;
-		String sql = "SELECT * FROM member WHERE id = ?"; // ¸â¹ö Å×ÀÌºí ¸í member
+		String sql = "SELECT * FROM member WHERE id = ?"; // memberDBì—ì„œ idê°€ ê°€ì§„ ì •ë³´ë¥¼ ëª¨ë‘ ê°€ì ¸ì˜´
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setString(1, id);

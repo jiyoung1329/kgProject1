@@ -14,7 +14,7 @@ public class MainService {
 		this.mainController = mainController;
 	}
 
-	public void rcOpen() {	// ȸ�� �α��� ������ RoomChoice ���� �����ϴ� �޼ҵ�
+	public void rcOpen() {	// roomChoice메뉴를 실행하는 메소드
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/room/choice/rcForm.fxml"));
 
 		Parent roomChoiceForm;
@@ -22,7 +22,7 @@ public class MainService {
 		try {
 
 			roomChoiceForm = loader.load();
-			mainController.setRoomChoiceForm(roomChoiceForm);
+			mainController.setRoomChoiceForm(roomChoiceForm);//rcForm의 정보저장
 			Scene scene = new Scene(roomChoiceForm);
 
 			Stage stage = new Stage();
@@ -36,7 +36,7 @@ public class MainService {
 
 	}
 
-	public void regOpen() {  //ȸ������ ��ư Ŭ���� Register���� �����ϴ� �޼ҵ�
+	public void regOpen() {  //Register메뉴를 실행하는 메소드
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/register/regForm.fxml"));
 
 		Parent regForm;
@@ -44,7 +44,7 @@ public class MainService {
 		try {
 			regForm = loader.load();
 			
-			mainController.setRegForm(regForm);
+			mainController.setRegForm(regForm); //regForm의 정보저장
 			mainController.setRegController(loader.getController());
 			
 			Scene scene = new Scene(regForm);
@@ -58,16 +58,15 @@ public class MainService {
 			e.printStackTrace();
 		}
 	}
-	// ������ �α��� ������ ������ ���� �����ϴ� �޼ҵ带 �ۼ��ؾ���
 
-	public void adminOpen() {
+	public void adminOpen() {//admin메뉴를 실행하는 메소드
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Admin/AdminForm.fxml"));
 		
 		Parent adminForm;
 		try {
 		adminForm = loader.load();
 		
-		mainController.setAdminForm(adminForm);
+		mainController.setAdminForm(adminForm);//adminForm의 정보저장
 		mainController.setAdminController(loader.getController());
 		
 		Scene scene = new Scene(adminForm);
