@@ -28,3 +28,7 @@ hs_err_pid*
 .settings/org.eclipse.core.resources.prefs
 
 .project
+
+src/media/
+
+src/video/

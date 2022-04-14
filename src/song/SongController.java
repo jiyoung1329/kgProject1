@@ -1,6 +1,7 @@
 package song;
 
 import java.net.URL;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -82,7 +83,7 @@ public class SongController implements Initializable{
 				if(endOfMedia) {
 					songDefault.setOpacity(100);
 					if(count == 0) {
-						songSvc.roomAvailable(room);
+						songOutProc();
 					}
 				}
 			});
@@ -123,7 +124,7 @@ public class SongController implements Initializable{
 			CommonService.msg("먼저 곡을 예약해 주세요");
 		}else {
 			// SongDB 내 곡의 재생횟수 +1 시키기
-			songSvc.songPlay(songNumber.get(0).getSongNum());
+			songDto = songSvc.songPlay(songNumber.get(0).getSongNum());
 			
 			//MediaView재생
 			String url = getClass().getResource(songDto.getSongLink()).toString();
@@ -170,9 +171,16 @@ public class SongController implements Initializable{
 		// 남은 곡 수가 0일 때 방 사용여부 가능으로 바꾸고 창 모두 닫기
 		if(count == 0) {
 			songSvc.roomAvailable(room);
-			CommonService.windowClose(searchForm);
-			CommonService.windowClose(songForm);
-		}
+			CommonService.msg("노래방이 종료됩니다.");
+			
+			try {
+			Thread.sleep(1000);
+			}catch(Exception e) {}
+			
+			// 창 모두 닫기
+			if(songForm != null) CommonService.windowClose(songForm);
+			if(searchForm != null) CommonService.windowClose(searchForm);
+		}		
 	}
 	
 	// 나가기 버튼 누를 때

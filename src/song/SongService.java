@@ -57,12 +57,13 @@ public class SongService {
 	
 	
 	// DB내 카운트 추가
-	public void songPlay(String songNumber) {
+	public SongDTO songPlay(String songNumber) {
 		// DB내 카운트 추가
 		SongDTO songDto = new SongDTO();
 		songDto = songDao.selectNum(songNumber);
 		songDao.addCount(songDto);
 		System.out.println(songDto);
+		return songDto;
 	}
 
 	// 방 예약으로 변경 : 예약가능 -> 예약중(0 -> 1)
