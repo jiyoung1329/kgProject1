@@ -1,69 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="room.menu.RoomMenuController">
-   <center>
-      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="500.0" spacing="10.0" BorderPane.alignment="CENTER">
-         <children>
-            <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <TextField fx:id="roomMenuId" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="회원님">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Text>
-               </children>
-            </HBox>
-            <Line endX="100.0" startX="-100.0" stroke="#ff8121" strokeWidth="1.8" />
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="남은 곡 수 : ">
-                     <font>
-                        <Font size="25.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Text>
-                  <TextField prefHeight="50.0" prefWidth="50.0" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="개">
-                     <font>
-                        <Font size="25.0" />
-                     </font>
-                  </Text>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="125.0" prefWidth="530.0" spacing="30.0">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#selectProc" prefHeight="140.0" prefWidth="120.0" text="곡 갯수 선택" />
-                  <Button mnemonicParsing="false" onAction="#chargeProc" prefHeight="140.0" prefWidth="120.0" text="충전하기" />
-               </children>
-               <padding>
-                  <Insets top="10.0" />
-               </padding>
-            </HBox>
-         </children>
-      </VBox>
-   </center>
-   <left>
-      <Circle fx:id="back" fill="#80706b" onMouseClicked="#backProc" radius="30.0" stroke="BLACK" strokeType="INSIDE" BorderPane.alignment="TOP_LEFT">
-         <BorderPane.margin>
-            <Insets left="10.0" top="10.0" />
-         </BorderPane.margin>
-      </Circle>
-   </left>
-   <right>
-      <VBox prefHeight="400.0" prefWidth="70.0" BorderPane.alignment="CENTER" />
-   </right>
-</BorderPane>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="room.menu.RoomMenuController">
+   <children>
+      <ImageView fitHeight="600.0" fitWidth="1000.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../img/곡개수선택.png" />
+         </image>
+      </ImageView>
+      <Circle fx:id="back" fill="#80706b" layoutX="60.0" layoutY="62.0" onMouseClicked="#backProc" opacity="0.0" radius="38.0" stroke="BLACK" strokeType="INSIDE" />
+      <Label fx:id="customerId" alignment="CENTER" layoutX="378.0" layoutY="53.0" prefHeight="40.0" prefWidth="200.0">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Label>
+      <Label fx:id="remainSongLabel" alignment="CENTER" layoutX="529.0" layoutY="167.0" prefHeight="70.0" prefWidth="150.0">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Label>
+      <Button layoutX="244.0" layoutY="270.0" mnemonicParsing="false" onAction="#selectProc" prefHeight="241.0" prefWidth="226.0" style="-fx-background-color: FFB84D;" text="곡 갯수 선택">
+         <font>
+            <Font name="NanumGothic" size="34.0" />
+         </font></Button>
+      <Button layoutX="529.0" layoutY="270.0" mnemonicParsing="false" onAction="#chargeProc" prefHeight="241.0" prefWidth="226.0" text="충전하기">
+         <font>
+            <Font name="NanumGothic" size="35.0" />
+         </font></Button>
+   </children>
+</AnchorPane>
+
