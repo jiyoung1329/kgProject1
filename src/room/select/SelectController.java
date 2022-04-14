@@ -62,9 +62,12 @@ public class SelectController implements Initializable{
 	}
 	
 	public void selectProc() {
-		int room = Integer.parseInt(roomNumber.getText());
-		int count = Integer.parseInt(songCount.getText());
-		selectService.saveSongCount(selectForm);
+		String room = roomNumber.getText();
+		if (selectService.checkRoomReserve(room)) {
+			selectService.saveSongCount(selectForm);
+		} else {
+			CommonService.msg("이미 예약된 방입니다.");
+		}
 		
 	}
 	

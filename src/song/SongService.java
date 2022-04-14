@@ -15,8 +15,11 @@ import song.search.SongSearchController;
 
 public class SongService {
 	private SongController songController;
-	
-	
+	private SongDAO songDao;
+
+	public SongService() {
+		songDao = new SongDAO();
+	}
 	
 	public SongController getSongController() {
 		return songController;
@@ -55,10 +58,17 @@ public class SongService {
 	// DB내 카운트 추가
 	public void songPlay(SongDTO songDto) {
 		// DB내 카운트 추가
-		SongDAO songDao = new SongDAO();
 		songDao.addCount(songDto);
 		System.out.println(songDto);
 	}
+
+	// 방 예약으로 변경 : 예약가능 -> 예약중(0 -> 1)
+	public void roomReserve(String room) {
+		songDao.roomReserve(room);
+		
+	}
+	
+	
 	
 	
 	

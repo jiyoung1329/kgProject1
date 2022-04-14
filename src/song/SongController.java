@@ -22,7 +22,7 @@ public class SongController implements Initializable{
 	private SongDTO songDto;
 	private SongSearchController songSearchController;
 	private ArrayList<SongDTO> songNumber = new ArrayList<SongDTO>();
-	private String count;
+	private int count;
 	private String room;
 	private MediaPlayer mediaPlayer;
 	private boolean endOfMedia;
@@ -44,14 +44,33 @@ public class SongController implements Initializable{
 	public void setSongSearchController(SongSearchController songSearchController) {
 		this.songSearchController = songSearchController;
 	}
+	
+	public void setSong(Parent songForm) {
+		this.songForm = songForm;
+	}
+	
+	public void setSongSearchForm(Parent searchForm) {
+		this.searchForm = searchForm;
+	}
+	
+	public void setCount(String count) {
+		this.count = Integer.parseInt(count);
+		remainSong.setText(count);
+
+	}
+
+	public void setRoomNumber(String room) {
+		this.room = room;
+		songSvc.roomReserve(room);
+		
+		
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		songSvc = new SongService();
 		songSvc.setSongController(this);
-		count = 
-		
-		remainSong.setText(Integer.toString(count));
+		songSvc.roomReserve(room);
 		
 		mediaPlayer = null;
 		if (mediaPlayer != null) {
@@ -67,14 +86,6 @@ public class SongController implements Initializable{
 		}
 		
 		
-	}
-	
-	public void setSong(Parent songForm) {
-		this.songForm = songForm;
-	}
-	
-	public void setSongSearchForm(Parent searchForm) {
-		this.searchForm = searchForm;
 	}
 	
 	//노래 검색창 오픈
@@ -159,6 +170,8 @@ public class SongController implements Initializable{
 			CommonService.windowClose(songForm);
 		}
 	}
+
+
 
 
 }

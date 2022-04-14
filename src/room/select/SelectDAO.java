@@ -67,7 +67,30 @@ public class SelectDAO {
 			}
 		}
 		
-		
+	}
+
+	public int checkRoomReserve(String room) {
+		String query = "select isreservation from room where num=?";
+		int isReservation = -1;
+		try {
+			ps = conn.prepareStatement(query);
+			ps.setString(1, room);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				isReservation = Integer.parseInt(rs.getString("isreservation")); 
+			}
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) rs.close();
+				if (ps != null) ps.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return isReservation;
 		
 	}
 }
