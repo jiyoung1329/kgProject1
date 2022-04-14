@@ -9,7 +9,11 @@ import javafx.scene.Parent;
 
 public class RoomChoiceController implements Initializable {
 	private RoomChoiceService rcs;
-	private Parent imsi2;	// 임시 테스트
+	private Parent rcForm;
+	
+	public void setRcForm(Parent rcForm) {
+		this.rcForm = rcForm;
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -18,7 +22,8 @@ public class RoomChoiceController implements Initializable {
 	
 	public void rmProc() throws Exception{
 		rcs.rmProc();
-//		CommonService.windowClose(imsi2);	//임시 테스트
+//		rcs.rmProc(rcForm);
+		CommonService.windowClose(rcForm);
 	}
 
 
