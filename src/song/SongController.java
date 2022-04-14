@@ -121,6 +121,23 @@ public class SongController implements Initializable{
 		if(songNumber.size() == 0) {
 			CommonService.msg("먼저 곡을 예약해 주세요");
 		}else {
+			// DB카운트
+			SongDAO songDao = new SongDAO();
+			songDto = new SongDTO();
+			songDto = songDao.selectNum(songNumber.get(0).getSongNum());
+			songSvc.songPlay(songDto);
+			
+			//MediaView재생
+			String url = getClass().getResource(songDto.getSongLink()).toString();
+			if(url != null) {
+				songDefault.setOpacity(0);
+				Media media = new Media(url);
+				mediaPlayer = new MediaPlayer(media);
+				songMedia.setMediaPlayer(mediaPlayer);
+				songMedia.setPreserveRatio(false);
+				mediaPlayer.play();
+			}
+			
 			remainSong.setText(Integer.toString(--count));
 			//System.out.println(count);
 			//System.out.println(songNumber.get(0).getSongNum());
@@ -140,22 +157,6 @@ public class SongController implements Initializable{
 				num6.setText(songNumber.get(5).getSongNum());
 			} catch(Exception e) {}
 			
-			// DB카운트
-			SongDAO songDao = new SongDAO();
-			songDto = new SongDTO();
-			songDto = songDao.selectNum(songNumber.get(0).getSongNum());
-			songSvc.songPlay(songDto);
-			
-			//MediaView재생
-			String url = getClass().getResource(songDto.getSongLink()).toString();
-			if(url != null) {
-				songDefault.setOpacity(0);
-				Media media = new Media(url);
-				mediaPlayer = new MediaPlayer(media);
-				songMedia.setMediaPlayer(mediaPlayer);
-				songMedia.setPreserveRatio(false);
-				mediaPlayer.play();
-			}
 		}
 		
 	}
