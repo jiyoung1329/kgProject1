@@ -38,9 +38,15 @@ public class SongService {
 			songController.setSongSearchForm(songSearchForm);
 			
 			Scene scene = new Scene(songSearchForm);
-		
+			
+			Stage nowStage = (Stage) songController.getSongForm().getScene().getWindow();
+			Double SongX = nowStage.getX();
+			Double SongY = nowStage.getY();
+			
 			Stage stage = new Stage();
 			stage.setTitle("노래 검색");
+			stage.setX(SongX + 1005);
+			stage.setY(SongY);
 			stage.setScene(scene);
 			stage.show();
 		} catch (IOException e) {
