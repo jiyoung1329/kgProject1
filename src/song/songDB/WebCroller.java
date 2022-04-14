@@ -18,26 +18,19 @@ public class WebCroller {
         StringBuilder query = new StringBuilder();
         Youtube youtube = new Youtube();
         
-        String url = "https://www.tjmedia.com/tjsong/song_monthPopular.asp?strType=1&SYY=2022&SMM=01&SDD=01&EYY=2022&EMM=04&EDD=01";
+        String url = "https://www.youtube.com/watch?v=-oSdbZ2OFF4&list=PL5rkMpxC5Ex81afWiXpTnBNyGAfk-L06u&index=1";
         Document document = Jsoup.connect(url).get();
-
-        Elements tjSongs = document.select("#BoardType1 > table > tbody > tr");
+        
+        Elements media = document.select("#movie_player > div.ytp-cued-thumbnail-overlay > div");
+        System.out.println(media);
+        Elements tjSongBox = document.select("#items");
+        Elements tjsong = document.select("#wc-endpoint");
+        Elements tjSongs = document.select("#playlist-items");
+        System.out.println(tjSongs);
         for (int i = 1; i < tjSongs.size(); i++) {
-            Element song = tjSongs.get(i);
-            String number = song.select("td:nth-child(2)").text();
-            String title = song.select("td:nth-child(3)").text();
-            String singer = song.select("td:nth-child(4)").text();
-            String link = "www.youtube.com/watch?v=" + youtube.search("tj+"+number);
-            query.append("insert into song values(")
-                    .append("'").append(number).append("', ")
-                    .append("'").append(title).append("', ")
-                    .append("'").append(singer).append("', ")
-                    .append("0, ")
-                    .append("'").append(link).append("'")
-                    .append("); \n");
-
+        	System.out.println(tjSongs.get(i));
         }
-        MakeSQLFile(query.toString());
+//        MakeSQLFile(query.toString());
     }
 
     public static void MakeSQLFile(String sb) throws IOException {

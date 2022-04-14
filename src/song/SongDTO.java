@@ -1,14 +1,14 @@
 package song;
 
 public class SongDTO {
-	private int songNum;
-	private int songCount;
+	private String songNum;
+	private int songCount; 
 	private String songLink;
 	
-	public int getSongNum() {
+	public String getSongNum() {
 		return songNum;
 	}
-	public void setSongNum(int songNum) {
+	public void setSongNum(String songNum) {
 		this.songNum = songNum;
 	}
 	public int getSongCount() {

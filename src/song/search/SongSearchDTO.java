@@ -4,6 +4,8 @@ public class SongSearchDTO {
 	private String songNum;
 	private String songTitle;
 	private String songSinger;
+	private int songCount; 
+
 	private String songLink;
 	
 	public SongSearchDTO() {}
@@ -38,6 +40,14 @@ public class SongSearchDTO {
 
 	public void setSongSinger(String songSinger) {
 		this.songSinger = songSinger;
+	}
+	
+	public int getSongCount() {
+		return songCount;
+	}
+	
+	public void setSongCount(int songCount) {
+		this.songCount = songCount;
 	}
 
 	public String getSongLink() {

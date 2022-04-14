@@ -2,29 +2,45 @@ package song;
 
 import java.io.IOException;
 
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
+import song.search.SongSearchController;
 
 public class SongService {
 	private SongController songController;
+	private SongDAO songDao;
+
+	public SongService() {
+		songDao = new SongDAO();
+	}
 	
+	public SongController getSongController() {
+		return songController;
+	}
 	
 	public void setSongController(SongController songController) {
 		this.songController = songController;
-		
 	}
 	
 	// 노래 리스트 창 오픈 메소드
 	public void songSearchOpen() {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/songSearch.fxml"));
-		
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/song/search/songSearch.fxml"));
 		Parent songSearchForm;
+		
 		try {
 			songSearchForm = loader.load();
 			
-			songController.setSongSearchForm(songSearchForm);
+			songController.setSongSearchController(loader.getController());
+			songController.getSongSearchController().setSearchForm(songSearchForm);
+			
+			songController.getSongSearchController().setSongController(songController);
 			
 			Scene scene = new Scene(songSearchForm);
 		
@@ -37,27 +53,23 @@ public class SongService {
 		}
 	}
 	
-	// 남은 곡 수 카운트 - deCounting만
-	public void remainNumCount() {
-		
-	}
 	
-	// 예약 곡 바에 띄울 노래 리스트 메소드
-	public void reservSongReg() {
-		
-	}
 	
-	// 시작버튼을 누르면 곡 재생 메소드
-	public void songPlay() {
-		
-		
-	}
-	
-	// 취소버튼 누를 시 재생정지 + 대기화면 띄우기 
-	public void songCancel() {
-		
+	// DB내 카운트 추가
+	public void songPlay(SongDTO songDto) {
+		// DB내 카운트 추가
+		songDao.addCount(songDto);
+		System.out.println(songDto);
 	}
 
+	// 방 예약으로 변경 : 예약가능 -> 예약중(0 -> 1)
+	public void roomReserve(String room) {
+		songDao.roomReserve(room);
+		
+	}
+	
+	
+	
 	
 	
 }

@@ -4,11 +4,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class CommonDAO {
-		private String url ="jdbc:oracle:thin:@kgproject_high?TNS_ADMIN=C:/Wallet_kgProject";
-		private String user = "admin";
-		private String pwd = "KGproject1234!";
+		private static String url ="jdbc:oracle:thin:@kgproject_high?TNS_ADMIN=C:/Wallet_kgProject";
+		private static String user = "admin";
+		private static String pwd = "KGproject1234!";
 		
-	public Connection makeConnection() {
+	public static Connection makeConnection() {
 		Connection conn = null;
 		
 		try {
