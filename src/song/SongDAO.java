@@ -46,7 +46,7 @@ public class SongDAO {
 	}
 	
 	public void addCount(SongDTO song) {
-		System.out.println("널이 뜨는곳 : " + song.getSongNum());
+
 		String sql = "UPDATE song SET count = count+1 WHERE num = ?";
 		try {
 			ps = conn.prepareStatement(sql);
@@ -64,6 +64,24 @@ public class SongDAO {
 		} 
 
 	
+	}
+	
+	public void roomAvailable(int room) {
+		String sql = "UPDATE room SET isreservation = 0 WHERE num = ?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, Integer.toString(room));
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(ps != null) ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} 
 	}
 		
 

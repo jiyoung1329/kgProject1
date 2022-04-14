@@ -22,7 +22,8 @@ public class SongController implements Initializable{
 	private SongDTO songDto;
 	private SongSearchController songSearchController;
 	private ArrayList<SongDTO> songNumber = new ArrayList<SongDTO>();
-	private int count;
+	private String count;
+	private String room;
 	private MediaPlayer mediaPlayer;
 	private boolean endOfMedia;
 	@FXML private Label num1;
@@ -48,7 +49,8 @@ public class SongController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		songSvc = new SongService();
 		songSvc.setSongController(this);
-		count = 5;
+		count = 
+		
 		remainSong.setText(Integer.toString(count));
 		
 		mediaPlayer = null;
@@ -152,7 +154,9 @@ public class SongController implements Initializable{
 		mediaPlayer.pause();
 		songDefault.setOpacity(100);
 		if(count == 0) {
-			// 방 번호를 받아서 방DB에 접근하는 DAO 필
+			
+			CommonService.windowClose(searchForm);
+			CommonService.windowClose(songForm);
 		}
 	}
 
