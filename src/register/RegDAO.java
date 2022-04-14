@@ -4,13 +4,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import common.CommonDAO;
 import login.LoginDAO;
 
 public class RegDAO extends LoginDAO {
+	private CommonDAO commonDao;
+	private Connection con;
 	
 	public void insert(RegDTO reg) { // RegDT값을 받아와서 실행
+		commonDao = new CommonDAO();
+		con = commonDao.makeConnection();
 		String sql = "INSERT INTO member VALUES(?,?,?,?,?)";
-		Connection con = getCon();
+		
 		PreparedStatement ps = null;
 
 		try {
