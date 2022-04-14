@@ -26,6 +26,11 @@ public class LoginController implements Initializable {
 	private LoginService loginSvc;
 	private MainController mainController;
 	
+	//------------
+	public void setId(TextField id) {
+		this.id = id;
+	}
+	//--------------
 	
 	public void setLoginForm(Parent loginForm) {
 		this.loginForm = loginForm;
@@ -54,22 +59,7 @@ public class LoginController implements Initializable {
 				loginProc();
 			}
 		});
-//		loginButton.setOnMousePressed(event->{ 
-//			loginButton.setStyle("-fx-background-color: #FFB84D");
-//			loginButton.setStyle("-fx-padding : 15, 10, 10, 10");
-//		});
-//		loginButton.setOnMouseReleased(event->{
-//			loginButton.setStyle("-fx-background-color: #FFB84D");
-//			loginButton.setStyle("-fx-padding : 10, 10, 10, 10");
-//		});
-//		regButton.setOnMousePressed(event->{
-//			regButton.setStyle("-fx-background-color: FFB84D");
-//			regButton.setStyle("-fx-padding : 15, 10, 10, 10");
-//		});
-//		regButton.setOnMouseReleased(event->{
-//			regButton.setStyle("-fx-background-color: FFB84D");
-//			regButton.setStyle("-fx-padding : 10, 10, 10, 10");
-//		});
+
 	
 	}
 	
@@ -79,7 +69,7 @@ public class LoginController implements Initializable {
 			if(loginDto.getIsAdmin() == 1){		// 받아온 LoginDTO의 isAdmin 값이 1일경우 String "Admin"반환
 				mainController.open("Admin");
 			}else {								// isAdmin값이 1이 아닐경우 String "RoomChoice"반환
-			CommonService.windowClose(loginForm); //로그인메뉴 종료
+			CommonService.windowClose(loginForm); // 로그인메뉴 종료
 			mainController.open("RoomChoice");
 			}
 		}else {
@@ -94,8 +84,11 @@ public class LoginController implements Initializable {
 		mainController.open("Register"); // 회원가입 버튼 클릭시 String "Register" 받환
 	}
 	
+	public void adminOpen() {
+		mainController.open("Admin");
+	}
 	
-	public void idLengthCheck() {	// id 길이제한 8자
+	public void idLengthCheck() {	//id 길이제한 8자
 		if(id.getLength() > 8){
 			String tmp = id.getText();
 			tmp = tmp.substring(0,8);

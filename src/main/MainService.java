@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import room.choice.RoomChoiceController;
 
 public class MainService {
 	private MainController mainController;
@@ -22,7 +23,15 @@ public class MainService {
 		try {
 
 			roomChoiceForm = loader.load();
-			mainController.setRoomChoiceForm(roomChoiceForm);//rcForm의 정보저장
+
+			mainController.setRcForm(roomChoiceForm);//rcForm의 정보저장
+
+			mainController.setRoomChoiceForm(roomChoiceForm);
+//			
+			RoomChoiceController roomChoiceController = loader.getController();
+			mainController.setRoomChoiceController(roomChoiceController);
+			
+
 			Scene scene = new Scene(roomChoiceForm);
 
 			Stage stage = new Stage();

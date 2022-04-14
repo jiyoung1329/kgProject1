@@ -3,7 +3,10 @@ package main;
 import admin.AdminController;
 import javafx.scene.Parent;
 import login.LoginController;
+import login.LoginDTO;
 import register.RegController;
+import room.choice.RoomChoiceController;
+import room.menu.RoomMenuController;
 
 public class MainController { //메인, 로그인, 레지스터 정보 저장소
 	private MainService mainSvc;
@@ -14,6 +17,25 @@ public class MainController { //메인, 로그인, 레지스터 정보 저장소
 	private RegController regController;
 	private Parent adminForm;
 	private AdminController adminController;
+	
+	//-------------------------
+	
+	
+	//------------------------------
+	private RoomChoiceController roomChoiceController;
+	private Parent rcForm;
+	
+	public void setRoomChoiceController(RoomChoiceController roomChoiceController) {
+		this.roomChoiceController = roomChoiceController;
+		roomChoiceController.setRcForm(roomChoiceForm);
+	}
+	public void setRcForm(Parent rcForm) {
+		this.rcForm = rcForm;
+	}
+	//-------------------------------
+	
+	
+	
 	
 	public MainController() {
 		mainSvc = new MainService();
