@@ -24,5 +24,6 @@ public class SelectMain extends Application{
 		primaryStage.setTitle("곡선택");
 		primaryStage.show();
 	}
+	
 
 }
