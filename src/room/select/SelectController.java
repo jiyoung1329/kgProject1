@@ -64,7 +64,7 @@ public class SelectController implements Initializable{
 	public void selectProc() {
 		int room = Integer.parseInt(roomNumber.getText());
 		int count = Integer.parseInt(songCount.getText());
-		selectService.saveSongCount(count, selectForm);
+		selectService.saveSongCount(selectForm);
 		
 	}
 	
