@@ -2,14 +2,9 @@ package song;
 
 import java.io.IOException;
 
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import song.search.SongSearchController;
 
@@ -39,8 +34,8 @@ public class SongService {
 			
 			songController.setSongSearchController(loader.getController());
 			songController.getSongSearchController().setSearchForm(songSearchForm);
-			
 			songController.getSongSearchController().setSongController(songController);
+			songController.setSongSearchForm(songSearchForm);
 			
 			Scene scene = new Scene(songSearchForm);
 		
@@ -56,8 +51,10 @@ public class SongService {
 	
 	
 	// DB내 카운트 추가
-	public void songPlay(SongDTO songDto) {
+	public void songPlay(String songNumber) {
 		// DB내 카운트 추가
+		SongDTO songDto = new SongDTO();
+		songDto = songDao.selectNum(songNumber);
 		songDao.addCount(songDto);
 		System.out.println(songDto);
 	}
@@ -68,7 +65,10 @@ public class SongService {
 		
 	}
 	
-	
+	// 방 예약가능으로 변경 : 예약중 -> 예약가능(1 -> 0)
+	public void roomAvailable(String room) {
+		songDao.roomAvailable(room);
+	}
 	
 	
 	

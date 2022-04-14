@@ -1,14 +1,5 @@
 package login;
-/*
- * SQL> CREATE TABLE membertmp(
-  2  isAdmin number(4),
-  3  id varchar2(15),
-  4  pw varchar2(15),
-  5  songCount number(4),
-  6  mobile varchar2(15)
-  7  );
 
- */
 public class LoginDTO {
 	private Integer isAdmin;
 	private String id;

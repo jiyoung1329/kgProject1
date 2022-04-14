@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 
 public class SongMain extends Application{
@@ -19,6 +20,7 @@ public class SongMain extends Application{
 		Scene scene = new Scene(songForm);
 		
 		primaryStage.setTitle("노래방");
+		primaryStage.initStyle(StageStyle.UNDECORATED);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 				

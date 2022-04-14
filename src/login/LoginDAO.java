@@ -6,35 +6,51 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import common.CommonDAO;
 import login.LoginDTO;
+import main.MainController;
+import room.menu.RoomMenuController;
 
 public class LoginDAO {
-	private Connection con;
-
-	public Connection getCon() {
-		return con;
+	private Connection conn;
+	
+	//-----------
+	
+	private MainController mainController;
+	private CommonDAO commonDao;
+	
+	public void setMainController(MainController mainController) {
+		this.mainController = mainController;
+		
 	}
+	//--------------
+	
 
-	public LoginDAO() { //½ÇÇà½Ã È¸¿øµ¥ÀÌÅÍº£ÀÌ½º Á¢¼Ó
+	public LoginDAO() { //LoginDAO ì¸ìŠ¤í„´ìŠ¤ ìƒì„±ì‹œ memberDBì ‘ì†
+		commonDao = new CommonDAO();
+		conn = 	commonDao.makeConnection();
 		String url = "jdbc:oracle:thin:@kgproject_high?TNS_ADMIN=C:/Wallet_kgProject";
 		String user = "admin";
 		String pwd = "KGproject1234!";
 
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			con = DriverManager.getConnection(url, user, pwd);
+			conn = DriverManager.getConnection(url, user, pwd);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
-	public LoginDTO selectId(String id) { //¾ÆÀÌµğ°Ë»ö
+	
+	
+	
+	public LoginDTO selectId(String id) { //idë¡œ DBì— ìˆëŠ” ê°’ì„ ê°€ì ¸ì˜®
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		LoginDTO login = null;
-		String sql = "SELECT * FROM member WHERE id = ?"; // ¸â¹ö Å×ÀÌºí ¸í member
+		String sql = "SELECT * FROM member WHERE id = ?"; // memberDBì—ì„œ idê°€ ê°€ì§„ ì •ë³´ë¥¼ ëª¨ë‘ ê°€ì ¸ì˜´
+
 		try {
-			ps = con.prepareStatement(sql);
+			ps = conn.prepareStatement(sql);
 			ps.setString(1, id);
 			rs = ps.executeQuery();
 			if (rs.next()) {
@@ -47,7 +63,8 @@ public class LoginDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
+		} 
+		finally {
 			try {
 				if (rs != null)
 					rs.close();
@@ -57,6 +74,8 @@ public class LoginDAO {
 				e.printStackTrace();
 			}
 		}
+		
 		return login;
+		
 	}
 }

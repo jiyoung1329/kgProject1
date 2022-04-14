@@ -1,66 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="register.RegController">
    <children>
-      <HBox prefHeight="68.0" prefWidth="189.0">
-         <children>
-            <VBox prefHeight="68.0" prefWidth="147.0">
-               <children>
-                  <Label prefHeight="58.0" prefWidth="133.0" text="회원가입">
-                     <font>
-                        <Font size="30.0" />
-                     </font>
-                  </Label>
-                  <Line endX="53.29289245605469" endY="-1.0355340242385864" startX="-100.0" />
-               </children>
-            </VBox>
-         </children>
-      </HBox>
-      <HBox layoutX="100.0" layoutY="100.0" prefHeight="51.0" prefWidth="427.0" spacing="50.0">
-         <children>
-            <Label prefWidth="100.0" text="아이디   " />
-            <TextField fx:id="regId" prefHeight="23.0" prefWidth="139.0" />
-            <Button fx:id="regSame" mnemonicParsing="false" onAction="#regSameProc" text="중복확인">
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </Button>
-         </children>
-      </HBox>
-      <HBox layoutX="100.0" layoutY="156.0" prefHeight="51.0" prefWidth="427.0" spacing="50.0">
-         <children>
-            <Label prefWidth="100.0" text="비밀번호" />
-            <PasswordField fx:id="regPw" />
-         </children>
-      </HBox>
-      <HBox layoutX="100.0" layoutY="207.0" prefHeight="51.0" prefWidth="427.0" spacing="50.0">
-         <children>
-            <Label prefWidth="100.0" text="비밀번호 확인" />
-            <PasswordField fx:id="regConfirmPw" />
-         </children>
-      </HBox>
-      <HBox layoutX="100.0" layoutY="258.0" prefHeight="51.0" prefWidth="427.0" spacing="50.0">
-         <children>
-            <Label prefWidth="100.0" text="전화번호" />
-            <TextField fx:id="regMobile" />
-         </children>
-      </HBox>
-      <HBox alignment="CENTER" layoutX="100.0" layoutY="335.0" prefHeight="51.0" prefWidth="427.0" spacing="50.0">
-         <children>
-            <Button fx:id="registerButton" mnemonicParsing="false" onAction="#regProc" prefHeight="40.0" prefWidth="120.0" text="회원가입" />
-            <Button fx:id="regCancelButton" mnemonicParsing="false" onAction="#regCancelProc" prefHeight="40.0" prefWidth="120.0" text="취소" />
-         </children>
-      </HBox>
+      <ImageView fitHeight="600.0" fitWidth="1023.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/회원가입.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="regId" layoutX="356.0" layoutY="127.0" prefHeight="50.0" prefWidth="344.0" style="-fx-background-radius: 50;" />
+      <PasswordField fx:id="regPw" layoutX="356.0" layoutY="204.0" prefHeight="50.0" prefWidth="450.0" style="-fx-background-radius: 50;" />
+      <PasswordField fx:id="regConfirmPw" layoutX="356.0" layoutY="291.0" prefHeight="50.0" prefWidth="450.0" style="-fx-background-radius: 50;" />
+      <Button fx:id="regSame" layoutX="711.0" layoutY="127.0" mnemonicParsing="false" onAction="#regSameProc" prefHeight="50.0" prefWidth="95.0" style="-fx-background-radius: 30; -fx-background-color: BE7E33;" text="중복" textFill="WHITE">
+         <font>
+            <Font name="NanumGothicBold" size="20.0" />
+         </font>
+      </Button>
+      <TextField fx:id="regMobile" layoutX="356.0" layoutY="380.0" prefHeight="50.0" prefWidth="450.0" style="-fx-background-radius: 50;" />
+      <Button fx:id="registerButton" layoutX="214.0" layoutY="471.0" mnemonicParsing="false" onAction="#regProc" prefHeight="80.0" prefWidth="270.0" style="-fx-background-radius: 20; -fx-background-color: FFB84D;" text="회원가입" textFill="WHITE">
+         <font>
+            <Font name="NanumGothicBold" size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="regCancelButton" layoutX="507.0" layoutY="471.0" mnemonicParsing="false" onAction="#regCancelProc" prefHeight="80.0" prefWidth="270.0" style="-fx-background-radius: 20; -fx-background-color: FFB84D;" text="취소" textFill="WHITE">
+         <font>
+            <Font name="NanumGothicBold" size="20.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

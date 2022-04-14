@@ -44,37 +44,37 @@ public class RegController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		registerButton.setDisable(true); //ȸ������ ��ư ��Ȱ��ȭ
-		regPw.setDisable(true);			// ��й�ȣ �ʵ� ��Ȱ��ȭ
-		regConfirmPw.setDisable(true);  // ��й�ȣ Ȯ�� �ʵ� ��Ȱ��ȭ
-		regMobile.setDisable(true);		// ��ȭ��ȣ �ʵ� ��Ȱ��ȭ
-		regSame.setDisable(true);		// �ߺ�Ȯ�� ��ư ��Ȱ��ȭ
+		registerButton.setDisable(true); //회원 등록버튼 비활성화
+		regPw.setDisable(true);			// 비밀번호 필드 비활성화
+		regConfirmPw.setDisable(true);  // 비밀번호 확인 필드 비활성화
+		regMobile.setDisable(true);		// 전화번호 필드 비활성화
+		regSame.setDisable(true);		// 중복확인 버튼 비활성화
 		regSvc = new RegisterService();
 		regId.textProperty().addListener((attribute, before, after) -> {
-			idLengthCheck();	// ȸ������ ID���� Ȯ�� 8������
-			if(regId.getText().length()>0) { //ID�ʵ忡 ���� ���� ��쿡�� �ߺ�Ȯ�� ��ư Ȱ��ȭ
+			idLengthCheck();	// ID의 길이체크 8자제한
+			if(regId.getText().length()>0) { //ID필드에 값이 있어야만 중복체크버튼 활성화
 				regSame.setDisable(false);
 			}
 			emptyCheck();
 		});
 		regPw.textProperty().addListener((attribute, before, after) -> {
-			pwLengthCheck(); //��й�ȣ ���� Ȯ�� 10������
+			pwLengthCheck(); //비밀번호 길이체크 10자제한
 			emptyCheck();
 		});
 		
 		regMobile.textProperty().addListener((attribute, before, after) -> {
-			emptyCheck(); // ��ȭ��ȣ�ʵ���� ���� �־�߸� ȸ������ ��ư Ȱ��ȭ
+			emptyCheck(); // 전화번호필드를 포함한 각 필드의 값이 존재하는지 확인. 모두 통과 시 회원등록버튼 활성화
 		});
 	}
-	public void regSameProc() { //�ߺ���ư Ŭ���� ����Ǵ� �޼ҵ�
+	public void regSameProc() { //중복체크 메소드
 
 		RegDAO regDao = new RegDAO();
 		LoginDTO login = regDao.selectId(regId.getText());
 			if (login != null) {
-				CommonService.msg("�ߺ��� ���̵��Դϴ�.");
+				CommonService.msg("중복된 아이디입니다.");
 				return;
-			} else { //�ߺ��� �ƴ� ��쿡�� ��Ȱ��ȭ�� �ʵ���� Ȳ��ȭ�� ����
-				CommonService.msg("ȸ�������� ������ ���̵��Դϴ�.");
+			} else { // 중복되지 않은 ID일시 ID이외의 비활성화되어있던 필드를 활성화
+				CommonService.msg("회원가입 가능한 아이디입니다.");
 				regPw.setDisable(false);
 				regConfirmPw.setDisable(false);
 				regMobile.setDisable(false);
@@ -106,7 +106,7 @@ public class RegController implements Initializable {
 		}
 	
 
-	public void emptyCheck() {
+	public void emptyCheck() { //각 필드가 하나라도 비어있을 경우 회원 등록버튼 비활성화
 		if (regId.getText().isEmpty() || regPw.getText().isEmpty() || regConfirmPw.getText().isEmpty()
 				|| regMobile.getText().isEmpty()) {
 			registerButton.setDisable(true);
