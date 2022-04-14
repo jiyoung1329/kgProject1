@@ -26,6 +26,7 @@ public class SongController implements Initializable{
 	private String room;
 	private MediaPlayer mediaPlayer;
 	private boolean endOfMedia;
+	
 	@FXML private Label num1;
 	@FXML private Label num2;
 	@FXML private Label num3;
@@ -56,14 +57,11 @@ public class SongController implements Initializable{
 	public void setCount(String count) {
 		this.count = Integer.parseInt(count);
 		remainSong.setText(count);
-
 	}
 
 	public void setRoomNumber(String room) {
 		this.room = room;
 		songSvc.roomReserve(room);
-		
-		
 	}
 
 	@Override
@@ -79,7 +77,7 @@ public class SongController implements Initializable{
 				if(endOfMedia) {
 					songDefault.setOpacity(100);
 					if(count == 0) {
-						// 방DB 방 사용여부 변경 메서드
+						songSvc.roomAvailable(room);
 					}
 				}
 			});
@@ -95,7 +93,6 @@ public class SongController implements Initializable{
 	
 	//예약된 노래번호 띄우기
 	public void reserveSong(SongDTO songDTO) {
-		
 		if(songNumber.size() >= 6) {
 			CommonService.msg("곡을 더 이상 추가할 수 없습니다.");
 		}else {
@@ -114,17 +111,31 @@ public class SongController implements Initializable{
 		
 	}
 	
-	//SongDB 내 Count int +1 등록, 예약곡 리스트 첫번째 곡 삭제, 남은 곡 수 감소, SongDB 내 동영상 MediaView로 재생
+	// 시작 버튼 누를 때
 	public void songStartProc() {
-		
-		// 남은 곡 수 감소 및 예약곡 리스트 업데이트
 		if(songNumber.size() == 0) {
+			// 예약된 곡이 0일 때
 			CommonService.msg("먼저 곡을 예약해 주세요");
 		}else {
+			// SongDB 내 곡의 재생횟수 +1 시키기
+			songSvc.songPlay(songNumber.get(0).getSongNum());
+			
+			//MediaView재생
+			String url = getClass().getResource(songDto.getSongLink()).toString();
+			if(url != null) {
+				songDefault.setOpacity(0);
+				Media media = new Media(url);
+				mediaPlayer = new MediaPlayer(media);
+				songMedia.setMediaPlayer(mediaPlayer);
+				songMedia.setPreserveRatio(false);
+				mediaPlayer.play();
+			}
+			
+			// 남은 곡 수 숫자 업데이트
 			remainSong.setText(Integer.toString(--count));
-			//System.out.println(count);
-			//System.out.println(songNumber.get(0).getSongNum());
+			// 첫 번째 예약곡 지우기
 			songNumber.remove(0);
+			// 예약곡 리스트 업데이트
 			num1.setText("");
 			num2.setText("");
 			num3.setText("");
@@ -140,37 +151,33 @@ public class SongController implements Initializable{
 				num6.setText(songNumber.get(5).getSongNum());
 			} catch(Exception e) {}
 			
-			// DB카운트
-			SongDAO songDao = new SongDAO();
-			songDto = new SongDTO();
-			songDto = songDao.selectNum(songNumber.get(0).getSongNum());
-			songSvc.songPlay(songDto);
-			
-			//MediaView재생
-			String url = getClass().getResource(songDto.getSongLink()).toString();
-			if(url != null) {
-				songDefault.setOpacity(0);
-				Media media = new Media(url);
-				mediaPlayer = new MediaPlayer(media);
-				songMedia.setMediaPlayer(mediaPlayer);
-				songMedia.setPreserveRatio(false);
-				mediaPlayer.play();
-			}
 		}
 		
 	}
 	
-	// 취소버튼을 눌렀을 때 남은 곡 수가 0이면 방의 사용여부를 0으로 바꾸기 & 취소버튼 누르면 대기화면 띄우기
+	// 취소 버튼 누를 때 
 	public void songCancelProc() {
+		// 미디어 재생 멈추기
 		mediaPlayer.pause();
+		// 대기화면 불러오기
 		songDefault.setOpacity(100);
+		
+		// 남은 곡 수가 0일 때 방 사용여부 가능으로 바꾸고 창 모두 닫기
 		if(count == 0) {
-			
+			songSvc.roomAvailable(room);
 			CommonService.windowClose(searchForm);
 			CommonService.windowClose(songForm);
 		}
 	}
-
+	
+	// 나가기 버튼 누를 때
+	public void songOutProc() {
+		// 방 사용여부 가능으로 바꾸기
+		songSvc.roomAvailable(room);
+		// 창 모두 닫기
+		if(songForm != null) CommonService.windowClose(songForm);
+		if(searchForm != null) CommonService.windowClose(searchForm);
+	}
 
 
 
