@@ -6,7 +6,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import login.LoginController;
+import login.LoginDAO;
 import register.RegController;
+import room.choice.RoomChoiceController;
+import room.menu.RoomMenuController;
 
 public class Main extends Application{
 	public static void main(String[] args) {
@@ -17,11 +20,12 @@ public class Main extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/login/loginForm.fxml"));
 		Parent loginForm = loader.load();
-		
-		LoginController loginController = loader.getController(); //·Î±×ÀÎ(¸ŞÀÎ)ÆûÀÇ ÄÁÆ®·Ñ·¯°ªÀ» °¡Á®¿Í¼­ ÀúÀå
+
+		LoginController loginController = loader.getController(); // ë¡œê·¸ì¸ ì»¨íŠ¸ë¡¤ëŸ¬ì— ì •ë³´ë¥¼ ì €ì¥
 		loginController.setLoginForm(loginForm);
 		
-		MainController mainController = new MainController(); // ¸ŞÀÎÄÁÆ®·Ñ·¯¿¡ ÀÌÇÏÀÇ °ªÀ» ÀúÀå
+		MainController mainController = new MainController(); // ë©”ì¸ ì»¨íŠ¸ë¡¤ëŸ¬ì— ì •ë³´ë¥¼ ì €ì¥
+
 		mainController.setLoginController(loginController);
 		loginController.setMainController(mainController);
 				
