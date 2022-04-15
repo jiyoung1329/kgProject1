@@ -28,6 +28,7 @@ public class SongController implements Initializable{
 	private MediaPlayer mediaPlayer;
 	private boolean endOfMedia;
 	
+
 	@FXML private Label num1;
 	@FXML private Label num2;
 	@FXML private Label num3;
@@ -51,7 +52,6 @@ public class SongController implements Initializable{
 		this.songForm = songForm;
 	}
 	
-	
 	public Parent getSongForm() {
 		return songForm;
 	}
@@ -69,27 +69,37 @@ public class SongController implements Initializable{
 		this.room = room;
 		songSvc.roomReserve(room);
 	}
-
+	
+	public void setEndOfMedia(boolean endOfMedia) {
+		this.endOfMedia = endOfMedia;
+	}
+	
+	public void setEndOfMedia2(boolean endOfMedia) {
+		this.endOfMedia = endOfMedia;
+		if(endOfMedia) {
+			songDefault.setOpacity(100);
+			if(songNumber.get(0).getSongNum() != null) {
+				songStartProc();
+			}
+		}
+	}
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		songSvc = new SongService();
 		songSvc.setSongController(this);
 		songSvc.roomReserve(room);
 		
-		mediaPlayer = null;
+		endOfMedia = false;
 		
-		if (mediaPlayer != null) {
-			mediaPlayer.setOnEndOfMedia(()-> {
-				endOfMedia = true;
-				if(endOfMedia) {
-					songDefault.setOpacity(100);
-					if(count == 0) {
-						songOutProc();
-					}
-				}
-			});
-		}
-		
+		mediaPlayer.currentTimeProperty().addListener((old,oldV,newV) -> {
+			Double now = mediaPlayer.getCurrentTime().toSeconds();
+			Double end = mediaPlayer.getTotalDuration().toSeconds();
+			if(now == end) {
+				songStartProc();
+				setEndOfMedia2(true);
+			}
+		});
 		
 	}
 	
@@ -121,8 +131,7 @@ public class SongController implements Initializable{
 	// 시작 버튼 누를 때
 	public void songStartProc() {
 		
-		// 미디어재생의 끝(endOfMedia = ture)일 때만 시작버튼 구
-		if(endOfMedia) {			
+		if(endOfMedia) {
 			if(songNumber.size() == 0) {
 				// 예약된 곡이 0일 때
 				CommonService.msg("먼저 곡을 예약해 주세요");
@@ -161,7 +170,8 @@ public class SongController implements Initializable{
 				} catch(Exception e) {}
 				
 			}
-		}
+			
+		}	
 		
 	}
 	
@@ -174,7 +184,7 @@ public class SongController implements Initializable{
 		songDefault.setOpacity(100);
 		
 		//시작버튼 활성화 조건 세팅하기
-		endOfMedia = true;
+		setEndOfMedia(true);
 		
 		// 남은 곡 수가 0일 때 방 사용여부 가능으로 바꾸고 창 모두 닫기
 		if(count == 0) {
