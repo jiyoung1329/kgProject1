@@ -6,12 +6,14 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import common.CommonService;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.media.Media;
+import javafx.scene.media.MediaMarkerEvent;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import song.search.SongSearchController;
@@ -23,7 +25,7 @@ public class SongController implements Initializable{
 	private SongDTO songDto;
 	private SongSearchController songSearchController;
 	private ArrayList<SongDTO> songNumber = new ArrayList<SongDTO>();
-	private int count;
+	private int count = 1;
 	private String room;
 	private MediaPlayer mediaPlayer;
 	private boolean endOfMedia;
@@ -70,17 +72,32 @@ public class SongController implements Initializable{
 		songSvc.roomReserve(room);
 	}
 	
+	// 취소 버튼 눌렀을떄
 	public void setEndOfMedia(boolean endOfMedia) {
 		this.endOfMedia = endOfMedia;
 	}
 	
+	// 미디어가 끝났을때
 	public void setEndOfMedia2(boolean endOfMedia) {
 		this.endOfMedia = endOfMedia;
 		if(endOfMedia) {
+			// 대기화면 띄우기
 			songDefault.setOpacity(100);
-			if(songNumber.get(0).getSongNum() != null) {
-				songStartProc();
-			}
+			
+			
+			try {
+				// 남은곡이 0일때
+				if (count <= 0) {
+					songSvc.roomAvailable(room);
+					CommonService.msg("노래방이 종료됩니다.");
+					
+					try {
+					Thread.sleep(1000);
+					}catch(Exception e) {}
+
+					closeForm();
+				}
+			} catch(Exception e) {}
 		}
 	}
 	
@@ -89,17 +106,8 @@ public class SongController implements Initializable{
 		songSvc = new SongService();
 		songSvc.setSongController(this);
 		songSvc.roomReserve(room);
+		endOfMedia = true;
 		
-		endOfMedia = false;
-		
-		mediaPlayer.currentTimeProperty().addListener((old,oldV,newV) -> {
-			Double now = mediaPlayer.getCurrentTime().toSeconds();
-			Double end = mediaPlayer.getTotalDuration().toSeconds();
-			if(now == end) {
-				songStartProc();
-				setEndOfMedia2(true);
-			}
-		});
 		
 	}
 	
@@ -132,6 +140,7 @@ public class SongController implements Initializable{
 	public void songStartProc() {
 		
 		if(endOfMedia) {
+			
 			if(songNumber.size() == 0) {
 				// 예약된 곡이 0일 때
 				CommonService.msg("먼저 곡을 예약해 주세요");
@@ -148,7 +157,20 @@ public class SongController implements Initializable{
 					songMedia.setMediaPlayer(mediaPlayer);
 					songMedia.setPreserveRatio(false);
 					mediaPlayer.play();
+					endOfMedia = false;
+					
+					mediaPlayer.currentTimeProperty().addListener((old,oldV,newV) -> {
+						Double now = mediaPlayer.getCurrentTime().toSeconds();
+						Double end = mediaPlayer.getTotalDuration().toSeconds();
+
+						if((now/end) >= 0.99) {
+							setEndOfMedia2(true);
+						}
+						
+					});
+				
 				}
+				
 				
 				// 남은 곡 수 숫자 업데이트
 				remainSong.setText(Integer.toString(--count));
@@ -171,7 +193,7 @@ public class SongController implements Initializable{
 				
 			}
 			
-		}	
+		} 
 		
 	}
 	
@@ -187,17 +209,15 @@ public class SongController implements Initializable{
 		setEndOfMedia(true);
 		
 		// 남은 곡 수가 0일 때 방 사용여부 가능으로 바꾸고 창 모두 닫기
-		if(count == 0) {
+		if(count <= 0) {
 			songSvc.roomAvailable(room);
 			CommonService.msg("노래방이 종료됩니다.");
 			
 			try {
 			Thread.sleep(1000);
 			}catch(Exception e) {}
-			
-			// 창 모두 닫기
-			if(songForm != null) CommonService.windowClose(songForm);
-			if(searchForm != null) CommonService.windowClose(searchForm);
+
+			closeForm();
 		}		
 	}
 	
@@ -205,10 +225,16 @@ public class SongController implements Initializable{
 	public void songOutProc() {
 		// 방 사용여부 가능으로 바꾸기
 		songSvc.roomAvailable(room);
+		closeForm();
 		
+		
+	}
+	
+	public void closeForm() {
 		// 창 모두 닫기
 		if(songForm != null) CommonService.windowClose(songForm);
 		if(searchForm != null) CommonService.windowClose(searchForm);
+
 	}
 
 
