@@ -77,6 +77,7 @@ public class SongController implements Initializable{
 		songSvc.roomReserve(room);
 		
 		mediaPlayer = null;
+		
 		if (mediaPlayer != null) {
 			mediaPlayer.setOnEndOfMedia(()-> {
 				endOfMedia = true;
@@ -119,44 +120,47 @@ public class SongController implements Initializable{
 	
 	// 시작 버튼 누를 때
 	public void songStartProc() {
-		if(songNumber.size() == 0) {
-			// 예약된 곡이 0일 때
-			CommonService.msg("먼저 곡을 예약해 주세요");
-		}else {
-			// SongDB 내 곡의 재생횟수 +1 시키기
-			songDto = songSvc.songPlay(songNumber.get(0).getSongNum());
-			
-			//MediaView재생
-			String url = getClass().getResource(songDto.getSongLink()).toString();
-			if(url != null) {
-				songDefault.setOpacity(0);
-				Media media = new Media(url);
-				mediaPlayer = new MediaPlayer(media);
-				songMedia.setMediaPlayer(mediaPlayer);
-				songMedia.setPreserveRatio(false);
-				mediaPlayer.play();
+		
+		// 미디어재생의 끝(endOfMedia = ture)일 때만 시작버튼 구
+		if(endOfMedia) {			
+			if(songNumber.size() == 0) {
+				// 예약된 곡이 0일 때
+				CommonService.msg("먼저 곡을 예약해 주세요");
+			}else {
+				// SongDB 내 곡의 재생횟수 +1 시키기
+				songDto = songSvc.songPlay(songNumber.get(0).getSongNum());
+				
+				//MediaView재생
+				String url = getClass().getResource(songDto.getSongLink()).toString();
+				if(url != null) {
+					songDefault.setOpacity(0);
+					Media media = new Media(url);
+					mediaPlayer = new MediaPlayer(media);
+					songMedia.setMediaPlayer(mediaPlayer);
+					songMedia.setPreserveRatio(false);
+					mediaPlayer.play();
+				}
+				
+				// 남은 곡 수 숫자 업데이트
+				remainSong.setText(Integer.toString(--count));
+				
+				// 첫 번째 예약곡 지우기
+				songNumber.remove(0);
+				
+				// 예약곡 리스트 업데이트(기존 데이터 지우고 새로운 데이터 입력)
+				num1.setText("");num2.setText("");num3.setText("");
+				num4.setText("");num5.setText("");num6.setText("");
+				
+				try {
+					num1.setText(songNumber.get(0).getSongNum());
+					num2.setText(songNumber.get(1).getSongNum());
+					num3.setText(songNumber.get(2).getSongNum());
+					num4.setText(songNumber.get(3).getSongNum());
+					num5.setText(songNumber.get(4).getSongNum());
+					num6.setText(songNumber.get(5).getSongNum());
+				} catch(Exception e) {}
+				
 			}
-			
-			// 남은 곡 수 숫자 업데이트
-			remainSong.setText(Integer.toString(--count));
-			// 첫 번째 예약곡 지우기
-			songNumber.remove(0);
-			// 예약곡 리스트 업데이트
-			num1.setText("");
-			num2.setText("");
-			num3.setText("");
-			num4.setText("");
-			num5.setText("");
-			num6.setText("");
-			try {
-				num1.setText(songNumber.get(0).getSongNum());
-				num2.setText(songNumber.get(1).getSongNum());
-				num3.setText(songNumber.get(2).getSongNum());
-				num4.setText(songNumber.get(3).getSongNum());
-				num5.setText(songNumber.get(4).getSongNum());
-				num6.setText(songNumber.get(5).getSongNum());
-			} catch(Exception e) {}
-			
 		}
 		
 	}
@@ -165,8 +169,12 @@ public class SongController implements Initializable{
 	public void songCancelProc() {
 		// 미디어 재생 멈추기
 		mediaPlayer.pause();
+		
 		// 대기화면 불러오기
 		songDefault.setOpacity(100);
+		
+		//시작버튼 활성화 조건 세팅하기
+		endOfMedia = true;
 		
 		// 남은 곡 수가 0일 때 방 사용여부 가능으로 바꾸고 창 모두 닫기
 		if(count == 0) {
@@ -187,6 +195,7 @@ public class SongController implements Initializable{
 	public void songOutProc() {
 		// 방 사용여부 가능으로 바꾸기
 		songSvc.roomAvailable(room);
+		
 		// 창 모두 닫기
 		if(songForm != null) CommonService.windowClose(songForm);
 		if(searchForm != null) CommonService.windowClose(searchForm);
