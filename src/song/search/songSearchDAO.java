@@ -52,7 +52,7 @@ public class songSearchDAO {
 			ps = conn.prepareStatement(query);
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				System.out.println(rs.getString("num") + rs.getString("title"));
+//				System.out.println(rs.getString("num") + rs.getString("title"));
 				SongSearchDTO searchDTO = new SongSearchDTO();
 				searchDTO.setSongNum(rs.getString("num"));
 				searchDTO.setSongTitle(rs.getString("title"));
@@ -98,7 +98,7 @@ public class songSearchDAO {
 			ps = conn.prepareStatement(query);
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				System.out.println(rs.getString("num") + rs.getString("title"));
+//				System.out.println(rs.getString("num") + rs.getString("title"));
 				SongSearchDTO searchDTO = new SongSearchDTO();
 				searchDTO.setSongNum(rs.getString("num"));
 				searchDTO.setSongTitle(rs.getString("title"));

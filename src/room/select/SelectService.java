@@ -57,7 +57,7 @@ public class SelectService {
 			
 			selectController.setSongController(loader.getController());
 			selectController.getSongController().setSong(songForm);
-			System.out.println(count + " " + room);
+//			System.out.println(count + " " + room);
 			selectController.getSongController().setCount(count);
 			selectController.getSongController().setRoomNumber(room);
 			

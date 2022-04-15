@@ -95,7 +95,7 @@ public class SongSearchController implements Initializable{
 			songdto.setSongNum(searchDTO.getSongNum());
 			songdto.setSongCount(searchDTO.getSongCount());
 			songdto.setSongLink(searchDTO.getSongLink());
-			System.out.println(searchDTO.getSongLink());
+//			System.out.println(searchDTO.getSongLink());
 			songController.reserveSong(songdto);
 			//System.out.println(searchDTO.getSongNum() + ", " + searchDTO.getSongTitle() + ", " + searchDTO.getSongSinger() + ", "  + searchDTO.getSongLink());
 			

@@ -26,7 +26,7 @@ public class SongService {
 	
 	// 노래 리스트 창 오픈 메소드
 	public void songSearchOpen() {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/song/search/songSearch.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/song/search/titleSongSearch.fxml"));
 		Parent songSearchForm;
 		
 		try {
@@ -39,14 +39,14 @@ public class SongService {
 			
 			Scene scene = new Scene(songSearchForm);
 			
-			Stage nowStage = (Stage) songController.getSongForm().getScene().getWindow();
-			Double SongX = nowStage.getX();
-			Double SongY = nowStage.getY();
+//			Stage nowStage = (Stage) songController.getSongForm().getScene().getWindow();
+//			Double SongX = nowStage.getX();
+//			Double SongY = nowStage.getY();
 			
 			Stage stage = new Stage();
 			stage.setTitle("노래 검색");
-			stage.setX(SongX + 1005);
-			stage.setY(SongY);
+//			stage.setX(SongX + 1005);
+//			stage.setY(SongY);
 			stage.setScene(scene);
 			stage.show();
 		} catch (IOException e) {
@@ -62,7 +62,7 @@ public class SongService {
 		SongDTO songDto = new SongDTO();
 		songDto = songDao.selectNum(songNumber);
 		songDao.addCount(songDto);
-		System.out.println(songDto);
+//		System.out.println(songDto);
 		return songDto;
 	}
 
