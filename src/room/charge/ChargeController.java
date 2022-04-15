@@ -53,7 +53,7 @@ public class ChargeController implements Initializable{
 	}
 	
 	
-	public void remainSongInfo() {
+	public void remainSongInfo() {	//선택한 가격에 따른 정보전달
 		ChargeDAO chargeDAO = new ChargeDAO();
 		
 		loginDTO = status.getLoginDTO();
@@ -98,7 +98,10 @@ public class ChargeController implements Initializable{
 	}
 	
 	public void chargeCancelProc() throws Exception {
+		chargeSvc.chargeCancelProc();//##0414
+		
 		CommonService.windowClose(chargeForm);
+		
 	}
 	
 	public void chargePayProc() throws Exception{
@@ -118,24 +121,7 @@ public class ChargeController implements Initializable{
 		chargePayButton.setDisable(true);	// 가격선택했을때 결제창 활성화 & 선택한 가격 정보 받아오기
 		priceGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 			public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
-				if (priceGroup.getSelectedToggle() != null) {
-//					System.out.println(priceGroup.getSelectedToggle().toString());
-//					
-//					Integer selectReaminSong = 0;	//선택한 곡수
-//					if(price1.isSelected()) {
-//						selectReaminSong = 4;
-//						System.out.println(selectReaminSong);
-//					}else if(price2.isSelected()) {
-//						selectReaminSong = 22;
-//						System.out.println(selectReaminSong);
-//					}else if(price3.isSelected()) {
-//						selectReaminSong = 45;
-//						System.out.println(selectReaminSong);
-//					}else{
-//						selectReaminSong = 250;
-//						System.out.println(selectReaminSong);
-//					}
-					
+				if (priceGroup.getSelectedToggle() != null) {				
 					chargePayButton.setDisable(false);
 				}
 			}

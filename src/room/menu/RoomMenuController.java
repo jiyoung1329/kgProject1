@@ -64,7 +64,7 @@ public class RoomMenuController implements Initializable{		//메뉴선택 페이
 		
 		loginDTO = status.getLoginDTO();
 		
-		customerId.setText(loginDTO.getId());//##
+		customerId.setText(loginDTO.getId());
 		
 		
 		LoginDAO loginDao = new LoginDAO();

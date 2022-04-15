@@ -6,12 +6,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import login.LoginDTO;
+import room.choice.Status;
 
 public class SelectService {
 	
 	private SelectDAO selectDAO;
 	private SelectController selectController;
+	
+	private Status status;
 	
 	public SelectController getSelectController() {
 		return selectController;
@@ -30,7 +34,7 @@ public class SelectService {
 		String count = ((Label) selectForm.lookup("#songCount")).getText();
 		String room = ((Label) selectForm.lookup("#roomNumber")).getText();
 		
-		LoginDTO dto = selectDAO.callMember();
+		LoginDTO dto = status.getLoginDTO();
 
 		// 남은 곡수 minus 후 저장
 		selectDAO.saveSongCount(Integer.parseInt(count), dto);
@@ -57,13 +61,14 @@ public class SelectService {
 			
 			selectController.setSongController(loader.getController());
 			selectController.getSongController().setSong(songForm);
-			System.out.println(count + " " + room);
+//			System.out.println(count + " " + room);
 			selectController.getSongController().setCount(count);
 			selectController.getSongController().setRoomNumber(room);
 			
 			Scene scene = new Scene(songForm);
 		
 			Stage stage = new Stage();
+			stage.initStyle(StageStyle.UNDECORATED);
 			stage.setTitle("노래방");
 			stage.setScene(scene);
 			stage.show();

@@ -33,21 +33,25 @@
          <font>
             <Font name="Hancom Gothic Bold" size="30.0" />
          </font></Button>
-      <Pane layoutX="41.0" layoutY="30.0" prefHeight="63.0" prefWidth="88.0" style="-fx-background-radius: 30; -fx-background-color: #d3d3d3;" />
-      <Pane layoutX="739.0" layoutY="30.0" prefHeight="63.0" prefWidth="126.0" style="-fx-background-radius: 30; -fx-background-color: #d3d3d3;" />
+      <Pane layoutX="41.0" layoutY="30.0" prefHeight="63.0" prefWidth="88.0" style="-fx-background-radius: 30; -fx-background-color: #d3d3d3;">
+         <children>
+            <Label fx:id="roomNumber" alignment="CENTER" layoutX="17.0" layoutY="5.0" prefHeight="53.0" prefWidth="55.0">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+         </children></Pane>
+      <Pane layoutX="739.0" layoutY="30.0" prefHeight="63.0" prefWidth="126.0" style="-fx-background-radius: 30; -fx-background-color: #d3d3d3;">
+         <children>
+            <Label fx:id="remainCount" alignment="CENTER" contentDisplay="RIGHT" layoutX="3.0" prefHeight="63.0" prefWidth="120.0">
+               <font>
+                  <Font name="Hancom Gothic Bold" size="45.0" />
+               </font>
+            </Label>
+         </children></Pane>
       <Label fx:id="songCount" alignment="CENTER" layoutX="407.0" layoutY="260.0" prefHeight="137.0" prefWidth="186.0" text="5">
          <font>
             <Font name="Hancom Gothic Bold" size="100.0" />
-         </font>
-      </Label>
-      <Label fx:id="roomNumber" layoutX="72.0" layoutY="29.0" text="5">
-         <font>
-            <Font name="Hancom Gothic Bold" size="45.0" />
-         </font>
-      </Label>
-      <Label fx:id="remainCount" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="765.0" layoutY="29.0" prefHeight="63.0" prefWidth="80.0" text="15">
-         <font>
-            <Font name="Hancom Gothic Bold" size="45.0" />
          </font>
       </Label>
    </children>
