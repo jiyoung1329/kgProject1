@@ -14,7 +14,7 @@ import javafx.scene.control.TextField;
 import song.SongController;
 import song.SongDTO;
 
-public class SongSearchController implements Initializable{
+public class PopularChartController implements Initializable {
 	@FXML 
 	private TableView<SongSearchDTO> songTable;
 	@FXML
@@ -23,10 +23,8 @@ public class SongSearchController implements Initializable{
 	private TableColumn<SongSearchDTO, String> songTitle;
 	@FXML
 	private TableColumn<SongSearchDTO, String> songSinger;
-	@FXML
-	private TextField searchContent; 
 	
-	private Parent searchForm;
+	private Parent chartForm; 
 	private SongSearchService searchService;
 	private SongSearchDTO searchDTO;
 	private SongController songController;
@@ -35,13 +33,16 @@ public class SongSearchController implements Initializable{
 		this.songController = songController;
 	}
 
-	public Parent getSearchForm() {
-		return searchForm;
+	
+	public Parent getChartForm() {
+		return chartForm;
 	}
 
-	public void setSearchForm(Parent searchForm) {
-		this.searchForm = searchForm;
+
+	public void setChartForm(Parent chartForm) {
+		this.chartForm = chartForm;
 	}
+
 
 	// 화면창 생성과 동시에 노래 목록 띄우기
 	@Override
@@ -49,7 +50,7 @@ public class SongSearchController implements Initializable{
 		searchService = new SongSearchService();
 		
 		// 화면창 띄울때 전체 목록 불러오기
-		searchService.searchAll(songTable, songNumber, songTitle, songSinger);
+		searchService.popluarSong(songTable, songNumber, songTitle, songSinger);
 		
 		// 테이블 내용 선택했을때 해당 데이터 뽑아오기
 		songTable.getFocusModel().focusedCellProperty().addListener(
@@ -62,18 +63,6 @@ public class SongSearchController implements Initializable{
 			}
 		}
 		);
-		
-	}
-	
-	// 검색 버튼 클릭했을 때 결과 출력
-	public void titleSearchProc() {
-		searchService.titleSearchResult(searchForm);
-		
-	}
-	
-	// 검색 버튼 클릭했을 때 결과 출력
-	public void singerSearchProc() {
-		searchService.singerSearchResult(searchForm);
 		
 	}
 	
@@ -92,10 +81,8 @@ public class SongSearchController implements Initializable{
 	
 	// 취소버튼
 	public void pageCancelProc() {
-		searchService.windowClose(searchForm);
+		searchService.windowClose(chartForm);
 		
 	}
-	
-	
-	
+
 }
