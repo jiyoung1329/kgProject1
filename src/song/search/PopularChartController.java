@@ -13,6 +13,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import song.SongController;
 import song.SongDTO;
+import song.remotecontrol.RemoteControlController;
+import song.remotecontrol.RemoteControlService;
 
 public class PopularChartController implements Initializable {
 	@FXML 
@@ -28,12 +30,24 @@ public class PopularChartController implements Initializable {
 	private SongSearchService searchService;
 	private SongSearchDTO searchDTO;
 	private SongController songController;
+	private RemoteControlController remoteController;
+	
 	
 	public void setSongController(SongController songController) {
 		this.songController = songController;
 	}
 
 	
+	public RemoteControlController getRemoteController() {
+		return remoteController;
+	}
+
+
+	public void setRemoteController(RemoteControlController remoteController) {
+		this.remoteController = remoteController;
+	}
+
+
 	public Parent getChartForm() {
 		return chartForm;
 	}
@@ -48,6 +62,8 @@ public class PopularChartController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		searchService = new SongSearchService();
+		remoteController.setChartController(this);
+		
 		
 		// 화면창 띄울때 전체 목록 불러오기
 		searchService.popluarSong(songTable, songNumber, songTitle, songSinger);

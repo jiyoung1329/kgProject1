@@ -2,6 +2,7 @@ package song.remotecontrol;
 
 import java.io.IOException;
 
+import common.CommonService;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,6 +16,9 @@ public class RemoteControlService {
 	
 	private SongController songController;
 	private RemoteControlController remoteController; 
+	
+	private Parent searchForm;
+	private Parent chartForm;
 	
 	
 	public RemoteControlService() {
@@ -47,9 +51,16 @@ public class RemoteControlService {
 		try {
 			chartForm = loader.load();
 			
+			if (remoteController.getChartController().getChartForm() != null) {
+				CommonService.windowClose(remoteController.getChartController().getChartForm());
+			}
+			
 			PopularChartController popularChartController = loader.getController();
+			remoteController.setChartController(popularChartController);
 			popularChartController.setChartForm(chartForm);
 			popularChartController.setSongController(songController);
+			popularChartController.setRemoteController(remoteController);
+			
 			
 			Scene scene = new Scene(chartForm);
 			
@@ -59,7 +70,7 @@ public class RemoteControlService {
 			Double SongY = nowStage.getY();
 			
 			Stage stage = new Stage();
-			stage.setTitle("노래 검색");
+			stage.setTitle("인기 차트");
 			stage.setX(SongX + 400);
 			stage.setY(SongY);
 			stage.setScene(scene);
@@ -76,9 +87,14 @@ public class RemoteControlService {
 		try {
 			titleSearchForm = loader.load();
 			
+			if (remoteController.getSearchController().getSearchForm() != null) {
+				CommonService.windowClose(remoteController.getSearchController().getSearchForm());
+			}
+			
 			SongSearchController searchController = loader.getController();
 			searchController.setSearchForm(titleSearchForm);
 			searchController.setSongController(songController);
+			searchController.setRemoteController(remoteController);
 			
 			
 			Scene scene = new Scene(titleSearchForm);
@@ -89,7 +105,7 @@ public class RemoteControlService {
 			Double SongY = nowStage.getY();
 			
 			Stage stage = new Stage();
-			stage.setTitle("노래 검색");
+			stage.setTitle("제목 검색");
 			stage.setX(SongX + 400);
 			stage.setY(SongY);
 			stage.setScene(scene);
@@ -106,9 +122,14 @@ public class RemoteControlService {
 		try {
 			singerSearchForm = loader.load();
 			
+			if (remoteController.getSearchController().getSearchForm() != null) {
+				CommonService.windowClose(remoteController.getSearchController().getSearchForm());
+			}
+			
 			SongSearchController searchController = loader.getController();
 			searchController.setSearchForm(singerSearchForm);
 			searchController.setSongController(songController);
+			searchController.setRemoteController(remoteController);
 			
 			Scene scene = new Scene(singerSearchForm);
 			
@@ -118,7 +139,7 @@ public class RemoteControlService {
 			Double SongY = nowStage.getY();
 			
 			Stage stage = new Stage();
-			stage.setTitle("노래 검색");
+			stage.setTitle("가수 검색");
 			stage.setX(SongX + 400);
 			stage.setY(SongY);
 			stage.setScene(scene);

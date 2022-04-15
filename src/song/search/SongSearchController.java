@@ -13,6 +13,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import song.SongController;
 import song.SongDTO;
+import song.remotecontrol.RemoteControlController;
 
 public class SongSearchController implements Initializable{
 	@FXML 
@@ -30,6 +31,7 @@ public class SongSearchController implements Initializable{
 	private SongSearchService searchService;
 	private SongSearchDTO searchDTO;
 	private SongController songController;
+	private RemoteControlController remoteController;
 	
 	public void setSongController(SongController songController) {
 		this.songController = songController;
@@ -43,10 +45,19 @@ public class SongSearchController implements Initializable{
 		this.searchForm = searchForm;
 	}
 
+	public RemoteControlController getRemoteController() {
+		return remoteController;
+	}
+
+	public void setRemoteController(RemoteControlController remoteController) {
+		this.remoteController = remoteController;
+	}
+
 	// 화면창 생성과 동시에 노래 목록 띄우기
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		searchService = new SongSearchService();
+		remoteController.setSearchController(this);
 		
 		// 화면창 띄울때 전체 목록 불러오기
 		searchService.searchAll(songTable, songNumber, songTitle, songSinger);

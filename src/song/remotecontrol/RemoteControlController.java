@@ -9,6 +9,8 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import song.SongController;
+import song.search.PopularChartController;
+import song.search.SongSearchController;
 
 public class RemoteControlController implements Initializable {
 	@FXML private Button one;
@@ -37,6 +39,10 @@ public class RemoteControlController implements Initializable {
 	@FXML private Label testLabel;
 	
 	private SongController songController;
+	private RemoteControlController remoteController; 
+	private PopularChartController chartController;
+	private SongSearchController searchController;
+	
 	private RemoteControlService remoteService;
 	private Parent remoteForm;
 	
@@ -48,6 +54,36 @@ public class RemoteControlController implements Initializable {
 	}
 
 	
+	public RemoteControlController getRemoteController() {
+		return remoteController;
+	}
+
+
+	public void setRemoteController(RemoteControlController remoteController) {
+		this.remoteController = remoteController;
+	}
+
+
+	public PopularChartController getChartController() {
+		return chartController;
+	}
+
+
+	public void setChartController(PopularChartController chartController) {
+		this.chartController = chartController;
+	}
+
+
+	public SongSearchController getSearchController() {
+		return searchController;
+	}
+
+
+	public void setSearchController(SongSearchController searchController) {
+		this.searchController = searchController;
+	}
+
+
 	public Parent getRemoteForm() {
 		return remoteForm;
 	}
