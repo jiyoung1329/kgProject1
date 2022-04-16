@@ -19,18 +19,6 @@ import javafx.scene.media.MediaView;
 import song.search.SongSearchController;
 
 public class SongController implements Initializable{
-	private Parent songForm;
-	private Parent searchForm;
-	private SongService songSvc;
-	private SongDTO songDto;
-	private SongSearchController songSearchController;
-	private ArrayList<SongDTO> songNumber = new ArrayList<SongDTO>();
-	private int count = 1;
-	private String room;
-	private MediaPlayer mediaPlayer;
-	private boolean endOfMedia;
-	
-
 	@FXML private Label num1;
 	@FXML private Label num2;
 	@FXML private Label num3;
@@ -40,8 +28,22 @@ public class SongController implements Initializable{
 	@FXML private Label remainSong;
 	@FXML private MediaView songMedia;
 	@FXML private ImageView songDefault;
+
+	private Parent songForm;
+	private Parent searchForm;
+	private Parent remoteForm;
 	
+	private SongService songSvc;
+	private SongDTO songDto;
+	private SongSearchController songSearchController;
 	
+	private ArrayList<SongDTO> songNumber = new ArrayList<SongDTO>();
+	private int count = 1;
+	private String room;
+	private MediaPlayer mediaPlayer;
+	private boolean endOfMedia;
+	
+
 	public SongSearchController getSongSearchController() {
 		return songSearchController;
 	}
@@ -56,6 +58,14 @@ public class SongController implements Initializable{
 	
 	public Parent getSongForm() {
 		return songForm;
+	}
+
+	public Parent getRemoteForm() {
+		return remoteForm;
+	}
+
+	public void setRemoteForm(Parent remoteForm) {
+		this.remoteForm = remoteForm;
 	}
 
 	public void setSongSearchForm(Parent searchForm) {
@@ -84,20 +94,10 @@ public class SongController implements Initializable{
 			// 대기화면 띄우기
 			songDefault.setOpacity(100);
 			
-			
-			try {
-				// 남은곡이 0일때
-				if (count <= 0) {
-					songSvc.roomAvailable(room);
-					CommonService.msg("노래방이 종료됩니다.");
-					
-					try {
-					Thread.sleep(1000);
-					}catch(Exception e) {}
-
-					closeForm();
-				}
-			} catch(Exception e) {}
+			// 남은곡이 0일때 노래방 나가기
+			if (count <= 0) {
+				exit();
+			}
 		}
 	}
 	
@@ -107,7 +107,6 @@ public class SongController implements Initializable{
 		songSvc.setSongController(this);
 		songSvc.roomReserve(room);
 		endOfMedia = true;
-		
 		
 	}
 	
@@ -210,30 +209,33 @@ public class SongController implements Initializable{
 		
 		// 남은 곡 수가 0일 때 방 사용여부 가능으로 바꾸고 창 모두 닫기
 		if(count <= 0) {
-			songSvc.roomAvailable(room);
-			CommonService.msg("노래방이 종료됩니다.");
-			
-			try {
-			Thread.sleep(1000);
-			}catch(Exception e) {}
-
-			closeForm();
+			exit();
 		}		
 	}
 	
 	// 나가기 버튼 누를 때
 	public void songOutProc() {
-		// 방 사용여부 가능으로 바꾸기
-		songSvc.roomAvailable(room);
-		closeForm();
-		
-		
+		exit();
 	}
+	
+	
+	public void exit() {
+		songSvc.roomAvailable(room);
+		CommonService.msg("노래방이 종료됩니다.");
+		
+		try {
+		Thread.sleep(1000);
+		}catch(Exception e) {}
+
+		closeForm();
+	}
+	
 	
 	public void closeForm() {
 		// 창 모두 닫기
 		if(songForm != null) CommonService.windowClose(songForm);
 		if(searchForm != null) CommonService.windowClose(searchForm);
+		if(remoteForm != null) CommonService.windowClose(remoteForm);
 
 	}
 
