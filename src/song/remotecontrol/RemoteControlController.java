@@ -1,7 +1,14 @@
 package song.remotecontrol;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -127,10 +134,16 @@ public class RemoteControlController implements Initializable {
 	public void nine() {}
 	public void zero() {}
 	
-	public void cancel() {}
-	public void start() {}
+	public void cancel() {
+		songController.songCancelProc();
+	}
+	public void start() {
+		songController.songStartProc();
+	}
 	
-	public void reserve() {}
+	public void reserve() {
+		
+	}
 	public void primaryReserve() {}
 	public void cancelReserve() {}
 	
@@ -144,9 +157,23 @@ public class RemoteControlController implements Initializable {
 		remoteService.singerSearch();
 	}
 	
-	public void pause() {}
-	public void madijump() {}
+	public void pause() {
+		
+	}
+	public void madijump() {
+		
+	}
 	public void clap() {
+		try {
+			File clapEffect = new File("src/song/remotecontrol/clap.wav");
+			Clip clip = AudioSystem.getClip();
+			clip.open(AudioSystem.getAudioInputStream(clapEffect));
+			clip.start();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		
 	}
 }
+;
