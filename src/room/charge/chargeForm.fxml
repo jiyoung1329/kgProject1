@@ -38,7 +38,13 @@
             <Font size="25.0" />
          </font>
       </RadioButton>
-      <Button fx:id="chargePayButton" layoutX="210.0" layoutY="481.0" mnemonicParsing="false" onAction="#chargePayProc" prefHeight="80.0" prefWidth="270.0" style="-fx-background-color: FFB84D;" text="결제" />
-      <Button fx:id="chargeCancelButton" layoutX="520.0" layoutY="481.0" mnemonicParsing="false" onAction="#chargeCancelProc" prefHeight="80.0" prefWidth="270.0" style="-fx-background-color: FFB84D;" text="취소" />
+      <Button fx:id="chargePayButton" layoutX="210.0" layoutY="481.0" mnemonicParsing="false" onAction="#chargePayProc" prefHeight="80.0" prefWidth="270.0" style="-fx-background-color: FFB84D; -fx-background-radius: 13;" text="결제" textFill="WHITE">
+         <font>
+            <Font name="NanumGothic" size="30.0" />
+         </font></Button>
+      <Button fx:id="chargeCancelButton" layoutX="520.0" layoutY="481.0" mnemonicParsing="false" onAction="#chargeCancelProc" prefHeight="80.0" prefWidth="270.0" style="-fx-background-color: FFB84D; -fx-background-radius: 13;" text="취소" textFill="WHITE">
+         <font>
+            <Font name="NanumGothic" size="30.0" />
+         </font></Button>
    </children>
 </AnchorPane>
