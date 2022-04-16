@@ -74,10 +74,15 @@ public class SelectService {
 			RemoteControlController remoteController = loader2.getController();
 			remoteController.setSongController(songController);
 			remoteController.setRemoteForm(remoteForm);
+	
 			// 노래방 종료시 동시에 꺼지게 form 저장
 			songController.setRemoteForm(remoteForm);
+			songController.getSongSvc().setRemoteService(remoteController.getRemoteService());
 			// remoteService의 songController 설정 -> 페이지 위치조정에 필요
 			remoteController.getRemoteService().setSongController(songController);
+			// songController에 remoteController 설정
+			songController.setRemoteController(remoteController);
+			
 			
 			Scene scene1 = new Scene(songForm);
 			Scene scene2 = new Scene(remoteForm);

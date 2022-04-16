@@ -17,6 +17,7 @@ import javafx.scene.media.MediaMarkerEvent;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.util.Duration;
+import song.remotecontrol.RemoteControlController;
 import song.search.SongSearchController;
 
 public class SongController implements Initializable{
@@ -38,6 +39,7 @@ public class SongController implements Initializable{
 	private SongService songSvc;
 	private SongDTO songDto;
 	private SongSearchController songSearchController;
+	private RemoteControlController remoteController;
 	
 	private ArrayList<SongDTO> songNumber = new ArrayList<SongDTO>();
 	private int count = 1;
@@ -45,6 +47,14 @@ public class SongController implements Initializable{
 	private MediaPlayer mediaPlayer;
 	private boolean endOfMedia;
 	
+
+	public SongService getSongSvc() {
+		return songSvc;
+	}
+
+	public void setSongSvc(SongService songSvc) {
+		this.songSvc = songSvc;
+	}
 
 	public SongSearchController getSongSearchController() {
 		return songSearchController;
@@ -55,6 +65,14 @@ public class SongController implements Initializable{
 	}
 	
 	
+	public RemoteControlController getRemoteController() {
+		return remoteController;
+	}
+
+	public void setRemoteController(RemoteControlController remoteController) {
+		this.remoteController = remoteController;
+	}
+
 	public Parent getChartForm() {
 		return chartForm;
 	}
