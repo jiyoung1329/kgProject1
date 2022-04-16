@@ -15,6 +15,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import song.SongController;
 import song.search.PopularChartController;
 import song.search.SongSearchController;
@@ -52,6 +54,7 @@ public class RemoteControlController implements Initializable {
 	
 	private RemoteControlService remoteService;
 	private Parent remoteForm;
+	private Parent songForm;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -101,6 +104,16 @@ public class RemoteControlController implements Initializable {
 	}
 
 
+	public Parent getSongForm() {
+		return songForm;
+	}
+
+
+	public void setSongForm(Parent songForm) {
+		this.songForm = songForm;
+	}
+
+
 	public Parent getRemoteForm() {
 		return remoteForm;
 	}
@@ -145,7 +158,9 @@ public class RemoteControlController implements Initializable {
 		
 	}
 	public void primaryReserve() {}
-	public void cancelReserve() {}
+	public void cancelReserve() {
+		songController.cancelReserve();
+	}
 	
 	public void popularChart() {
 		remoteService.popularChart();
@@ -158,9 +173,25 @@ public class RemoteControlController implements Initializable {
 	}
 	
 	public void pause() {
+		// 미디어 플레이어가 재생중이 아니면 일시정지 못하게
+		if (songController.getMediaPlayer() == null) return;
+		
+		if (pause.getText().equals("일시정지")) {
+			songController.pause();
+			pause.setText("일시정지해제");
+			Font font = Font.font("Hancom Gothic", FontWeight.BOLD, 16);
+			pause.setFont(font);
+			
+		} else if (pause.getText().equals("일시정지해제")) {
+			songController.pauseCancel();
+			pause.setText("일시정지");
+			Font font = Font.font("Hancom Gothic", FontWeight.BOLD, 18);
+			pause.setFont(font);
+		}
 		
 	}
 	public void madijump() {
+		songController.madiJump();
 		
 	}
 	public void clap() {

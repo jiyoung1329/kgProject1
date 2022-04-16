@@ -16,6 +16,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaMarkerEvent;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.util.Duration;
 import song.search.SongSearchController;
 
 public class SongController implements Initializable{
@@ -92,6 +93,15 @@ public class SongController implements Initializable{
 		songSvc.roomReserve(room);
 	}
 	
+	
+	public MediaPlayer getMediaPlayer() {
+		return mediaPlayer;
+	}
+
+	public void setMediaPlayer(MediaPlayer mediaPlayer) {
+		this.mediaPlayer = mediaPlayer;
+	}
+
 	// 취소 버튼 눌렀을떄
 	public void setEndOfMedia(boolean endOfMedia) {
 		this.endOfMedia = endOfMedia;
@@ -146,6 +156,24 @@ public class SongController implements Initializable{
 			} catch(Exception e) {}
 		}
 		
+	}
+	
+	// 우선 예약 기능
+	public void primaryReserveSong(SongDTO songDTO) {
+		if(songNumber.size() >= 6) {
+			CommonService.msg("곡을 더 이상 추가할 수 없습니다.");
+		}else {
+			songNumber.add(0, songDTO);
+			
+			try {
+				num1.setText(songNumber.get(0).getSongNum());
+				num2.setText(songNumber.get(1).getSongNum());
+				num3.setText(songNumber.get(2).getSongNum());
+				num4.setText(songNumber.get(3).getSongNum());
+				num5.setText(songNumber.get(4).getSongNum());
+				num6.setText(songNumber.get(5).getSongNum());
+			} catch(Exception e) {}
+		}
 	}
 	
 	// 시작 버튼 누를 때
@@ -232,6 +260,60 @@ public class SongController implements Initializable{
 	}
 	
 	
+	// 노래 일시정지
+	public void pause() {
+		if (mediaPlayer != null) {
+			mediaPlayer.pause();
+		}
+	}
+	
+	// 노래 일시정지 해제
+	public void pauseCancel() {
+		if (mediaPlayer != null) {
+			mediaPlayer.play();
+		}
+	}
+	
+	// 노래 마디점프
+	public void madiJump() {
+		if (mediaPlayer != null) {
+			System.out.println(mediaPlayer.getStatus().toString());
+			if (mediaPlayer.getStatus().toString().equals("PLAYING")) {
+				Duration now = mediaPlayer.getCurrentTime();
+				Duration later = new Duration(3000);
+				mediaPlayer.seek(now.add(later));
+				
+			}
+		}
+		
+	}
+	
+	// 노래 예약 취소
+	public void cancelReserve() {
+		
+		if (songNumber.size() > 0) {
+			// 첫 번째 예약곡 지우기
+			songNumber.remove(0);
+			
+			// 예약곡 리스트 업데이트(기존 데이터 지우고 새로운 데이터 입력)
+			num1.setText("");num2.setText("");num3.setText("");
+			num4.setText("");num5.setText("");num6.setText("");
+			
+			try {
+				num1.setText(songNumber.get(0).getSongNum());
+				num2.setText(songNumber.get(1).getSongNum());
+				num3.setText(songNumber.get(2).getSongNum());
+				num4.setText(songNumber.get(3).getSongNum());
+				num5.setText(songNumber.get(4).getSongNum());
+				num6.setText(songNumber.get(5).getSongNum());
+			} catch(Exception e) {}
+			
+		} else {
+			CommonService.msg("예약된 곡이 없습니다.");
+		}
+		
+	}
+	
 	public void exit() {
 		songSvc.roomAvailable(room);
 		CommonService.msg("노래방이 종료됩니다.");
@@ -256,6 +338,7 @@ public class SongController implements Initializable{
 			Thread.sleep(time);
 		} catch(Exception e) {}
 	}
+
 
 
 
