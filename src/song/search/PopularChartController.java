@@ -14,8 +14,9 @@ import javafx.scene.control.TextField;
 import song.SongController;
 import song.SongDTO;
 import song.remotecontrol.RemoteControlController;
+import song.remotecontrol.RemoteControlService;
 
-public class SongSearchController implements Initializable{
+public class PopularChartController implements Initializable {
 	@FXML 
 	private TableView<SongSearchDTO> songTable;
 	@FXML
@@ -24,43 +25,48 @@ public class SongSearchController implements Initializable{
 	private TableColumn<SongSearchDTO, String> songTitle;
 	@FXML
 	private TableColumn<SongSearchDTO, String> songSinger;
-	@FXML
-	private TextField searchContent; 
 	
-	private Parent searchForm;
+	private Parent chartForm; 
 	private SongSearchService searchService;
 	private SongSearchDTO searchDTO;
 	private SongController songController;
 	private RemoteControlController remoteController;
 	
+	
 	public void setSongController(SongController songController) {
 		this.songController = songController;
 	}
 
-	public Parent getSearchForm() {
-		return searchForm;
-	}
-
-	public void setSearchForm(Parent searchForm) {
-		this.searchForm = searchForm;
-	}
-
+	
 	public RemoteControlController getRemoteController() {
 		return remoteController;
 	}
+
 
 	public void setRemoteController(RemoteControlController remoteController) {
 		this.remoteController = remoteController;
 	}
 
+
+	public Parent getChartForm() {
+		return chartForm;
+	}
+
+
+	public void setChartForm(Parent chartForm) {
+		this.chartForm = chartForm;
+	}
+
+
 	// 화면창 생성과 동시에 노래 목록 띄우기
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		searchService = new SongSearchService();
-//		remoteController.setSearchController(this);
+		remoteController.setChartController(this);
+		
 		
 		// 화면창 띄울때 전체 목록 불러오기
-		searchService.searchAll(songTable, songNumber, songTitle, songSinger);
+		searchService.popluarSong(songTable, songNumber, songTitle, songSinger);
 		
 		// 테이블 내용 선택했을때 해당 데이터 뽑아오기
 		songTable.getFocusModel().focusedCellProperty().addListener(
@@ -76,18 +82,6 @@ public class SongSearchController implements Initializable{
 		
 	}
 	
-	// 검색 버튼 클릭했을 때 결과 출력
-	public void titleSearchProc() {
-		searchService.titleSearchResult(searchForm);
-		
-	}
-	
-	// 검색 버튼 클릭했을 때 결과 출력
-	public void singerSearchProc() {
-		searchService.singerSearchResult(searchForm);
-		
-	}
-	
 	// 예약 버튼 클릭 - searchDTO를 노래방 페이지로 전달
 	public void songReserveProc() {
 		if (searchDTO != null) {
@@ -95,7 +89,6 @@ public class SongSearchController implements Initializable{
 			songdto.setSongNum(searchDTO.getSongNum());
 			songdto.setSongCount(searchDTO.getSongCount());
 			songdto.setSongLink(searchDTO.getSongLink());
-//			System.out.println(searchDTO.getSongLink());
 			songController.reserveSong(songdto);
 			//System.out.println(searchDTO.getSongNum() + ", " + searchDTO.getSongTitle() + ", " + searchDTO.getSongSinger() + ", "  + searchDTO.getSongLink());
 			
@@ -104,10 +97,8 @@ public class SongSearchController implements Initializable{
 	
 	// 취소버튼
 	public void pageCancelProc() {
-		searchService.windowClose(searchForm);
+		searchService.windowClose(chartForm);
 		
 	}
-	
-	
-	
+
 }
