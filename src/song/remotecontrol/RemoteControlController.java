@@ -54,6 +54,16 @@ public class RemoteControlController implements Initializable {
 	}
 
 	
+	public RemoteControlService getRemoteService() {
+		return remoteService;
+	}
+
+
+	public void setRemoteService(RemoteControlService remoteService) {
+		this.remoteService = remoteService;
+	}
+
+
 	public RemoteControlController getRemoteController() {
 		return remoteController;
 	}

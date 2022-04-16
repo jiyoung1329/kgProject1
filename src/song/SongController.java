@@ -32,6 +32,7 @@ public class SongController implements Initializable{
 	private Parent songForm;
 	private Parent searchForm;
 	private Parent remoteForm;
+	private Parent chartForm;
 	
 	private SongService songSvc;
 	private SongDTO songDto;
@@ -52,6 +53,15 @@ public class SongController implements Initializable{
 		this.songSearchController = songSearchController;
 	}
 	
+	
+	public Parent getChartForm() {
+		return chartForm;
+	}
+
+	public void setChartForm(Parent chartForm) {
+		this.chartForm = chartForm;
+	}
+
 	public void setSong(Parent songForm) {
 		this.songForm = songForm;
 	}
@@ -93,11 +103,14 @@ public class SongController implements Initializable{
 		if(endOfMedia) {
 			// 대기화면 띄우기
 			songDefault.setOpacity(100);
-			
 			// 남은곡이 0일때 노래방 나가기
 			if (count <= 0) {
 				exit();
+				return;
 			}
+			
+			sleep(1000);
+			songStartProc();
 		}
 	}
 	
@@ -223,9 +236,7 @@ public class SongController implements Initializable{
 		songSvc.roomAvailable(room);
 		CommonService.msg("노래방이 종료됩니다.");
 		
-		try {
-		Thread.sleep(1000);
-		}catch(Exception e) {}
+		sleep(1000);
 
 		closeForm();
 	}
@@ -236,7 +247,14 @@ public class SongController implements Initializable{
 		if(songForm != null) CommonService.windowClose(songForm);
 		if(searchForm != null) CommonService.windowClose(searchForm);
 		if(remoteForm != null) CommonService.windowClose(remoteForm);
+		if(chartForm != null) CommonService.windowClose(chartForm);
 
+	}
+	
+	public void sleep(int time) {
+		try {
+			Thread.sleep(time);
+		} catch(Exception e) {}
 	}
 
 
