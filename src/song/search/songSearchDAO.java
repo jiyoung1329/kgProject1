@@ -91,6 +91,28 @@ public class songSearchDAO {
 		
 	}
 	
+	// 리모컨으로 예약번호 입력했을때 노래 찾기
+	public SongSearchDTO findSong(String songNum) {
+		String query = "select * from song where num=?";
+		SongSearchDTO searchDTO = null;
+		try {
+			ps = conn.prepareStatement(query);
+			ps.setString(1, songNum);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				searchDTO = new SongSearchDTO();
+				searchDTO.setSongNum(rs.getString("num"));
+				searchDTO.setSongTitle(rs.getString("title"));
+				searchDTO.setSongSinger(rs.getString("singer"));
+				searchDTO.setSongLink(rs.getString("link"));
+				searchDTO.setSongCount(rs.getInt("count"));
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return searchDTO;
+	}
+	
 	public ObservableList<SongSearchDTO> singerSearchSong(String searchContent){
 		String query = "select * from song where singer like '%" + searchContent + "%'";
 		ObservableList<SongSearchDTO> songDatas = FXCollections.observableArrayList();

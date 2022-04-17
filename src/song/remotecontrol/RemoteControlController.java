@@ -18,8 +18,11 @@ import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import song.SongController;
+import song.SongDTO;
 import song.search.PopularChartController;
 import song.search.SongSearchController;
+import song.search.SongSearchDTO;
+import song.search.songSearchDAO;
 
 public class RemoteControlController implements Initializable {
 	@FXML private Button one;
@@ -53,14 +56,19 @@ public class RemoteControlController implements Initializable {
 	private SongSearchController searchController;
 	
 	private RemoteControlService remoteService;
+	
 	private Parent remoteForm;
 	private Parent songForm;
+	
+	private SongSearchDTO searchDTO;
+	private SongDTO songDTO;
+	private songSearchDAO searchDAO;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		remoteService = new RemoteControlService();
 		remoteService.setRemoteController(this);
-		
+		searchDAO = new songSearchDAO();
 	}
 
 	
@@ -134,21 +142,62 @@ public class RemoteControlController implements Initializable {
 		this.songController = songController;
 	}
 
-
-
-	public void one() {}
-	public void two() {}
-	public void three() {}
-	public void four() {}
-	public void five() {}
-	public void six() {}
-	public void seven() {}
-	public void eight() {}
-	public void nine() {}
-	public void zero() {}
+	public void one() {
+		inputNum("1");
+	}
+	public void two() {
+		inputNum("2");
+	}
+	public void three() {
+		inputNum("3");
+	}
+	public void four() {
+		inputNum("4");
+	}
+	public void five() {
+		inputNum("5");
+	}
+	public void six() {
+		inputNum("6");
+	}
+	public void seven() {
+		inputNum("7");
+	}
+	public void eight() {
+		inputNum("8");
+	}
+	public void nine() {
+		inputNum("9");
+	}
+	public void zero() {
+		inputNum("0");
+	}
+	
+	public void inputNum(String num) {
+		Label resNumTitle = (Label) songController.getSongForm().lookup("#resNumTitle");
+		Label resNum = (Label) songController.getSongForm().lookup("#resNum");
+		resNumTitle.setStyle("-fx-background-color: #ffffff; -fx-opacity : 1");
+		resNum.setStyle("-fx-background-color: #ffffff; -fx-opacity : 1");
+		String songNum = resNum.getText() + num;
+		searchDTO = searchDAO.findSong(songNum);
+		if (searchDTO != null ) {
+			resNum.setText(songNum + " - " + searchDTO.getSongTitle() + " (" + searchDTO.getSongSinger() + ")");
+		} else {
+			resNum.setText(songNum);
+		}
+	}
 	
 	public void cancel() {
-		songController.songCancelProc();
+		Label resNumTitle = (Label) songController.getSongForm().lookup("#resNumTitle");
+		Label resNum = (Label) songController.getSongForm().lookup("#resNum");
+		if (resNum.getText().equals("")) {
+			songController.songCancelProc();
+		} else {
+			resNumTitle.setStyle("-fx-background-color: #ffffff; -fx-opacity : 0");
+			resNum.setStyle("-fx-background-color: #ffffff; -fx-opacity : 0");
+			resNum.setText("");
+		}
+		
 	}
 	public void start() {
 		songController.songStartProc();

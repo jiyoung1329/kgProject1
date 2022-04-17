@@ -28,6 +28,8 @@ public class SongController implements Initializable{
 	@FXML private Label num5;
 	@FXML private Label num6;
 	@FXML private Label remainSong;
+	@FXML private Label resNumTitle;
+	@FXML private Label resNum;
 	@FXML private MediaView songMedia;
 	@FXML private ImageView songDefault;
 
@@ -101,6 +103,15 @@ public class SongController implements Initializable{
 		this.searchForm = searchForm;
 	}
 	
+	
+	public Label getResNum() {
+		return resNum;
+	}
+
+	public void setResNum(Label resNum) {
+		this.resNum = resNum;
+	}
+
 	public void setCount(String count) {
 		this.count = Integer.parseInt(count);
 		remainSong.setText(count);
@@ -257,19 +268,22 @@ public class SongController implements Initializable{
 	
 	// 취소 버튼 누를 때 
 	public void songCancelProc() {
-		// 미디어 재생 멈추기
-		mediaPlayer.pause();
-		
-		// 대기화면 불러오기
-		songDefault.setOpacity(100);
-		
-		//시작버튼 활성화 조건 세팅하기
-		setEndOfMedia(true);
-		
-		// 남은 곡 수가 0일 때 방 사용여부 가능으로 바꾸고 창 모두 닫기
-		if(count <= 0) {
-			exit();
-		}		
+		if (mediaPlayer != null) {
+			// 미디어 재생 멈추기
+			mediaPlayer.pause();
+			
+			// 대기화면 불러오기
+			songDefault.setOpacity(100);
+			
+			//시작버튼 활성화 조건 세팅하기
+			setEndOfMedia(true);
+			
+			// 남은 곡 수가 0일 때 방 사용여부 가능으로 바꾸고 창 모두 닫기
+			if(count <= 0) {
+				exit();
+			}		
+			
+		}
 	}
 	
 	// 나가기 버튼 누를 때
