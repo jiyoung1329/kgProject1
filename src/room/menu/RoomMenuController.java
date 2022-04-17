@@ -82,6 +82,7 @@ public class RoomMenuController implements Initializable{		//메뉴선택 페이
 
 	public void selectProc() throws Exception{
 		roomMenuService.selectProc();
+		CommonService.windowClose(roomMenuForm);
 	}
 	
 	public void backProc() throws Exception{
