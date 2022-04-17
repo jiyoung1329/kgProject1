@@ -10,6 +10,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+import common.CommonService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -176,10 +177,11 @@ public class RemoteControlController implements Initializable {
 	public void inputNum(String num) {
 		Label resNumTitle = (Label) songController.getSongForm().lookup("#resNumTitle");
 		Label resNum = (Label) songController.getSongForm().lookup("#resNum");
-		resNumTitle.setStyle("-fx-background-color: #ffffff; -fx-opacity : 1");
-		resNum.setStyle("-fx-background-color: #ffffff; -fx-opacity : 1");
 		String songNum = resNum.getText() + num;
 		searchDTO = searchDAO.findSong(songNum);
+
+		reserveOpacityOne();
+		
 		if (searchDTO != null ) {
 			resNum.setText(songNum + " - " + searchDTO.getSongTitle() + " (" + searchDTO.getSongSinger() + ")");
 		} else {
@@ -187,26 +189,86 @@ public class RemoteControlController implements Initializable {
 		}
 	}
 	
+	
 	public void cancel() {
 		Label resNumTitle = (Label) songController.getSongForm().lookup("#resNumTitle");
 		Label resNum = (Label) songController.getSongForm().lookup("#resNum");
 		if (resNum.getText().equals("")) {
 			songController.songCancelProc();
 		} else {
-			resNumTitle.setStyle("-fx-background-color: #ffffff; -fx-opacity : 0");
-			resNum.setStyle("-fx-background-color: #ffffff; -fx-opacity : 0");
+			reserveOpacityZero();
 			resNum.setText("");
+			
 		}
+		
 		
 	}
 	public void start() {
-		songController.songStartProc();
+		Label resNumTitle = (Label) songController.getSongForm().lookup("#resNumTitle");
+		Label resNum = (Label) songController.getSongForm().lookup("#resNum");
+		resNumTitle.setStyle("-fx-background-color: #ffffff; -fx-opacity : 0");
+		resNum.setStyle("-fx-background-color: #ffffff; -fx-opacity : 0");
+		resNum.setText("");
+		
+		if (searchDTO != null) {
+			SongDTO songdto = new SongDTO();
+			songdto.setSongNum(searchDTO.getSongNum());
+			songdto.setSongCount(searchDTO.getSongCount());
+			songdto.setSongLink(searchDTO.getSongLink());
+			
+			// 노래가 재생중이 아니면
+			if (songController.getMediaPlayer() != null) {
+				CommonService.msg("현재 노래가 재생중입니다.");
+			} else {
+				songController.primaryReserveSong(songdto);
+				songController.songStartProc();
+			}
+			searchDTO = null;
+			
+		} else {
+			CommonService.msg("해당 번호의 노래가 없습니다.");
+		}
+		
+			
 	}
 	
 	public void reserve() {
+		Label resNumTitle = (Label) songController.getSongForm().lookup("#resNumTitle");
+		Label resNum = (Label) songController.getSongForm().lookup("#resNum");
+		resNumTitle.setStyle("-fx-background-color: #ffffff; -fx-opacity : 0");
+		resNum.setStyle("-fx-background-color: #ffffff; -fx-opacity : 0");
+		resNum.setText("");
+		if (searchDTO != null) {
+			SongDTO songdto = new SongDTO();
+			songdto.setSongNum(searchDTO.getSongNum());
+			songdto.setSongCount(searchDTO.getSongCount());
+			songdto.setSongLink(searchDTO.getSongLink());
+			songController.reserveSong(songdto);
+			searchDTO = null;
+			
+		} else {
+			CommonService.msg("해당 번호의 노래가 없습니다.");
+		}
+		
 		
 	}
-	public void primaryReserve() {}
+	public void primaryReserve() {
+		Label resNumTitle = (Label) songController.getSongForm().lookup("#resNumTitle");
+		Label resNum = (Label) songController.getSongForm().lookup("#resNum");
+
+		reserveOpacityZero();
+		resNum.setText("");
+		
+		if (searchDTO != null) {
+			SongDTO songdto = new SongDTO();
+			songdto.setSongNum(searchDTO.getSongNum());
+			songdto.setSongCount(searchDTO.getSongCount());
+			songdto.setSongLink(searchDTO.getSongLink());
+			songController.primaryReserveSong(songdto);
+			searchDTO = null;
+			
+		} 
+	}
 	public void cancelReserve() {
 		songController.cancelReserve();
 	}
@@ -252,8 +314,21 @@ public class RemoteControlController implements Initializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
+	}
+	
+	public void reserveOpacityZero() {
+		Label resNumTitle = (Label) songController.getSongForm().lookup("#resNumTitle");
+		Label resNum = (Label) songController.getSongForm().lookup("#resNum");
+		resNumTitle.setStyle("-fx-background-color: #ffffff; -fx-opacity : 0");
+		resNum.setStyle("-fx-background-color: #ffffff; -fx-opacity : 0");
+		resNum.setText("");
+	}
+
+	public void reserveOpacityOne() {
+		Label resNumTitle = (Label) songController.getSongForm().lookup("#resNumTitle");
+		Label resNum = (Label) songController.getSongForm().lookup("#resNum");
+		resNumTitle.setStyle("-fx-background-color: #ffffff; -fx-opacity : 1");
+		resNum.setStyle("-fx-background-color: #ffffff; -fx-opacity : 1");
 	}
 }
 ;
