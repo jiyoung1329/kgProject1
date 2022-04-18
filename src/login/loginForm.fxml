@@ -16,14 +16,14 @@
             <Image url="@../img/로그인.png" />
          </image>
       </ImageView>
-      <PasswordField fx:id="pw" alignment="CENTER" layoutX="354.0" layoutY="237.0" prefHeight="50.0" prefWidth="450.0" style="-fx-background-radius: 50;">
-         <font>
-            <Font name="NanumGothicBold" size="25.0" />
-         </font></PasswordField>
       <TextField fx:id="id" alignment="CENTER" layoutX="354.0" layoutY="143.0" prefHeight="50.0" prefWidth="450.0" style="-fx-background-radius: 50;">
          <font>
             <Font name="NanumGothicBold" size="25.0" />
          </font></TextField>
+      <PasswordField fx:id="pw" alignment="CENTER" layoutX="354.0" layoutY="237.0" prefHeight="50.0" prefWidth="450.0" style="-fx-background-radius: 50;">
+         <font>
+            <Font name="NanumGothicBold" size="25.0" />
+         </font></PasswordField>
       <HBox alignment="CENTER" layoutX="279.0" layoutY="369.0" prefHeight="98.0" prefWidth="482.0" spacing="20.0">
          <children>
             <Button fx:id="loginButton" mnemonicParsing="false" onAction="#loginProc" prefHeight="80.0" prefWidth="270.0" style="-fx-background-color: FFB84D; -fx-padding: 10; -fx-background-radius: 20;" text="로그인" textFill="WHITE">

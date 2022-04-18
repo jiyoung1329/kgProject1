@@ -6,16 +6,29 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import song.remotecontrol.RemoteControlController;
+import song.remotecontrol.RemoteControlService;
 import song.search.SongSearchController;
 
 public class SongService {
 	private SongController songController;
+	private RemoteControlService remoteService;
 	private SongDAO songDao;
 
 	public SongService() {
 		songDao = new SongDAO();
 	}
 	
+	public RemoteControlService getRemoteService() {
+		return remoteService;
+	}
+
+
+	public void setRemoteService(RemoteControlService remoteService) {
+		this.remoteService = remoteService;
+	}
+
+
 	public SongController getSongController() {
 		return songController;
 	}
@@ -26,16 +39,22 @@ public class SongService {
 	
 	// 노래 리스트 창 오픈 메소드
 	public void songSearchOpen() {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/song/search/songSearch.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/song/search/titleSongSearch.fxml"));
 		Parent songSearchForm;
 		
 		try {
+			remoteService.closeForm();
+			
 			songSearchForm = loader.load();
 			
-			songController.setSongSearchController(loader.getController());
-			songController.getSongSearchController().setSearchForm(songSearchForm);
-			songController.getSongSearchController().setSongController(songController);
+			SongSearchController searchController = loader.getController();
+			songController.setSongSearchController(searchController);
+			searchController.setSearchForm(songSearchForm);
+			searchController.setSongController(songController);
 			songController.setSongSearchForm(songSearchForm);
+			// 검색창 꺼지게 remoteController 에 searchForm 설정
+			songController.getRemoteController().setSearchController(searchController);
+			
 			
 			Scene scene = new Scene(songSearchForm);
 			
@@ -57,12 +76,13 @@ public class SongService {
 	
 	
 	// DB내 카운트 추가
-	public void songPlay(String songNumber) {
+	public SongDTO songPlay(String songNumber) {
 		// DB내 카운트 추가
 		SongDTO songDto = new SongDTO();
 		songDto = songDao.selectNum(songNumber);
 		songDao.addCount(songDto);
-		System.out.println(songDto);
+//		System.out.println(songDto);
+		return songDto;
 	}
 
 	// 방 예약으로 변경 : 예약가능 -> 예약중(0 -> 1)
