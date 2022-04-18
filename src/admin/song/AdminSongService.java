@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import common.CommonDAO;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -29,18 +30,8 @@ public class AdminSongService extends AdminSongController {
 
 	public AdminSongService() {
 
-		String url = "jdbc:oracle:thin:@kgproject_high?TNS_ADMIN=C:/Wallet_kgProject";
-		String user = "admin";
-		String pw = "KGproject1234!";
-
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-
-			con = DriverManager.getConnection(url, user, pw);
-		} catch (Exception e) {
-			System.out.println("연결실패");
-			e.printStackTrace();
-		}
+		CommonDAO common=new CommonDAO();
+		con=common.makeConnection();
 	}
 
 	public void check(TextField songNumber, Button reg_button, int Number) {
