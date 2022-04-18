@@ -48,6 +48,8 @@ public class MemberService {
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				MemberDTO mdto = new MemberDTO();
+				if (rs.getInt("ISadmin")==1)
+					continue;
 				mdto.setT1id(rs.getString("id"));
 				mdto.setT1phone(rs.getString("mobile"));
 				mdto.setT1song(rs.getInt("Songcount"));
