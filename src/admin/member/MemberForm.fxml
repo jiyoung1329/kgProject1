@@ -17,7 +17,10 @@
             <Image url="@../../img/관리자회원관리.png" />
          </image>
       </ImageView>
-      <TextField fx:id="Search_Bar" layoutX="219.0" layoutY="113.0" prefHeight="50.0" prefWidth="600.0" style="-fx-background-radius: 45;" />
+      <TextField fx:id="Search_Bar" layoutX="219.0" layoutY="113.0" prefHeight="50.0" prefWidth="600.0" style="-fx-background-radius: 45;">
+         <font>
+            <Font name="NanumBarunGothicOTF Bold" size="15.0" />
+         </font></TextField>
       <Button fx:id="right" layoutX="486.0" layoutY="192.0" mnemonicParsing="false" onAction="#right_move" prefHeight="51.0" prefWidth="45.0" text="-&gt;" />
       <Button fx:id="left" layoutX="486.0" layoutY="448.0" mnemonicParsing="false" onAction="#left_move" prefHeight="51.0" prefWidth="45.0" text="&lt;-" />
       <Button fx:id="delete_button" layoutX="885.0" layoutY="538.0" mnemonicParsing="false" onAction="#delete" prefHeight="50.0" prefWidth="95.0" style="-fx-background-color: FFB84D; -fx-background-radius: 25;" text="삭제" textFill="#fffcfc">
@@ -25,11 +28,11 @@
             <Insets left="10.0" right="10.0" />
          </opaqueInsets>
          <font>
-            <Font size="19.0" />
+            <Font name="NanumBarunGothicOTF Bold" size="19.0" />
          </font></Button>
       <Button fx:id="reset" layoutX="780.0" layoutY="538.0" mnemonicParsing="false" onAction="#reset_all" prefHeight="50.0" prefWidth="95.0" style="-fx-background-color: FFB84D; -fx-background-radius: 25;" text="초기화" textFill="#fffcfc">
          <font>
-            <Font size="19.0" />
+            <Font name="NanumBarunGothicOTF Bold" size="19.0" />
          </font></Button>
       <Button fx:id="Xbutton" layoutX="37.0" layoutY="498.0" mnemonicParsing="false" onAction="#close" prefHeight="80.0" prefWidth="79.0" style="-fx-background-color: transparent;" textFill="#ff0404" />
       <ImageView fitHeight="51.0" fitWidth="45.0" layoutX="760.0" layoutY="113.0" pickOnBounds="true" preserveRatio="true">

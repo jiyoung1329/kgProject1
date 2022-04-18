@@ -17,25 +17,25 @@
       <TextField fx:id="songNumber" layoutX="317.0" layoutY="143.0" prefHeight="50.0" prefWidth="336.0" style="-fx-background-radius: 50;" />
       <Button fx:id="check" layoutX="673.0" layoutY="143.0" mnemonicParsing="false" onAction="#checkProc" prefHeight="50.0" prefWidth="95.0" style="-fx-background-color: BE7E33; -fx-background-radius: 30;" text="중복" textFill="#fffcfc">
          <font>
-            <Font size="25.0" />
+            <Font name="NanumBarunGothicOTF Bold" size="25.0" />
          </font></Button>
       <TextField fx:id="songName" layoutX="317.0" layoutY="236.0" prefHeight="50.0" prefWidth="450.0" style="-fx-background-radius: 50;" />
       <TextField fx:id="songSinger" layoutX="317.0" layoutY="329.0" prefHeight="50.0" prefWidth="450.0" style="-fx-background-radius: 50;" />
       <Button fx:id="Xbutton" layoutX="40.0" layoutY="482.0" mnemonicParsing="false" onAction="#close" prefHeight="86.0" prefWidth="73.0" style="-fx-background-color: transparent;" textFill="WHITE" />
       <Button fx:id="file" layoutX="794.0" layoutY="414.0" mnemonicParsing="false" onAction="#filePrco" prefHeight="50.0" prefWidth="95.0" style="-fx-background-color: FFB84D; -fx-background-radius: 30;" text="찾아보기" textFill="#fffcfc">
          <font>
-            <Font size="16.0" />
+            <Font name="NanumBarunGothicOTF Bold" size="16.0" />
          </font>
       </Button>
       <TextField fx:id="fileroot" layoutX="317.0" layoutY="414.0" prefHeight="50.0" prefWidth="450.0" style="-fx-background-radius: 50;" />
          <Button fx:id="reg_button" layoutX="205.0" layoutY="490.0" mnemonicParsing="true" onAction="#regProc" prefHeight="80.0" prefWidth="270.0" style="-fx-background-color: FFB84D; -fx-background-radius: 25;" text="등록" textFill="#fffcfc">
          <font>
-            <Font name="Impact" size="31.0" />
+            <Font name="NanumBarunGothicOTF Bold" size="30.0" />
          </font></Button>
 
       <Button fx:id="resetbutton" layoutX="515.0" layoutY="490.0" mnemonicParsing="false" onAction="#resetProc" prefHeight="80.0" prefWidth="270.0" style="-fx-background-color: FFB84D; -fx-background-radius: 25;" text="취소" textFill="#fffcfc">
          <font>
-            <Font name="Impact" size="31.0" />
+            <Font name="NanumBarunGothicOTF Bold" size="30.0" />
          </font></Button>
    </children>
 </AnchorPane>
