@@ -57,7 +57,6 @@ public class SongSearchController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		searchService = new SongSearchService();
-//		remoteController.setSearchController(this);
 		
 		// 화면창 띄울때 전체 목록 불러오기
 		searchService.searchAll(songTable, songNumber, songTitle, songSinger);

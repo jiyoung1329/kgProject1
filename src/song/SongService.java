@@ -6,16 +6,29 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import song.remotecontrol.RemoteControlController;
+import song.remotecontrol.RemoteControlService;
 import song.search.SongSearchController;
 
 public class SongService {
 	private SongController songController;
+	private RemoteControlService remoteService;
 	private SongDAO songDao;
 
 	public SongService() {
 		songDao = new SongDAO();
 	}
 	
+	public RemoteControlService getRemoteService() {
+		return remoteService;
+	}
+
+
+	public void setRemoteService(RemoteControlService remoteService) {
+		this.remoteService = remoteService;
+	}
+
+
 	public SongController getSongController() {
 		return songController;
 	}
@@ -30,23 +43,29 @@ public class SongService {
 		Parent songSearchForm;
 		
 		try {
+			remoteService.closeForm();
+			
 			songSearchForm = loader.load();
 			
-			songController.setSongSearchController(loader.getController());
-			songController.getSongSearchController().setSearchForm(songSearchForm);
-			songController.getSongSearchController().setSongController(songController);
+			SongSearchController searchController = loader.getController();
+			songController.setSongSearchController(searchController);
+			searchController.setSearchForm(songSearchForm);
+			searchController.setSongController(songController);
 			songController.setSongSearchForm(songSearchForm);
+			// 검색창 꺼지게 remoteController 에 searchForm 설정
+			songController.getRemoteController().setSearchController(searchController);
+			
 			
 			Scene scene = new Scene(songSearchForm);
 			
-//			Stage nowStage = (Stage) songController.getSongForm().getScene().getWindow();
-//			Double SongX = nowStage.getX();
-//			Double SongY = nowStage.getY();
+			Stage nowStage = (Stage) songController.getSongForm().getScene().getWindow();
+			Double SongX = nowStage.getX();
+			Double SongY = nowStage.getY();
 			
 			Stage stage = new Stage();
 			stage.setTitle("노래 검색");
-//			stage.setX(SongX + 1005);
-//			stage.setY(SongY);
+			stage.setX(SongX + 1005);
+			stage.setY(SongY);
 			stage.setScene(scene);
 			stage.show();
 		} catch (IOException e) {

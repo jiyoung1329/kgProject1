@@ -51,30 +51,30 @@ public class RemoteControlService {
 		try {
 			chartForm = loader.load();
 			
-			if (remoteController.getChartController().getChartForm() != null) {
-				CommonService.windowClose(remoteController.getChartController().getChartForm());
-			}
+			// 기존에 인기차트나 검색창 있으면 닫기
+			closeForm();
 			
 			PopularChartController popularChartController = loader.getController();
 			remoteController.setChartController(popularChartController);
 			popularChartController.setChartForm(chartForm);
+			songController.setChartForm(chartForm);
 			popularChartController.setSongController(songController);
-			popularChartController.setRemoteController(remoteController);
 			
 			
 			Scene scene = new Scene(chartForm);
 			
-			Stage nowStage = (Stage) remoteController.getRemoteForm().getScene().getWindow();
-			System.out.println(nowStage);
+			// 화면 위치 조정
+			Stage nowStage = (Stage) songController.getSongForm().getScene().getWindow();
 			Double SongX = nowStage.getX();
 			Double SongY = nowStage.getY();
 			
 			Stage stage = new Stage();
 			stage.setTitle("인기 차트");
-			stage.setX(SongX + 400);
+			stage.setX(SongX + 1005);
 			stage.setY(SongY);
 			stage.setScene(scene);
 			stage.show();
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -87,29 +87,29 @@ public class RemoteControlService {
 		try {
 			titleSearchForm = loader.load();
 			
-			if (remoteController.getSearchController().getSearchForm() != null) {
-				CommonService.windowClose(remoteController.getSearchController().getSearchForm());
-			}
+			closeForm();
 			
 			SongSearchController searchController = loader.getController();
 			searchController.setSearchForm(titleSearchForm);
 			searchController.setSongController(songController);
-			searchController.setRemoteController(remoteController);
+			remoteController.setSearchController(searchController);
+			songController.setSongSearchForm(titleSearchForm);
 			
 			
 			Scene scene = new Scene(titleSearchForm);
 			
-			Stage nowStage = (Stage) remoteController.getRemoteForm().getScene().getWindow();
-			System.out.println(nowStage);
+			// 화면 위치 조정
+			Stage nowStage = (Stage) songController.getSongForm().getScene().getWindow();
 			Double SongX = nowStage.getX();
 			Double SongY = nowStage.getY();
 			
 			Stage stage = new Stage();
 			stage.setTitle("제목 검색");
-			stage.setX(SongX + 400);
+			stage.setX(SongX + 1005);
 			stage.setY(SongY);
 			stage.setScene(scene);
 			stage.show();
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -122,31 +122,39 @@ public class RemoteControlService {
 		try {
 			singerSearchForm = loader.load();
 			
-			if (remoteController.getSearchController().getSearchForm() != null) {
-				CommonService.windowClose(remoteController.getSearchController().getSearchForm());
-			}
+			closeForm();
 			
 			SongSearchController searchController = loader.getController();
 			searchController.setSearchForm(singerSearchForm);
 			searchController.setSongController(songController);
-			searchController.setRemoteController(remoteController);
+			remoteController.setSearchController(searchController);
+			songController.setSongSearchForm(singerSearchForm);
 			
 			Scene scene = new Scene(singerSearchForm);
-			
-			Stage nowStage = (Stage) remoteController.getRemoteForm().getScene().getWindow();
-			System.out.println(nowStage);
+
+			// 화면 위치 조정
+			Stage nowStage = (Stage) songController.getSongForm().getScene().getWindow();
 			Double SongX = nowStage.getX();
 			Double SongY = nowStage.getY();
 			
 			Stage stage = new Stage();
 			stage.setTitle("가수 검색");
-			stage.setX(SongX + 400);
+			stage.setX(SongX + 1005);
 			stage.setY(SongY);
 			stage.setScene(scene);
 			stage.show();
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	// 기존에 인기차트나 검색창이 있으면 닫기
+	public void closeForm() {
+		try {
+			CommonService.windowClose(remoteController.getChartController().getChartForm());
+			CommonService.windowClose(remoteController.getSearchController().getSearchForm());
+		} catch (Exception e) {}
 	}
 
 }
