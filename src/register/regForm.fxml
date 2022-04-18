@@ -15,23 +15,35 @@
             <Image url="@../img/회원가입.png" />
          </image>
       </ImageView>
-      <TextField fx:id="regId" layoutX="356.0" layoutY="127.0" prefHeight="50.0" prefWidth="344.0" style="-fx-background-radius: 50;" />
-      <PasswordField fx:id="regPw" layoutX="356.0" layoutY="204.0" prefHeight="50.0" prefWidth="450.0" style="-fx-background-radius: 50;" />
-      <PasswordField fx:id="regConfirmPw" layoutX="356.0" layoutY="291.0" prefHeight="50.0" prefWidth="450.0" style="-fx-background-radius: 50;" />
+      <TextField fx:id="regId" layoutX="356.0" layoutY="127.0" prefHeight="50.0" prefWidth="344.0" style="-fx-background-radius: 50;">
+         <font>
+            <Font name="NanumBarunGothicOTF Bold" size="20.0" />
+         </font></TextField>
+      <PasswordField fx:id="regPw" layoutX="356.0" layoutY="204.0" prefHeight="50.0" prefWidth="450.0" style="-fx-background-radius: 50;">
+         <font>
+            <Font name="NanumBarunGothicOTF Bold" size="20.0" />
+         </font></PasswordField>
+      <PasswordField fx:id="regConfirmPw" layoutX="356.0" layoutY="291.0" prefHeight="50.0" prefWidth="450.0" style="-fx-background-radius: 50;">
+         <font>
+            <Font name="NanumBarunGothicOTF Bold" size="20.0" />
+         </font></PasswordField>
       <Button fx:id="regSame" layoutX="711.0" layoutY="127.0" mnemonicParsing="false" onAction="#regSameProc" prefHeight="50.0" prefWidth="95.0" style="-fx-background-radius: 30; -fx-background-color: BE7E33;" text="중복" textFill="WHITE">
          <font>
-            <Font name="NanumGothicBold" size="20.0" />
+            <Font name="NanumBarunGothicOTF Bold" size="24.0" />
          </font>
       </Button>
-      <TextField fx:id="regMobile" layoutX="356.0" layoutY="380.0" prefHeight="50.0" prefWidth="450.0" style="-fx-background-radius: 50;" />
+      <TextField fx:id="regMobile" layoutX="356.0" layoutY="380.0" prefHeight="50.0" prefWidth="450.0" style="-fx-background-radius: 50;">
+         <font>
+            <Font name="NanumBarunGothicOTF Bold" size="20.0" />
+         </font></TextField>
       <Button fx:id="registerButton" layoutX="214.0" layoutY="471.0" mnemonicParsing="false" onAction="#regProc" prefHeight="80.0" prefWidth="270.0" style="-fx-background-radius: 20; -fx-background-color: FFB84D;" text="회원가입" textFill="WHITE">
          <font>
-            <Font name="NanumGothicBold" size="20.0" />
+            <Font name="NanumBarunGothicOTF Bold" size="30.0" />
          </font>
       </Button>
       <Button fx:id="regCancelButton" layoutX="507.0" layoutY="471.0" mnemonicParsing="false" onAction="#regCancelProc" prefHeight="80.0" prefWidth="270.0" style="-fx-background-radius: 20; -fx-background-color: FFB84D;" text="취소" textFill="WHITE">
          <font>
-            <Font name="NanumGothicBold" size="20.0" />
+            <Font name="NanumBarunGothicOTF Bold" size="30.0" />
          </font>
       </Button>
    </children>

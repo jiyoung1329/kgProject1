@@ -27,17 +27,17 @@
       </Button>
       <Button fx:id="selectButton" layoutX="210.0" layoutY="481.0" mnemonicParsing="false" onAction="#selectProc" prefHeight="80.0" prefWidth="270.0" style="-fx-background-color: FFB84D; -fx-background-radius: 30;" text="선택완료" textFill="WHITE">
          <font>
-            <Font name="Hancom Gothic Bold" size="30.0" />
+            <Font name="NanumBarunGothicOTF Bold" size="30.0" />
          </font></Button>
       <Button fx:id="cancelButton" layoutX="520.0" layoutY="481.0" mnemonicParsing="false" onAction="#selectCancelProc" prefHeight="80.0" prefWidth="270.0" style="-fx-background-color: FFB84D; -fx-background-radius: 30;" text="취소" textFill="WHITE">
          <font>
-            <Font name="Hancom Gothic Bold" size="30.0" />
+            <Font name="NanumBarunGothicOTF Bold" size="30.0" />
          </font></Button>
       <Pane layoutX="41.0" layoutY="30.0" prefHeight="63.0" prefWidth="88.0" style="-fx-background-radius: 30; -fx-background-color: #d3d3d3;">
          <children>
             <Label fx:id="roomNumber" alignment="CENTER" layoutX="17.0" layoutY="5.0" prefHeight="53.0" prefWidth="55.0">
                <font>
-                  <Font size="23.0" />
+                  <Font name="NanumBarunGothicOTF Bold" size="35.0" />
                </font>
             </Label>
          </children></Pane>
@@ -45,11 +45,11 @@
          <children>
             <Label fx:id="remainCount" alignment="CENTER" contentDisplay="RIGHT" layoutX="3.0" prefHeight="63.0" prefWidth="120.0">
                <font>
-                  <Font name="Hancom Gothic Bold" size="45.0" />
+                  <Font name="NanumBarunGothicOTF Bold" size="40.0" />
                </font>
             </Label>
          </children></Pane>
-      <Label fx:id="songCount" alignment="CENTER" layoutX="407.0" layoutY="260.0" prefHeight="137.0" prefWidth="186.0" text="5">
+      <Label fx:id="songCount" alignment="CENTER" layoutX="407.0" layoutY="260.0" prefHeight="137.0" prefWidth="186.0" text="1">
          <font>
             <Font name="Hancom Gothic Bold" size="100.0" />
          </font>
