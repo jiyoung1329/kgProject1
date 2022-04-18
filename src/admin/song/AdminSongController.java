@@ -1,5 +1,6 @@
 package admin.song;
 
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -16,9 +17,9 @@ public class AdminSongController implements Initializable {
 	@FXML private TextField songNumber;
 	@FXML private TextField songName;
 	@FXML private TextField songSinger;
-	@FXML private TextField songURL;
 	@FXML private Button reg_button;
 	@FXML private Button check;
+	@FXML private TextField fileroot;
 	Parent songform;
 	AdminSongService ssvc;
 	AdminSongController scon;
@@ -66,19 +67,19 @@ public class AdminSongController implements Initializable {
 			checkalert.show();
 		}
 	}
-	public void uRLProc() {
-		ssvc.urlProc(songURL);
-	}
 	public void regProc() {
-		ssvc.regProc(songNumber, songName,songSinger,songURL);
+		ssvc.regProc(songNumber, songName,songSinger,fileroot);
 	}
 	public void resetProc() {
 		songNumber.clear();
 		songName.clear();
 		songNumber.setDisable(false);
 		songSinger.clear();
-		songURL.clear();
 		reg_button.setDisable(true);
+	}
+	public void filePrco() {
+		ssvc.filereg(fileroot);
+
 	}
 
 }
