@@ -44,7 +44,7 @@ public class SongController implements Initializable{
 	private RemoteControlController remoteController;
 	
 	private ArrayList<SongDTO> songNumber = new ArrayList<SongDTO>();
-	private int count = 1;
+	private int count;
 	private String room;
 	private MediaPlayer mediaPlayer;
 	private boolean endOfMedia;
@@ -104,6 +104,14 @@ public class SongController implements Initializable{
 	}
 	
 	
+	public ArrayList<SongDTO> getSongNumber() {
+		return songNumber;
+	}
+
+	public void setSongNumber(ArrayList<SongDTO> songNumber) {
+		this.songNumber = songNumber;
+	}
+
 	public Label getResNum() {
 		return resNum;
 	}
@@ -138,6 +146,7 @@ public class SongController implements Initializable{
 	// 미디어가 끝났을때
 	public void setEndOfMedia2(boolean endOfMedia) {
 		this.endOfMedia = endOfMedia;
+		mediaPlayer.stop();
 		if(endOfMedia) {
 			// 대기화면 띄우기
 			songDefault.setOpacity(100);
@@ -203,19 +212,6 @@ public class SongController implements Initializable{
 			}else {
 				//MediaView재생
 				songMediaView();
-				
-				// 남은 곡 수 숫자 업데이트
-				remainSong.setText(Integer.toString(--count));
-				
-				// 첫 번째 예약곡 지우기
-				songNumber.remove(0);
-				
-				// 예약곡 리스트 업데이트(기존 데이터 지우고 새로운 데이터 입력)
-				num1.setText("");num2.setText("");num3.setText("");
-				num4.setText("");num5.setText("");num6.setText("");
-				
-				insertReserveSong();
-				
 			}
 			
 		} 
@@ -226,7 +222,7 @@ public class SongController implements Initializable{
 	public void songCancelProc() {
 		if (mediaPlayer != null) {
 			// 미디어 재생 멈추기
-			mediaPlayer.pause();
+			mediaPlayer.stop();
 			
 			// 대기화면 불러오기
 			songDefault.setOpacity(100);
@@ -321,7 +317,6 @@ public class SongController implements Initializable{
 	}
 	
 	public void insertReserveSong() {
-		
 		try {
 			num1.setText(songNumber.get(0).getSongNum());
 			num2.setText(songNumber.get(1).getSongNum());
@@ -357,6 +352,18 @@ public class SongController implements Initializable{
 			});
 		
 		}
+		
+		// 남은 곡 수 숫자 업데이트
+		remainSong.setText(Integer.toString(--count));
+		
+		// 첫 번째 예약곡 지우기
+		songNumber.remove(0);
+		
+		// 예약곡 리스트 업데이트(기존 데이터 지우고 새로운 데이터 입력)
+		num1.setText("");num2.setText("");num3.setText("");
+		num4.setText("");num5.setText("");num6.setText("");
+		
+		insertReserveSong();
 	}
 
 
