@@ -8,7 +8,6 @@ import room.select.SelectDTO;
 public class Status {
 	private static LoginDTO loginDTO;
 	private static ChargeController chargeController;
-	//###220414
 	private static SelectDTO selectDTO;
 	private static SelectController selectController;
 	
@@ -28,7 +27,6 @@ public class Status {
 		Status.selectController = selectController;
 	}
 	
-	//###220414
 
 	public static LoginDTO getLoginDTO() {
 		return loginDTO;
@@ -45,7 +43,5 @@ public class Status {
 	public static void setChargeController(ChargeController chargeController) {
 		Status.chargeController = chargeController;
 	}
-	
-	
-	
+			
 }

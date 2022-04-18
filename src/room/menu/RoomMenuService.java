@@ -37,7 +37,7 @@ public class RoomMenuService {
 		Scene scene = new Scene(chargeForm);
 		Stage stage = new Stage();
 		
-		stage.setTitle("가격선택");
+		stage.setTitle("충전하기");
 		stage.setScene(scene);
 		stage.show();
 	}
@@ -53,7 +53,7 @@ public class RoomMenuService {
 		Scene scene = new Scene(selectForm);
 		Stage stage = new Stage();
 		
-		stage.setTitle("곡갯수선택");
+		stage.setTitle("곡 개수 선택");
 		stage.setScene(scene);
 		stage.show();
 	}

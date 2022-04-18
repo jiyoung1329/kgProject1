@@ -14,14 +14,12 @@ public class SelectDAO {
 	private PreparedStatement ps = null;
 	private ResultSet rs = null;
 	
-	private CommonDAO commonDao;//##0414
+	private CommonDAO commonDao;
 	
 	public SelectDAO() {
 		commonDao = new CommonDAO();
 		conn = CommonDAO.makeConnection();
 	}
-	
-
 	
 	public void saveSongCount(int count, LoginDTO dto) {
 		String query = "update member set songcount = ? where id = ?";
@@ -68,38 +66,38 @@ public class SelectDAO {
 		return isReservation;
 		
 	}
-	//###220414
-	public SelectDTO selectNum(int num) { //방번호로 DB에 있는 값을 가져옮
-		SelectDTO selectDto = null;
-		String sql = "SELECT * FROM room WHERE num = ?"; // memberDB에서 방번호가 가진 정보를 모두 가져옴
 
-		try {
-			ps = conn.prepareStatement(sql);
-			ps.setInt(1, num);
-			rs = ps.executeQuery();
-			if (rs.next()) {	
-				selectDto = new SelectDTO();
-				selectDto.setNum(rs.getInt("num"));
-				selectDto.setIsReservation(rs.getInt("isreservation"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} 
-		finally {
-			try {
-				if (rs != null)
-					rs.close();
-				if (ps != null)
-					ps.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		return selectDto;
-		
-	}
-	//###220414
+//	public SelectDTO selectNum(int num) { //방번호로 DB에 있는 값을 가져옮
+//		SelectDTO selectDto = null;
+//		String sql = "SELECT * FROM room WHERE num = ?"; // memberDB에서 방번호가 가진 정보를 모두 가져옴
+//
+//		try {
+//			ps = conn.prepareStatement(sql);
+//			ps.setInt(1, num);
+//			rs = ps.executeQuery();
+//			if (rs.next()) {	
+//				selectDto = new SelectDTO();
+//				selectDto.setNum(rs.getInt("num"));
+//				selectDto.setIsReservation(rs.getInt("isreservation"));
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} 
+//		finally {
+//			try {
+//				if (rs != null)
+//					rs.close();
+//				if (ps != null)
+//					ps.close();
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		
+//		return selectDto;
+//		
+//	}
+
 	
 	public void update(SelectDTO isRes) {
 		String sql = "UPDATE room SET isReservation=? WHERE num = ?";
