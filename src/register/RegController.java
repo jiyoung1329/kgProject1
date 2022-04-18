@@ -63,6 +63,7 @@ public class RegController implements Initializable {
 		});
 		
 		regMobile.textProperty().addListener((attribute, before, after) -> {
+			mobileLengthCheck();
 			emptyCheck(); // 전화번호필드를 포함한 각 필드의 값이 존재하는지 확인. 모두 통과 시 회원등록버튼 활성화
 		});
 	}
@@ -98,9 +99,9 @@ public class RegController implements Initializable {
 		}
 	}
 	public void mobileLengthCheck(){
-			if (regMobile.getLength() > 10) {
+			if (regMobile.getLength() > 11) {
 				String tmp = regMobile.getText();
-				tmp = tmp.substring(0, 10);
+				tmp = tmp.substring(0, 11);
 				regMobile.setText(tmp);
 			}
 		}

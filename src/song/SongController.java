@@ -155,7 +155,7 @@ public class SongController implements Initializable{
 				exit();
 				return;
 			}
-			// 자동재생
+			// 미디어 자동재생
 			if(songNumber.size() != 0) {
 				sleep(1000);
 				songMediaView();
@@ -179,13 +179,13 @@ public class SongController implements Initializable{
 	
 	//예약된 노래번호 띄우기
 	public void reserveSong(SongDTO songDTO) {
+		// 예약곡은 6개를 초과할 수 없음 
 		if(songNumber.size() >= 6) {
 			CommonService.msg("곡을 더 이상 추가할 수 없습니다.");
 		}else {
-			songNumber.add(songDTO);
-			num1.setText(songNumber.get(0).getSongNum());
-			
-			insertReserveSong();
+			songNumber.add(songDTO); // songDTO를 가져와
+			num1.setText(songNumber.get(0).getSongNum()); // DTO 안에 곡 번호를 가져와서 예약곡 리스트에 추가
+			insertReserveSong(); // 이전에 추가된 곡을 그 뒤로 띄움
 		}
 		
 	}
@@ -195,9 +195,9 @@ public class SongController implements Initializable{
 		if(songNumber.size() >= 6) {
 			CommonService.msg("곡을 더 이상 추가할 수 없습니다.");
 		}else {
-			songNumber.add(0, songDTO);
+			songNumber.add(0, songDTO); // 기존에 0번에 있던 데이터는 1번으로 자동으로 밀려남 
 			
-			insertReserveSong();
+			insertReserveSong(); // 예약곡 리스트 띄우기
 		}
 	}
 	
@@ -207,7 +207,7 @@ public class SongController implements Initializable{
 		if(endOfMedia) {
 			
 			if(songNumber.size() == 0) {
-				// 예약된 곡이 0일 때
+				// 예약된 곡이 0일 때 알림창
 				CommonService.msg("먼저 곡을 예약해 주세요");
 			}else {
 				//MediaView재생
@@ -328,7 +328,7 @@ public class SongController implements Initializable{
 	}
 	
 	public void songMediaView() {
-		// songDB count +1
+		// songDB 곡 재생 count +1
 		songDto = songSvc.songPlay(songNumber.get(0).getSongNum());
 		// MediaView 재생
 		String url = getClass().getResource(songDto.getSongLink()).toString();

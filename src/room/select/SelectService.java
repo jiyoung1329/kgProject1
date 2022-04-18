@@ -89,7 +89,6 @@ public class SelectService {
 		
 			Stage stage1 = new Stage();
 			stage1.initStyle(StageStyle.UNDECORATED);
-			stage1.setTitle("노래방");
 			stage1.setScene(scene1);
 			stage1.show();
 			Double X1 = stage1.getX();
@@ -99,7 +98,6 @@ public class SelectService {
 			stage2.setX(X1-395);
 			stage2.setY(Y1);
 			stage2.initStyle(StageStyle.UNDECORATED);
-			stage2.setTitle("리모컨");
 			stage2.setScene(scene2);
 			stage2.show();
 			
