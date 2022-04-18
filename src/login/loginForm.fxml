@@ -18,11 +18,11 @@
       </ImageView>
       <TextField fx:id="id" alignment="CENTER" layoutX="354.0" layoutY="143.0" prefHeight="50.0" prefWidth="450.0" style="-fx-background-radius: 50;">
          <font>
-            <Font name="NanumGothicBold" size="25.0" />
+            <Font name="NanumBarunGothicOTF Bold" size="25.0" />
          </font></TextField>
       <PasswordField fx:id="pw" alignment="CENTER" layoutX="354.0" layoutY="237.0" prefHeight="50.0" prefWidth="450.0" style="-fx-background-radius: 50;">
          <font>
-            <Font name="NanumGothicBold" size="25.0" />
+            <Font name="NanumBarunGothicOTF Bold" size="25.0" />
          </font></PasswordField>
       <HBox alignment="CENTER" layoutX="279.0" layoutY="369.0" prefHeight="98.0" prefWidth="482.0" spacing="20.0">
          <children>
