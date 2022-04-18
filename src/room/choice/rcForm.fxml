@@ -15,55 +15,55 @@
       </ImageView>
       <Button fx:id="room1" layoutX="63.0" layoutY="462.0" mnemonicParsing="false" onAction="#rmProc1" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: FFB84D; -fx-background-radius: 22;" text="1">
          <font>
-            <Font name="NanumGothic" size="40.0" />
+            <Font name="NanumBarunGothicOTF Bold" size="40.0" />
          </font></Button>
       <Button fx:id="room2" layoutX="63.0" layoutY="349.0" mnemonicParsing="false" onAction="#rmProc2" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: FFB84D; -fx-background-radius: 22;" text="2">
          <font>
-            <Font name="NanumGothic" size="40.0" />
+            <Font name="NanumBarunGothicOTF Bold" size="40.0" />
          </font></Button>
       <Button fx:id="room3" layoutX="63.0" layoutY="229.0" mnemonicParsing="false" onAction="#rmProc3" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: FFB84D; -fx-background-radius: 22;" text="3">
          <font>
-            <Font name="NanumGothic" size="40.0" />
+            <Font name="NanumBarunGothicOTF Bold" size="40.0" />
          </font></Button>
       <Button fx:id="room4" layoutX="173.0" layoutY="130.0" mnemonicParsing="false" onAction="#rmProc4" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: FFB84D; -fx-background-radius: 22;" text="4">
          <font>
-            <Font name="NanumGothic" size="40.0" />
+            <Font name="NanumBarunGothicOTF Bold" size="40.0" />
          </font></Button>
       <Button fx:id="room5" layoutX="302.0" layoutY="130.0" mnemonicParsing="false" onAction="#rmProc5" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: FFB84D; -fx-background-radius: 22;" text="5">
          <font>
-            <Font name="NanumGothic" size="40.0" />
+            <Font name="NanumBarunGothicOTF Bold" size="40.0" />
          </font></Button>
       <Button fx:id="room6" layoutX="429.0" layoutY="130.0" mnemonicParsing="false" onAction="#rmProc6" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: FFB84D; -fx-background-radius: 22;" text="6">
          <font>
-            <Font name="NanumGothic" size="40.0" />
+            <Font name="NanumBarunGothicOTF Bold" size="40.0" />
          </font></Button>
       <Button fx:id="room7" layoutX="561.0" layoutY="130.0" mnemonicParsing="false" onAction="#rmProc7" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: FFB84D; -fx-background-radius: 22;" text="7">
          <font>
-            <Font name="NanumGothic" size="40.0" />
+            <Font name="NanumBarunGothicOTF Bold" size="40.0" />
          </font></Button>
       <Button fx:id="room8" layoutX="691.0" layoutY="130.0" mnemonicParsing="false" onAction="#rmProc8" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: FFB84D; -fx-background-radius: 22;" text="8">
          <font>
-            <Font name="NanumGothic" size="40.0" />
+            <Font name="NanumBarunGothicOTF Bold" size="40.0" />
          </font></Button>
       <Button fx:id="room9" layoutX="691.0" layoutY="349.0" mnemonicParsing="false" onAction="#rmProc9" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: FFB84D; -fx-background-radius: 22;" text="9">
          <font>
-            <Font name="NanumGothic" size="40.0" />
+            <Font name="NanumBarunGothicOTF Bold" size="40.0" />
          </font></Button>
       <Button fx:id="room10" layoutX="561.0" layoutY="349.0" mnemonicParsing="false" onAction="#rmProc10" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: FFB84D; -fx-background-radius: 22;" text="10">
          <font>
-            <Font name="NanumGothic" size="30.0" />
+            <Font name="NanumBarunGothicOTF Bold" size="30.0" />
          </font></Button>
       <Button fx:id="room11" layoutX="429.0" layoutY="349.0" mnemonicParsing="false" onAction="#rmProc11" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: FFB84D; -fx-background-radius: 22;" text="11">
          <font>
-            <Font name="NanumGothic" size="30.0" />
+            <Font name="NanumBarunGothicOTF Bold" size="30.0" />
          </font></Button>
       <Button fx:id="room12" layoutX="302.0" layoutY="349.0" mnemonicParsing="false" onAction="#rmProc12" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: FFB84D; -fx-background-radius: 22;" text="12">
          <font>
-            <Font name="NanumGothic" size="30.0" />
+            <Font name="NanumBarunGothicOTF Bold" size="30.0" />
          </font></Button>
       <Button layoutX="819.0" layoutY="130.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #83CE8F; -fx-background-radius: 22;" text="현위치">
          <font>
-            <Font name="NanumGothic" size="20.0" />
+            <Font name="NanumBarunGothicOTF Bold" size="20.0" />
          </font></Button>
    </children>
 </AnchorPane>
