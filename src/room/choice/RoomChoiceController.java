@@ -70,193 +70,63 @@ public class RoomChoiceController implements Initializable {
 	}
 	
 	public void rmProc1() throws Exception{
-		roomChoiceDAO = new RoomChoiceDAO();
-		
-		selectDTO = roomChoiceDAO.selectNum(1);// -> 1번방 가져오는거
-		status.setSelectDTO(selectDTO);
-		
-		roomDisabled(1);
-		
-		rcs.rmProc();
-		CommonService.windowClose(rcForm);
+		roomChoice(1);
 	}
 	
 	public void rmProc2() throws Exception{
-		roomChoiceDAO = new RoomChoiceDAO();
-		
-		selectDTO = roomChoiceDAO.selectNum(2);
-		status.setSelectDTO(selectDTO);
-		
-		roomDisabled(2);
-				
-		rcs.rmProc();
-		CommonService.windowClose(rcForm);
+		roomChoice(2);
 	}
 	
 	public void rmProc3() throws Exception{
-		roomChoiceDAO = new RoomChoiceDAO();
-		
-		selectDTO = roomChoiceDAO.selectNum(3);
-		status.setSelectDTO(selectDTO);
-		
-		roomDisabled(3);
-		
-		rcs.rmProc();
-		CommonService.windowClose(rcForm);
+		roomChoice(3);
 	}
 	
 	public void rmProc4() throws Exception{
-		roomChoiceDAO = new RoomChoiceDAO();
-		
-		selectDTO = roomChoiceDAO.selectNum(4);
-		status.setSelectDTO(selectDTO);
-		
-		roomDisabled(4);
-		
-		rcs.rmProc();
-		CommonService.windowClose(rcForm);
+		roomChoice(4);
 	}
 	
 	public void rmProc5() throws Exception{
-		roomChoiceDAO = new RoomChoiceDAO();
-		
-		selectDTO = roomChoiceDAO.selectNum(5);
-		status.setSelectDTO(selectDTO);
-		
-		roomDisabled(5);
-		
-		rcs.rmProc();
-		CommonService.windowClose(rcForm);
+		roomChoice(5);
 	}
 	
 	public void rmProc6() throws Exception{
-		roomChoiceDAO = new RoomChoiceDAO();
-		
-		selectDTO = roomChoiceDAO.selectNum(6);
-		status.setSelectDTO(selectDTO);
-		
-		roomDisabled(6);
-		
-		rcs.rmProc();
-		CommonService.windowClose(rcForm);
+		roomChoice(6);
 	}
 	
 	public void rmProc7() throws Exception{
-		roomChoiceDAO = new RoomChoiceDAO();
-		
-		selectDTO = roomChoiceDAO.selectNum(7);
-		status.setSelectDTO(selectDTO);
-		
-		roomDisabled(7);
-		
-		rcs.rmProc();
-		CommonService.windowClose(rcForm);
+		roomChoice(7);
 	}
 	
 	public void rmProc8() throws Exception{
-		roomChoiceDAO = new RoomChoiceDAO();
-		
-		selectDTO = roomChoiceDAO.selectNum(8);
-		status.setSelectDTO(selectDTO);
-		
-		roomDisabled(8);
-		
-		rcs.rmProc();
-		CommonService.windowClose(rcForm);
+		roomChoice(8);
 	}
 	
 	public void rmProc9() throws Exception{
-		roomChoiceDAO = new RoomChoiceDAO();
-		
-		selectDTO = roomChoiceDAO.selectNum(9);
-		status.setSelectDTO(selectDTO);
-		
-		roomDisabled(9);
-		
-		rcs.rmProc();
-		CommonService.windowClose(rcForm);
+		roomChoice(9);
 	}
 	
 	public void rmProc10() throws Exception{
-		roomChoiceDAO = new RoomChoiceDAO();
-		
-		selectDTO = roomChoiceDAO.selectNum(10);
-		status.setSelectDTO(selectDTO);
-		
-		roomDisabled(10);
-		
-		rcs.rmProc();
-		CommonService.windowClose(rcForm);
+		roomChoice(10);
 	}
 	
 	public void rmProc11() throws Exception{
-		roomChoiceDAO = new RoomChoiceDAO();
-		
-		selectDTO = roomChoiceDAO.selectNum(11);
-		status.setSelectDTO(selectDTO);
-		
-		roomDisabled(11);
-		
-		rcs.rmProc();
-		CommonService.windowClose(rcForm);
+		roomChoice(11);
 	}
 	
 	public void rmProc12() throws Exception{
-		roomChoiceDAO = new RoomChoiceDAO();
-		
-		selectDTO = roomChoiceDAO.selectNum(12);
-		status.setSelectDTO(selectDTO);
-		
-		roomDisabled(12);
-		
-		rcs.rmProc();
-		CommonService.windowClose(rcForm);
+		roomChoice(12);
 	}
 	
-	public void roomDisabled(int tmp) {
-		roomChoiceDAO = new RoomChoiceDAO();
-		
-		tmp = status.getSelectDTO().getNum();
-		selectDTO = roomChoiceDAO.selectNum(tmp);// -> 1번방 가져오는거
-		
-		int reserConfirm = selectDTO.getIsReservation();
-		if(tmp == 1) {		
-			if(reserConfirm == 1)
-				room1.setDisable(true);
-		}else if(tmp == 2) {
-			if(reserConfirm == 1)
-				room2.setDisable(true);
-		}else if(tmp == 3) {
-			if(reserConfirm == 1)
-				room3.setDisable(true);
-		}else if(tmp == 4) {
-			if(reserConfirm == 1)
-				room4.setDisable(true);
-		}else if(tmp == 5) {
-			if(reserConfirm == 1)
-				room5.setDisable(true);
-		}else if(tmp == 6) {
-			if(reserConfirm == 1)
-				room6.setDisable(true);
-		}else if(tmp == 7) {
-			if(reserConfirm == 1)
-				room7.setDisable(true);
-		}else if(tmp == 8) {
-			if(reserConfirm == 1)
-				room8.setDisable(true);
-		}else if(tmp == 9) {
-			if(reserConfirm == 1)
-				room9.setDisable(true);
-		}else if(tmp == 10) {
-			if(reserConfirm == 1)
-				room10.setDisable(true);
-		}else if(tmp == 11) {
-			if(reserConfirm == 1)
-				room11.setDisable(true);
-		}else if(tmp ==12) {
-			if(reserConfirm == 1)
-				room12.setDisable(true);
-		}
+	public void roomChoice(int num) {
+		try {
+			roomChoiceDAO = new RoomChoiceDAO();
+
+			selectDTO = roomChoiceDAO.selectNum(num);
+			status.setSelectDTO(selectDTO);
+			
+			rcs.rmProc();
+			CommonService.windowClose(rcForm);
+		} catch(Exception e) {}
 	}
 
 
