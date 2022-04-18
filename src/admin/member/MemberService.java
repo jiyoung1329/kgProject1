@@ -2,6 +2,7 @@ package admin.member;
 
 import java.sql.Connection;
 
+
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import common.CommonDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Parent;
@@ -29,18 +31,10 @@ public class MemberService {
 //		String pw = "oracle";
 		
 		//데이터베이스 호출
-		String url = "jdbc:oracle:thin:@kgproject_high?TNS_ADMIN=C:/Wallet_kgProject";
-		String user = "admin";
-		String pw = "KGproject1234!";
+		CommonDAO common=new CommonDAO();
 
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
 
-			con = DriverManager.getConnection(url, user, pw);
-		} catch (Exception e) {
-			System.out.println("연결실패");
-			e.printStackTrace();
-		}
+		con=common.makeConnection();
 	}
 
 	public void list_all(TableView list) {

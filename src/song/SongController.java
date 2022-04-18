@@ -122,7 +122,6 @@ public class SongController implements Initializable{
 		songSvc.roomReserve(room);
 	}
 	
-	
 	public MediaPlayer getMediaPlayer() {
 		return mediaPlayer;
 	}
@@ -147,9 +146,11 @@ public class SongController implements Initializable{
 				exit();
 				return;
 			}
-			
-			sleep(1000);
-			songStartProc();
+			// 자동재생
+			if(songNumber.size() != 0) {
+				sleep(1000);
+				songMediaView();
+			}
 		}
 	}
 	
@@ -175,14 +176,7 @@ public class SongController implements Initializable{
 			songNumber.add(songDTO);
 			num1.setText(songNumber.get(0).getSongNum());
 			
-			try {
-				num1.setText(songNumber.get(0).getSongNum());
-				num2.setText(songNumber.get(1).getSongNum());
-				num3.setText(songNumber.get(2).getSongNum());
-				num4.setText(songNumber.get(3).getSongNum());
-				num5.setText(songNumber.get(4).getSongNum());
-				num6.setText(songNumber.get(5).getSongNum());
-			} catch(Exception e) {}
+			insertReserveSong();
 		}
 		
 	}
@@ -194,14 +188,7 @@ public class SongController implements Initializable{
 		}else {
 			songNumber.add(0, songDTO);
 			
-			try {
-				num1.setText(songNumber.get(0).getSongNum());
-				num2.setText(songNumber.get(1).getSongNum());
-				num3.setText(songNumber.get(2).getSongNum());
-				num4.setText(songNumber.get(3).getSongNum());
-				num5.setText(songNumber.get(4).getSongNum());
-				num6.setText(songNumber.get(5).getSongNum());
-			} catch(Exception e) {}
+			insertReserveSong();
 		}
 	}
 	
@@ -214,32 +201,8 @@ public class SongController implements Initializable{
 				// 예약된 곡이 0일 때
 				CommonService.msg("먼저 곡을 예약해 주세요");
 			}else {
-				// SongDB 내 곡의 재생횟수 +1 시키기
-				songDto = songSvc.songPlay(songNumber.get(0).getSongNum());
-				
 				//MediaView재생
-				String url = getClass().getResource(songDto.getSongLink()).toString();
-				if(url != null) {
-					songDefault.setOpacity(0);
-					Media media = new Media(url);
-					mediaPlayer = new MediaPlayer(media);
-					songMedia.setMediaPlayer(mediaPlayer);
-					songMedia.setPreserveRatio(false);
-					mediaPlayer.play();
-					endOfMedia = false;
-					
-					mediaPlayer.currentTimeProperty().addListener((old,oldV,newV) -> {
-						Double now = mediaPlayer.getCurrentTime().toSeconds();
-						Double end = mediaPlayer.getTotalDuration().toSeconds();
-
-						if((now/end) >= 0.99) {
-							setEndOfMedia2(true);
-						}
-						
-					});
-				
-				}
-				
+				songMediaView();
 				
 				// 남은 곡 수 숫자 업데이트
 				remainSong.setText(Integer.toString(--count));
@@ -251,14 +214,7 @@ public class SongController implements Initializable{
 				num1.setText("");num2.setText("");num3.setText("");
 				num4.setText("");num5.setText("");num6.setText("");
 				
-				try {
-					num1.setText(songNumber.get(0).getSongNum());
-					num2.setText(songNumber.get(1).getSongNum());
-					num3.setText(songNumber.get(2).getSongNum());
-					num4.setText(songNumber.get(3).getSongNum());
-					num5.setText(songNumber.get(4).getSongNum());
-					num6.setText(songNumber.get(5).getSongNum());
-				} catch(Exception e) {}
+				insertReserveSong();
 				
 			}
 			
@@ -331,14 +287,7 @@ public class SongController implements Initializable{
 			num1.setText("");num2.setText("");num3.setText("");
 			num4.setText("");num5.setText("");num6.setText("");
 			
-			try {
-				num1.setText(songNumber.get(0).getSongNum());
-				num2.setText(songNumber.get(1).getSongNum());
-				num3.setText(songNumber.get(2).getSongNum());
-				num4.setText(songNumber.get(3).getSongNum());
-				num5.setText(songNumber.get(4).getSongNum());
-				num6.setText(songNumber.get(5).getSongNum());
-			} catch(Exception e) {}
+			insertReserveSong();
 			
 		} else {
 			CommonService.msg("예약된 곡이 없습니다.");
@@ -369,6 +318,45 @@ public class SongController implements Initializable{
 		try {
 			Thread.sleep(time);
 		} catch(Exception e) {}
+	}
+	
+	public void insertReserveSong() {
+		
+		try {
+			num1.setText(songNumber.get(0).getSongNum());
+			num2.setText(songNumber.get(1).getSongNum());
+			num3.setText(songNumber.get(2).getSongNum());
+			num4.setText(songNumber.get(3).getSongNum());
+			num5.setText(songNumber.get(4).getSongNum());
+			num6.setText(songNumber.get(5).getSongNum());
+		} catch(Exception e) {}
+	}
+	
+	public void songMediaView() {
+		// songDB count +1
+		songDto = songSvc.songPlay(songNumber.get(0).getSongNum());
+		// MediaView 재생
+		String url = getClass().getResource(songDto.getSongLink()).toString();
+		if(url != null) {
+			songDefault.setOpacity(0);
+			Media media = new Media(url);
+			mediaPlayer = new MediaPlayer(media);
+			songMedia.setMediaPlayer(mediaPlayer);
+			songMedia.setPreserveRatio(false);
+			mediaPlayer.play();
+			endOfMedia = false;
+			
+			mediaPlayer.currentTimeProperty().addListener((obs,oldV,newV) -> {
+				Double now = mediaPlayer.getCurrentTime().toSeconds();
+				Double end = mediaPlayer.getTotalDuration().toSeconds();
+
+				if((now/end) >= 0.99) {
+					setEndOfMedia2(true);
+				}
+				
+			});
+		
+		}
 	}
 
 
