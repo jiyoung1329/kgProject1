@@ -44,7 +44,7 @@ public class SongController implements Initializable{
 	private RemoteControlController remoteController;
 	
 	private ArrayList<SongDTO> songNumber = new ArrayList<SongDTO>();
-	private int count = 1;
+	private int count;
 	private String room;
 	private MediaPlayer mediaPlayer;
 	private boolean endOfMedia;
