@@ -21,7 +21,7 @@ public class AdminMain extends Application {
 		Parent root = loader.load();
 		Scene scene = new Scene(root);
 		
-		primaryStage.setTitle("관리자");
+		primaryStage.setTitle("관리자 화면");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}

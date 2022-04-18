@@ -18,21 +18,21 @@
       </ImageView>
       <TextField fx:id="id" alignment="CENTER" layoutX="354.0" layoutY="143.0" prefHeight="50.0" prefWidth="450.0" style="-fx-background-radius: 50;">
          <font>
-            <Font name="NanumGothicBold" size="25.0" />
+            <Font name="NanumBarunGothicOTF Bold" size="25.0" />
          </font></TextField>
       <PasswordField fx:id="pw" alignment="CENTER" layoutX="354.0" layoutY="237.0" prefHeight="50.0" prefWidth="450.0" style="-fx-background-radius: 50;">
          <font>
-            <Font name="NanumGothicBold" size="25.0" />
+            <Font name="NanumBarunGothicOTF Bold" size="25.0" />
          </font></PasswordField>
       <HBox alignment="CENTER" layoutX="279.0" layoutY="369.0" prefHeight="98.0" prefWidth="482.0" spacing="20.0">
          <children>
             <Button fx:id="loginButton" mnemonicParsing="false" onAction="#loginProc" prefHeight="80.0" prefWidth="270.0" style="-fx-background-color: FFB84D; -fx-padding: 10; -fx-background-radius: 20;" text="로그인" textFill="WHITE">
                <font>
-                  <Font name="NanumGothicBold" size="30.0" />
+                  <Font name="NanumBarunGothicOTF Bold" size="35.0" />
                </font></Button>
-            <Button fx:id="regButton" mnemonicParsing="false" onAction="#regProc" prefHeight="80.0" prefWidth="270.0" style="-fx-background-color: FFB84D; -fx-padding: 10; -fx-background-radius: 20;" text="회원가입" textFill="WHITE">
+            <Button fx:id="regButton" alignment="CENTER" mnemonicParsing="false" onAction="#regProc" prefHeight="80.0" prefWidth="270.0" style="-fx-background-color: FFB84D; -fx-padding: 10; -fx-background-radius: 20;" text="회원가입" textFill="WHITE">
                <font>
-                  <Font name="NanumGothicBold" size="30.0" />
+                  <Font name="NanumBarunGothicOTF Bold" size="35.0" />
                </font></Button>
          </children>
       </HBox>

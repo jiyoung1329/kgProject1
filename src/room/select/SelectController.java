@@ -109,7 +109,7 @@ public class SelectController implements Initializable{
 			imsi.update(status.getSelectDTO());//@@
 			status.setSelectDTO(imsi.selectNum(status.getSelectDTO().getNum()));
 			//업데이트된 reservation
-			System.out.println(status.getSelectDTO());
+			//System.out.println(status.getSelectDTO());
 		} else {
 			CommonService.msg("이미 예약된 방입니다.");
 		}
