@@ -38,4 +38,22 @@ public class ChargeService {
 		stage.show();
 	}
 	
+
+	public void chargeCancelProc() throws Exception{
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/room/menu/rmForm.fxml"));
+		
+		Parent rmForm = loader.load();
+		
+		RoomMenuController roomMenuController = loader.getController();
+		roomMenuController.setRoomMenuForm(rmForm);
+
+		
+		Scene scene = new Scene(rmForm);
+		Stage stage = new Stage();
+		
+		stage.setTitle("메뉴선택");
+		stage.setScene(scene);
+		stage.show();
+	}
+	
 }

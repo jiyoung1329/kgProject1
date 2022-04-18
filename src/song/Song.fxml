@@ -79,5 +79,15 @@
             <Font name="NanumBarunGothicOTF Bold" size="20.0" />
          </font>
       </Button>
+      <Label fx:id="resNumTitle" layoutX="193.0" layoutY="41.0" style="-fx-background-color: white; -fx-opacity: 0;" text="예약곡 |   ">
+         <font>
+            <Font name="HCR Dotum Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="resNum" layoutX="283.0" layoutY="42.0" prefHeight="29.0" prefWidth="448.0" style="-fx-background-color: #ffffff; -fx-opacity: 0;">
+         <font>
+            <Font name="HCR Dotum Bold" size="20.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

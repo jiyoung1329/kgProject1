@@ -6,12 +6,18 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import login.LoginDTO;
+import room.choice.Status;
+import song.SongController;
+import song.remotecontrol.RemoteControlController;
 
 public class SelectService {
 	
 	private SelectDAO selectDAO;
 	private SelectController selectController;
+	
+	private Status status;
 	
 	public SelectController getSelectController() {
 		return selectController;
@@ -30,7 +36,7 @@ public class SelectService {
 		String count = ((Label) selectForm.lookup("#songCount")).getText();
 		String room = ((Label) selectForm.lookup("#roomNumber")).getText();
 		
-		LoginDTO dto = selectDAO.callMember();
+		LoginDTO dto = status.getLoginDTO();
 
 		// 남은 곡수 minus 후 저장
 		selectDAO.saveSongCount(Integer.parseInt(count), dto);
@@ -52,21 +58,50 @@ public class SelectService {
 	// 노래방 페이지로 화면 넘기기
 	public void moveSongPage(String count, String room) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/song/Song.fxml"));
+		FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/song/remotecontrol/remotecontrol.fxml"));
+		
 		try {
 			Parent songForm = loader.load();
+			Parent remoteForm = loader2.load();
 			
-			selectController.setSongController(loader.getController());
-			selectController.getSongController().setSong(songForm);
-			System.out.println(count + " " + room);
-			selectController.getSongController().setCount(count);
-			selectController.getSongController().setRoomNumber(room);
+			// songForm 열기
+			SongController songController = loader.getController();
+			songController.setSong(songForm);
+			songController.setCount(count);
+			songController.setRoomNumber(room);
+
+			// remoteForm 열기
+			RemoteControlController remoteController = loader2.getController();
+			remoteController.setSongController(songController);
+			remoteController.setRemoteForm(remoteForm);
+	
+			// 노래방 종료시 동시에 꺼지게 form 저장
+			songController.setRemoteForm(remoteForm);
+			songController.getSongSvc().setRemoteService(remoteController.getRemoteService());
+			// remoteService의 songController 설정 -> 페이지 위치조정에 필요
+			remoteController.getRemoteService().setSongController(songController);
+			// songController에 remoteController 설정
+			songController.setRemoteController(remoteController);
 			
-			Scene scene = new Scene(songForm);
+			
+			Scene scene1 = new Scene(songForm);
+			Scene scene2 = new Scene(remoteForm);
 		
-			Stage stage = new Stage();
-			stage.setTitle("노래방");
-			stage.setScene(scene);
-			stage.show();
+			Stage stage1 = new Stage();
+			stage1.initStyle(StageStyle.UNDECORATED);
+			stage1.setTitle("노래방");
+			stage1.setScene(scene1);
+			stage1.show();
+			Double X1 = stage1.getX();
+			Double Y1 = stage1.getY();
+
+			Stage stage2 = new Stage();
+			stage2.setX(X1-395);
+			stage2.setY(Y1);
+			stage2.initStyle(StageStyle.UNDECORATED);
+			stage2.setTitle("리모컨");
+			stage2.setScene(scene2);
+			stage2.show();
 			
 		} catch(Exception e) {
 			e.printStackTrace();

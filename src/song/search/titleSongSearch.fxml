@@ -11,8 +11,8 @@
 
 <AnchorPane maxHeight="600.0" maxWidth="400.0" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="song.search.SongSearchController">
 	<children>
-		<TextField fx:id="searchContent" layoutX="20.0" layoutY="26.0" maxHeight="50.0" maxWidth="360.0" onKeyPressed="#searchProc" prefHeight="50.0" prefWidth="360.0" promptText="  제목으로 검색해주세요" style="-fx-background-radius: 30;" AnchorPane.leftAnchor="20.0" />
-		<ImageView fx:id="searchButton" fitHeight="30.0" fitWidth="30.0" layoutX="335.0" layoutY="36.0" onMouseClicked="#searchProc" pickOnBounds="true" preserveRatio="true">
+		<TextField fx:id="searchContent" layoutX="20.0" layoutY="26.0" maxHeight="50.0" maxWidth="360.0" onKeyPressed="#titleSearchProc" prefHeight="50.0" prefWidth="360.0" promptText="  제목으로 검색해주세요" style="-fx-background-radius: 30;" AnchorPane.leftAnchor="20.0" />
+		<ImageView fx:id="searchButton" fitHeight="30.0" fitWidth="30.0" layoutX="335.0" layoutY="36.0" onMouseClicked="#titleSearchProc" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../img/searchIcon.png" />
          </image>
