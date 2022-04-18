@@ -11,7 +11,10 @@
 
 <AnchorPane maxHeight="600.0" maxWidth="400.0" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="song.search.SongSearchController">
 	<children>
-		<TextField fx:id="searchContent" layoutX="20.0" layoutY="26.0" maxHeight="50.0" maxWidth="360.0" onKeyPressed="#singerSearchProc" prefHeight="50.0" prefWidth="360.0" promptText="  가수명으로 검색해주세요" style="-fx-background-radius: 30;" AnchorPane.leftAnchor="20.0" />
+		<TextField fx:id="searchContent" layoutX="20.0" layoutY="26.0" maxHeight="50.0" maxWidth="360.0" onKeyPressed="#singerSearchProc" prefHeight="50.0" prefWidth="360.0" promptText="  가수명으로 검색해주세요" style="-fx-background-radius: 30;" AnchorPane.leftAnchor="20.0">
+         <font>
+            <Font name="NanumBarunGothicOTF Bold" size="15.0" />
+         </font></TextField>
 		<ImageView fx:id="searchButton" fitHeight="30.0" fitWidth="30.0" layoutX="335.0" layoutY="36.0" onMouseClicked="#singerSearchProc" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../img/searchIcon.png" />
@@ -20,12 +23,12 @@
       
       <Button fx:id="reserveButton" layoutX="200.0" layoutY="534.0" mnemonicParsing="false" onMouseClicked="#songReserveProc" prefHeight="50.0" prefWidth="80.0" style="-fx-background-color: #83CE8F; -fx-background-radius: 22;" text="예약" textFill="WHITE">
          <font>
-            <Font name="Hancom Gothic Bold" size="20.0" />
+            <Font name="NanumBarunGothicOTF Bold" size="20.0" />
          </font>
       </Button>
       <Button fx:id="cancelButton" layoutX="293.0" layoutY="534.0" mnemonicParsing="false" onMouseClicked="#pageCancelProc" prefHeight="50.0" prefWidth="80.0" style="-fx-background-color: #FFB84D; -fx-background-radius: 22;" text="취소" textFill="WHITE">
          <font>
-            <Font name="Hancom Gothic Bold" size="20.0" />
+            <Font name="NanumBarunGothicOTF Bold" size="20.0" />
          </font>
       </Button>
       <TableView fx:id="songTable" layoutX="20.0" layoutY="88.0" prefHeight="440.0" prefWidth="360.0">
