@@ -19,9 +19,6 @@ public class RoomChoiceController implements Initializable {
 	private SelectDAO selectDAO;
 	private SelectDTO selectDTO;
 	private Status status;
-	
-//	private SelectController selectController;
-	
 	@FXML private Button room1;
 	@FXML private Button room2;
 	@FXML private Button room3;
@@ -226,7 +223,6 @@ public class RoomChoiceController implements Initializable {
 		if(tmp == 1) {		
 			if(reserConfirm == 1)
 				room1.setDisable(true);
-//			else room1.setDisable(false);
 		}else if(tmp == 2) {
 			if(reserConfirm == 1)
 				room2.setDisable(true);
@@ -237,7 +233,6 @@ public class RoomChoiceController implements Initializable {
 			if(reserConfirm == 1)
 				room4.setDisable(true);
 		}else if(tmp == 5) {
-			System.out.println(reserConfirm);
 			if(reserConfirm == 1)
 				room5.setDisable(true);
 		}else if(tmp == 6) {

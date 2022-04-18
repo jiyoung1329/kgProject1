@@ -21,9 +21,8 @@ public class RegisterService {
 		String confirm = confirmField.getText();
 		String mobile = mobileField.getText();
 		
-		if(pw.equals(confirm)) { //비밀번호와 비밀번화 확인 값이 값을 경우
+		if(pw.equals(confirm)) { //비밀번호와 비밀번호 확인 값이 값을 경우
 			RegDAO regDao = new RegDAO();
-			//�ߺ�Ȯ�� ��ư?
 			LoginDTO login = regDao.selectId(id); //id필드의 값으로 데이터베이스 확인
 			if(login == null) { // id(pk)값이 중복되지 않을경우 RegDTO자료형 데이터 반환
 				RegDTO regDto = new RegDTO();
@@ -44,8 +43,5 @@ public class RegisterService {
 			pwField.requestFocus();
 		}
 	}
-
-
-
 
 }
