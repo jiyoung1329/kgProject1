@@ -11,12 +11,12 @@
    <children>
       <Button fx:id="reserveButton" layoutX="200.0" layoutY="534.0" mnemonicParsing="false" onMouseClicked="#songReserveProc" prefHeight="50.0" prefWidth="80.0" style="-fx-background-color: #83CE8F; -fx-background-radius: 22;" text="예약" textFill="WHITE">
          <font>
-            <Font name="NanumBarunGothic Bold" size="20.0" />
+            <Font name="NanumBarunGothicOTF Bold" size="20.0" />
          </font>
       </Button>
       <Button fx:id="cancelButton" layoutX="293.0" layoutY="534.0" mnemonicParsing="false" onMouseClicked="#pageCancelProc" prefHeight="50.0" prefWidth="80.0" style="-fx-background-color: #FFB84D; -fx-background-radius: 22;" text="취소" textFill="WHITE">
          <font>
-            <Font name="NanumBarunGothic Bold" size="20.0" />
+            <Font name="NanumBarunGothicOTF Bold" size="20.0" />
          </font>
       </Button>
       <TableView fx:id="songTable" layoutX="20.0" layoutY="88.0" prefHeight="440.0" prefWidth="360.0">
@@ -28,7 +28,7 @@
       </TableView>
       <Label layoutX="20.0" layoutY="30.0" text="KG 인기차트">
          <font>
-            <Font name="NanumBarunGothic Bold" size="30.0" />
+            <Font name="NanumBarunGothicOTF Bold" size="30.0" />
          </font>
       </Label>
    </children>
