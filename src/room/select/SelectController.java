@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import login.LoginDAO;
 import login.LoginDTO;
+import room.choice.RoomChoiceDAO;
 import room.choice.Status;
 import song.SongController;
 
@@ -24,19 +25,11 @@ public class SelectController implements Initializable{
 	@FXML private Button cancelButton;
 	@FXML private Button plusButton;
 	@FXML private Button minusButton;
-	
-	//###220414
 	private SelectDTO selectDTO;
-	private SelectDAO selectDAO;
-	
-	//###220414
-	
-	
+	private RoomChoiceDAO roomChoiceDAO;	
 	//DB에 있는 남은곡수 받아오기 위해 호출
 	private Status status;
 	private LoginDTO loginDTO;
-	
-	
 	private SelectService selectService; // 나중에 구현할때 필요
 	private Parent selectForm;	// selectForm띄우는 거는 RoomMenuService에서
 	
@@ -78,11 +71,10 @@ public class SelectController implements Initializable{
 		//DB에 있는 방번호 전달
 		selectDTO = status.getSelectDTO();
 		
-		SelectDAO selectDAO = new SelectDAO();
-		SelectDTO selectRoomNumber = selectDAO.selectNum(selectDTO.getNum());
-		SelectDTO test = selectDAO.selectNum(selectDTO.getNum());
+		roomChoiceDAO = new RoomChoiceDAO();
+		SelectDTO selectRoomNumber = roomChoiceDAO.selectNum(selectDTO.getNum());
 		
-		int room = test.getNum();
+		int room = selectRoomNumber.getNum();
 		String room1 = Integer.toString(room);
 		roomNumber.setText(room1);
 		
@@ -107,28 +99,16 @@ public class SelectController implements Initializable{
 			selectService.saveSongCount(selectForm);
 			SelectDAO imsi = new SelectDAO();
 			imsi.update(status.getSelectDTO());//@@
-			status.setSelectDTO(imsi.selectNum(status.getSelectDTO().getNum()));
+			status.getSelectDTO().setIsReservation(1);
 			//업데이트된 reservation
-			//System.out.println(status.getSelectDTO());
 		} else {
 			CommonService.msg("이미 예약된 방입니다.");
 		}
 		
 	}
-	
-	public void testResv() {
-		String room = roomNumber.getText();
-		if (selectService.checkRoomReserve(room)) {
-			selectService.saveSongCount(selectForm);
-			selectDAO.update(selectDTO);
-		}
-	}
-	
-	
+
 	public void selectCancelProc() throws Exception {
 		CommonService.windowClose(selectForm);
 	}
 	
-
-
 }

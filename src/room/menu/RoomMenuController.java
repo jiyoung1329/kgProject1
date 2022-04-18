@@ -19,26 +19,19 @@ import main.MainController;
 import room.charge.ChargeController;
 import room.choice.Status;
 
-public class RoomMenuController implements Initializable{		//메뉴선택 페이지 controller
+public class RoomMenuController implements Initializable{	//메뉴선택 페이지 controller
 	private RoomMenuService roomMenuService;
-	private Parent roomMenuForm; //꺼지긴 하는데 NullPoint에러 - 해결
+	private Parent roomMenuForm;
 	private Parent chargeForm;
 	private ChargeController chargeController;
 	private RoomMenuController roomMenuController;
 	private Status status;
 	private LoginDTO loginDTO;
-	
-//	@FXML TextField remainSong;
-	
 	@FXML Label customerId;
 	@FXML Label remainSongLabel;
 	
 	public void setLoginDTO(LoginDTO loginDTO) {
 		this.loginDTO = loginDTO;
-	}
-	
-	private void id() {
-	
 	}
 	
 	public void setRoomMenuController(RoomMenuController roomMenuController) {

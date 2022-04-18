@@ -13,33 +13,12 @@ import room.menu.RoomMenuController;
 
 public class LoginDAO {
 	private Connection conn;
-	
-	//-----------
-	
-	private MainController mainController;
 	private CommonDAO commonDao;
 	
-	public void setMainController(MainController mainController) {
-		this.mainController = mainController;
-		
-	}
-	//--------------
-	
-
 	public LoginDAO() { //LoginDAO 인스턴스 생성시 memberDB접속
 		commonDao = new CommonDAO();
 		conn = 	commonDao.makeConnection();
-		String url = "jdbc:oracle:thin:@kgproject_high?TNS_ADMIN=C:/Wallet_kgProject";
-		String user = "admin";
-		String pwd = "KGproject1234!";
-
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			conn = DriverManager.getConnection(url, user, pwd);
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
-	}
 	
 	
 	

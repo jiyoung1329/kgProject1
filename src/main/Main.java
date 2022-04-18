@@ -31,7 +31,7 @@ public class Main extends Application{
 				
 		Scene scene = new Scene(loginForm);
 		
-		primaryStage.setTitle("Karaoke");
+		primaryStage.setTitle("KG노래방");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
