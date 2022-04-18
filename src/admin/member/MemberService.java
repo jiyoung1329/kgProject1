@@ -82,6 +82,8 @@ public class MemberService {
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while (rs.next()) {
+				if (rs.getInt("ISadmin")==1)
+					continue;
 				MemberDTO mdto = new MemberDTO();
 				mdto.setT1id(rs.getString("id"));
 				mdto.setT1phone(rs.getString("mobile"));
