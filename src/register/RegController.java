@@ -35,10 +35,12 @@ public class RegController implements Initializable {
 	}
 
 	public void regCancelProc() {
+		CommonService.sound2();
 		CommonService.windowClose(regForm);
 	}
 
 	public void regProc() {
+		CommonService.sound2();
 		regSvc.regProc(regForm);
 	}
 
@@ -68,7 +70,7 @@ public class RegController implements Initializable {
 		});
 	}
 	public void regSameProc() { //중복체크 메소드
-
+		CommonService.sound2();
 		RegDAO regDao = new RegDAO();
 		LoginDTO login = regDao.selectId(regId.getText());
 			if (login != null) {
