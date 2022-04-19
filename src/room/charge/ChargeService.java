@@ -27,8 +27,7 @@ public class ChargeService {
 		loginDTO = status.getLoginDTO();
 		Label remainSongLabel =  (Label)rmForm.lookup("#remainSongLabel");
 		int tmp = loginDTO.getSongConut();
-		String tmp1 = Integer.toString(tmp);
-		remainSongLabel.setText(tmp1);
+		remainSongLabel.setText(Integer.toString(tmp));
 		
 		Scene scene = new Scene(rmForm);
 		Stage stage = new Stage();
