@@ -249,7 +249,6 @@ public class RemoteControlController implements Initializable {
 				
 				// 노래가 재생중일때
 				MediaPlayer mediaPlayer = songController.getMediaPlayer();
-				System.out.println(mediaPlayer);
 				if (mediaPlayer != null && !mediaPlayer.getStatus().toString().equals("STOPPED")) {
 					CommonService.msg("현재 노래가 재생중입니다.");
 					
@@ -266,10 +265,6 @@ public class RemoteControlController implements Initializable {
 			}
 				
 		}
-		
-		
-		
-		
 			
 	}
 	
@@ -300,6 +295,7 @@ public class RemoteControlController implements Initializable {
 		}
 		
 	}
+	
 	public void primaryReserve() {
 		Label resNumTitle = (Label) songController.getSongForm().lookup("#resNumTitle");
 		Label resNum = (Label) songController.getSongForm().lookup("#resNum");
@@ -317,6 +313,7 @@ public class RemoteControlController implements Initializable {
 			
 		} 
 	}
+	
 	public void cancelReserve() {
 		songController.cancelReserve();
 	}
@@ -324,9 +321,11 @@ public class RemoteControlController implements Initializable {
 	public void popularChart() {
 		remoteService.popularChart();
 	}
+	
 	public void titleSearch() {
 		remoteService.titleSearch();
 	}
+	
 	public void singerSearch() {
 		remoteService.singerSearch();
 	}
@@ -338,21 +337,23 @@ public class RemoteControlController implements Initializable {
 		if (pause.getText().equals("일시정지")) {
 			songController.pause();
 			pause.setText("일시정지해제");
-			Font font = Font.font("Hancom Gothic", FontWeight.BOLD, 16);
+			Font font = Font.font("NanumBarunGothicOTF", FontWeight.BOLD, 16);
 			pause.setFont(font);
 			
 		} else if (pause.getText().equals("일시정지해제")) {
 			songController.pauseCancel();
 			pause.setText("일시정지");
-			Font font = Font.font("Hancom Gothic", FontWeight.BOLD, 18);
+			Font font = Font.font("NanumBarunGothicOTF", FontWeight.BOLD, 20);
 			pause.setFont(font);
 		}
 		
 	}
+	
 	public void madijump() {
 		songController.madiJump();
 		
 	}
+	
 	public void clap() {
 		try {
 			File clapEffect = new File("src/song/remotecontrol/clap.wav");
@@ -369,7 +370,6 @@ public class RemoteControlController implements Initializable {
 		Label resNum = (Label) songController.getSongForm().lookup("#resNum");
 		resNumTitle.setStyle("-fx-background-color: #ffffff; -fx-opacity : 0");
 		resNum.setStyle("-fx-background-color: #ffffff; -fx-opacity : 0");
-		resNum.setText("");
 	}
 
 	public void reserveOpacityOne() {
@@ -379,4 +379,3 @@ public class RemoteControlController implements Initializable {
 		resNum.setStyle("-fx-background-color: #ffffff; -fx-opacity : 1");
 	}
 }
-;

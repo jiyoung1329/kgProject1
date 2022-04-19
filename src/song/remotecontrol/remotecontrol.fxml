@@ -104,7 +104,7 @@
       </Button>
       <Label alignment="CENTER" prefHeight="50.0" prefWidth="390.0" style="-fx-background-color: #d3d3d3;" text="KG 노래방 리모컨" textAlignment="CENTER">
          <font>
-            <Font name="NanumBarunGothic Bold" size="27.0" />
+            <Font name="NanumBarunGothicOTF Bold" size="27.0" />
          </font>
       </Label>
       <Button fx:id="primaryReserve" layoutX="135.0" layoutY="339.0" mnemonicParsing="false" onAction="#primaryReserve" prefHeight="60.0" prefWidth="120.0" style="-fx-border-color: #d3d3d3; -fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #FFB84D;" text="우선예약">
@@ -122,7 +122,7 @@
             <Font name="NanumBarunGothic Bold" size="27.0" />
          </font>
       </Label>
-      <Label fx:id="testLabel" alignment="CENTER" layoutX="1.0" layoutY="2.0" prefHeight="50.0" prefWidth="390.0" style="-fx-background-color: #d3d3d3; -fx-opacity: 0;" textAlignment="CENTER">
+      <Label fx:id="testLabel" alignment="CENTER" prefHeight="50.0" prefWidth="390.0" style="-fx-background-color: #d3d3d3; -fx-opacity: 0;" textAlignment="CENTER">
          <font>
             <Font name="NanumBarunGothicOTF Bold" size="27.0" />
          </font>
