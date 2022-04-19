@@ -337,13 +337,14 @@ public class RemoteControlController implements Initializable {
 		if (pause.getText().equals("일시정지")) {
 			songController.pause();
 			pause.setText("일시정지해제");
-			Font font = Font.font("NanumBarunGothicOTF", FontWeight.BOLD, 16);
+			Font font = Font.loadFont("file:src/font/NanumBarunGothicBold.otf", 16);
+			System.out.println(font);
 			pause.setFont(font);
 			
 		} else if (pause.getText().equals("일시정지해제")) {
 			songController.pauseCancel();
 			pause.setText("일시정지");
-			Font font = Font.font("NanumBarunGothicOTF", FontWeight.BOLD, 20);
+			Font font = Font.loadFont("file:src/font/NanumBarunGothicBold.otf", 20);
 			pause.setFont(font);
 		}
 		
@@ -370,6 +371,9 @@ public class RemoteControlController implements Initializable {
 		Label resNum = (Label) songController.getSongForm().lookup("#resNum");
 		resNumTitle.setStyle("-fx-background-color: #ffffff; -fx-opacity : 0");
 		resNum.setStyle("-fx-background-color: #ffffff; -fx-opacity : 0");
+		Font font = Font.loadFont("file:src/font/NanumBarunGothicBold.otf", 20);
+		resNumTitle.setFont(font);
+		resNum.setFont(font);
 	}
 
 	public void reserveOpacityOne() {
@@ -377,5 +381,8 @@ public class RemoteControlController implements Initializable {
 		Label resNum = (Label) songController.getSongForm().lookup("#resNum");
 		resNumTitle.setStyle("-fx-background-color: #ffffff; -fx-opacity : 1");
 		resNum.setStyle("-fx-background-color: #ffffff; -fx-opacity : 1");
+		Font font = Font.loadFont("file:src/font/NanumBarunGothicBold.otf", 20);
+		resNumTitle.setFont(font);
+		resNum.setFont(font);
 	}
 }
