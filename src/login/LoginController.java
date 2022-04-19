@@ -58,6 +58,7 @@ public class LoginController implements Initializable {
 	}
 	
 	public void loginProc() {
+		CommonService.sound2();
 		LoginDTO loginDto = loginSvc.loginProc(id.getText(), pw.getText());
 		if(loginDto != null) {					// 메인서비스에서 LoginDTO자료형으로 받아옮. null값이 아닐경우
 			if(loginDto.getIsAdmin() == 1){		// 받아온 LoginDTO의 isAdmin 값이 1일경우 String "Admin"반환
@@ -74,6 +75,7 @@ public class LoginController implements Initializable {
 	}
 	
 	public void regProc(){
+		CommonService.sound2();
 		mainController.open("Register"); // 회원가입 버튼 클릭시 String "Register" 받환
 	}
 	

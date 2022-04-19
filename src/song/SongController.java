@@ -327,6 +327,7 @@ public class SongController implements Initializable{
 		} catch(Exception e) {}
 	}
 	
+	// 노래방 화면 미디어 재생 및 띄우기
 	public void songMediaView() {
 		// songDB 곡 재생 count +1
 		songDto = songSvc.songPlay(songNumber.get(0).getSongNum());
@@ -350,7 +351,6 @@ public class SongController implements Initializable{
 				}
 				
 			});
-		
 		}
 		
 		// 남은 곡 수 숫자 업데이트
@@ -365,7 +365,12 @@ public class SongController implements Initializable{
 		
 		insertReserveSong();
 	}
-
+	
+	public void sound1() {
+		// 리모컨 버튼음
+		if (mediaPlayer == null || mediaPlayer.getStatus().toString().equals("STOPPED"))
+			CommonService.sound1();
+	}
 
 
 
