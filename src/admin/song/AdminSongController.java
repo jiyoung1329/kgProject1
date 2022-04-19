@@ -79,6 +79,7 @@ public class AdminSongController implements Initializable {
 		songNumber.setDisable(false);
 		songSinger.clear();
 		reg_button.setDisable(true);
+		fileroot.clear();
 	}
 	public void fileProc() {
 		ssvc.filereg(fileroot);
