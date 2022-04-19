@@ -286,7 +286,7 @@ public class RemoteControlController implements Initializable {
 		Label resNum = (Label) songController.getSongForm().lookup("#resNum");
 		resNumTitle.setStyle("-fx-background-color: #ffffff; -fx-opacity : 0");
 		resNum.setStyle("-fx-background-color: #ffffff; -fx-opacity : 0");
-		System.out.println(resNum);
+
 		// 현재 입력된 곡이 없으면
 		if (resNum.getText().equals("")) {
 			CommonService.msg("현재 입력된 번호가 없습니다.");
@@ -366,7 +366,6 @@ public class RemoteControlController implements Initializable {
 			songController.pause();
 			pause.setText("일시정지해제");
 			Font font = Font.loadFont("file:src/font/NanumBarunGothicBold.otf", 16);
-			System.out.println(font);
 			pause.setFont(font);
 			
 		} else if (pause.getText().equals("일시정지해제")) {
