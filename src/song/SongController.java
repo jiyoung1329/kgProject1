@@ -10,6 +10,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.media.Media;
@@ -291,11 +292,12 @@ public class SongController implements Initializable{
 	
 	public void exit() {
 		songSvc.roomAvailable(room);
-		CommonService.msg("노래방이 종료됩니다.");
+		Button okButton = CommonService.msg2("노래방이 종료됩니다.");
+		okButton.setOnAction(event -> {
+			closeForm();
+			
+		});
 		
-		sleep(1000);
-
-		closeForm();
 	}
 	
 	
@@ -363,7 +365,12 @@ public class SongController implements Initializable{
 		
 		insertReserveSong();
 	}
-
+	
+	public void sound1() {
+		// 리모컨 버튼음
+		if (mediaPlayer == null || mediaPlayer.getStatus().toString().equals("STOPPED"))
+			CommonService.sound1();
+	}
 
 
 
