@@ -2,7 +2,6 @@ package admin.member;
 
 import java.sql.Connection;
 
-
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,29 +25,20 @@ public class MemberService {
 	private ResultSet rs;
 
 	public MemberService() {
-//		String url = "jdbc:oracle:thin:@localhost:1521:xe";
-//		String user = "oracle";
-//		String pw = "oracle";
-		
-		//데이터베이스 호출
-		CommonDAO common=new CommonDAO();
+		// 데이터베이스 호출
+		CommonDAO common = new CommonDAO();
 
-
-		con=common.makeConnection();
+		con = common.makeConnection();
 	}
 
-	public void list_all(TableView list) {
-
-		list.getItems().clear();
-
+	public void listUp(TableView list, String sql) {
 		ObservableList<MemberDTO> datas = FXCollections.observableArrayList();
-		String sql = "SELECT * FROM member";
 		try {
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				MemberDTO mdto = new MemberDTO();
-				if (rs.getInt("ISadmin")==1)
+				if (rs.getInt("ISadmin") == 1)
 					continue;
 				mdto.setT1id(rs.getString("id"));
 				mdto.setT1phone(rs.getString("mobile"));
@@ -57,7 +47,6 @@ public class MemberService {
 
 			}
 			list.getItems().addAll(datas);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -70,46 +59,25 @@ public class MemberService {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public void list_all(TableView list) {
+		list.getItems().clear();
+		String sql = "SELECT * FROM member";
+		listUp(list, sql);
 	}
 
 	public void list_search(TableView list, String text) {
 		String id = text;
 		String sql = "select * from member where id like '%" + id + "%' ";
 		list.getItems().clear();
-		ObservableList<MemberDTO> datas = FXCollections.observableArrayList();
-		try {
-
-			ps = con.prepareStatement(sql);
-			rs = ps.executeQuery();
-			while (rs.next()) {
-				if (rs.getInt("ISadmin")==1)
-					continue;
-				MemberDTO mdto = new MemberDTO();
-				mdto.setT1id(rs.getString("id"));
-				mdto.setT1phone(rs.getString("mobile"));
-				mdto.setT1song(rs.getInt("Songcount"));
-				datas.add(mdto);
-				
-			}
-			list.getItems().addAll(datas);
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				if (ps != null)
-					ps.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+		listUp(list, sql);
 	}
 
 	public void right_move(TableView list1, TableView list2) {
 		ObservableList<MemberDTO> datas = FXCollections.observableArrayList();
 		MemberDTO mdto = (MemberDTO) list1.getSelectionModel().getSelectedItem();
-		
+
 		if (mdto != null) {
 			datas.add(mdto);
 			list1.getItems().remove(mdto);
@@ -130,11 +98,10 @@ public class MemberService {
 
 	public void delete(TableView list2, TableColumn t2id) {
 		ArrayList<String> array = new ArrayList(list2.getItems());
-			for (int i =0; i <  array.size() ;i++) {
+		for (int i = 0; i < array.size(); i++) {
 			MemberDTO mdto = new MemberDTO();
-			mdto = (MemberDTO) list2.getItems().get(0);
+			mdto = (MemberDTO) list2.getItems().get(i);
 			String sql = "delete FROM member where id ='" + mdto.getT2id() + "'";
-			list2.getItems().remove(0);
 			try {
 				ps = con.prepareStatement(sql);
 				ps.executeUpdate();
