@@ -56,7 +56,7 @@ public class AdminSongService extends AdminSongController {
 	}
 
 	public void regProc(TextField number, TextField name, TextField singer, TextField fileroot) {
-		String sql = "insert into song(num,title,singer) values (?,?,?)";
+		String sql = "insert into song(num,title,singer,Link) values (?,?,?,?)";
 		try {
 			
 			
@@ -64,19 +64,21 @@ public class AdminSongService extends AdminSongController {
 			String origin = fileroot.getText();
 			String copydir = "./src/media";
 			String copyfile = copydir + "/" + number.getText() + ".mp4";
-
+			String link = "/media/"+number.getText()+".mp4";
 			File originfile = new File(origin);
 			File copyfiles = new File(copyfile);
 			File dirCopyFile = new File(copydir);
-
+			double bytes = originfile.length();
+			double copys;
 			//디렉터리가 없으면 만들어주는 파트
-			if (!dirCopyFile.exists()) {
+			if (!dirCopyFile.exists()) { 
 				dirCopyFile.mkdirs();
 			}
 
 			try {
 				FileInputStream fis = new FileInputStream(originfile);
 				FileOutputStream fos = new FileOutputStream(copyfiles);
+				
 				int filebyte = 0;
 				try {
 					while ((filebyte = fis.read()) != -1) {
@@ -89,6 +91,7 @@ public class AdminSongService extends AdminSongController {
 					ps.setString(1, number.getText());
 					ps.setString(2, name.getText());
 					ps.setString(3, singer.getText());
+					ps.setString(4, link);
 					rs = ps.executeQuery();
 					CommonService.msg("노래가 등록되었습니다.");
 					
