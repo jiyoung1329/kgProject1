@@ -176,6 +176,10 @@ public class RemoteControlController implements Initializable {
 	}
 	
 	public void inputNum(String num) {
+		
+		// 리모컨 버튼음
+		sound1();
+		
 		Label resNumTitle = (Label) songController.getSongForm().lookup("#resNumTitle");
 		Label resNum = (Label) songController.getSongForm().lookup("#resNum");
 		String songNum;
@@ -209,6 +213,9 @@ public class RemoteControlController implements Initializable {
 	
 	
 	public void cancel() {
+		// 리모컨 버튼음
+		sound1();
+		
 		Label resNumTitle = (Label) songController.getSongForm().lookup("#resNumTitle");
 		Label resNum = (Label) songController.getSongForm().lookup("#resNum");
 		if (resNum.getText().equals("")) {
@@ -226,6 +233,9 @@ public class RemoteControlController implements Initializable {
 		
 	}
 	public void start() {
+		// 리모컨 버튼음
+		sound1();
+		
 		Label resNumTitle = (Label) songController.getSongForm().lookup("#resNumTitle");
 		Label resNum = (Label) songController.getSongForm().lookup("#resNum");
 		resNumTitle.setStyle("-fx-background-color: #ffffff; -fx-opacity : 0");
@@ -269,6 +279,9 @@ public class RemoteControlController implements Initializable {
 	}
 	
 	public void reserve() {
+		// 리모컨 버튼음
+		sound1();
+		
 		Label resNumTitle = (Label) songController.getSongForm().lookup("#resNumTitle");
 		Label resNum = (Label) songController.getSongForm().lookup("#resNum");
 		resNumTitle.setStyle("-fx-background-color: #ffffff; -fx-opacity : 0");
@@ -297,6 +310,9 @@ public class RemoteControlController implements Initializable {
 	}
 	
 	public void primaryReserve() {
+		// 리모컨 버튼음
+		sound1();
+		
 		Label resNumTitle = (Label) songController.getSongForm().lookup("#resNumTitle");
 		Label resNum = (Label) songController.getSongForm().lookup("#resNum");
 
@@ -315,18 +331,30 @@ public class RemoteControlController implements Initializable {
 	}
 	
 	public void cancelReserve() {
+		// 리모컨 버튼음
+		sound1();
+		
 		songController.cancelReserve();
 	}
 	
 	public void popularChart() {
+		// 리모컨 버튼음
+		sound1();
+		
 		remoteService.popularChart();
 	}
 	
 	public void titleSearch() {
+		// 리모컨 버튼음
+		sound1();
+		
 		remoteService.titleSearch();
 	}
 	
 	public void singerSearch() {
+		// 리모컨 버튼음
+		sound1();
+		
 		remoteService.singerSearch();
 	}
 	
@@ -364,6 +392,12 @@ public class RemoteControlController implements Initializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void sound1() {
+		// 리모컨 버튼음
+		if (songController.getMediaPlayer() == null || songController.getMediaPlayer().getStatus().toString().equals("STOPPED"))
+			CommonService.sound1();
 	}
 	
 	public void reserveOpacityZero() {

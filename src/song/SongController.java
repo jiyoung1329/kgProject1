@@ -365,7 +365,12 @@ public class SongController implements Initializable{
 		
 		insertReserveSong();
 	}
-
+	
+	public void sound1() {
+		// 리모컨 버튼음
+		if (mediaPlayer == null || mediaPlayer.getStatus().toString().equals("STOPPED"))
+			CommonService.sound1();
+	}
 
 
 
