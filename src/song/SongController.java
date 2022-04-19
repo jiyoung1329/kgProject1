@@ -10,6 +10,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.media.Media;
@@ -66,7 +67,6 @@ public class SongController implements Initializable{
 		this.songSearchController = songSearchController;
 	}
 	
-	
 	public RemoteControlController getRemoteController() {
 		return remoteController;
 	}
@@ -103,7 +103,6 @@ public class SongController implements Initializable{
 		this.searchForm = searchForm;
 	}
 	
-	
 	public ArrayList<SongDTO> getSongNumber() {
 		return songNumber;
 	}
@@ -138,12 +137,12 @@ public class SongController implements Initializable{
 		this.mediaPlayer = mediaPlayer;
 	}
 
-	// 취소 버튼 눌렀을떄
+	// 취소 버튼 눌렀을 때
 	public void setEndOfMedia(boolean endOfMedia) {
 		this.endOfMedia = endOfMedia;
 	}
 	
-	// 미디어가 끝났을때
+	// 미디어가 끝났을 때 
 	public void setEndOfMedia2(boolean endOfMedia) {
 		this.endOfMedia = endOfMedia;
 		mediaPlayer.stop();
@@ -172,38 +171,8 @@ public class SongController implements Initializable{
 		
 	}
 	
-	//노래 검색창 오픈
-	public void songSearch() {
-		songSvc.songSearchOpen();
-	}
-	
-	//예약된 노래번호 띄우기
-	public void reserveSong(SongDTO songDTO) {
-		// 예약곡은 6개를 초과할 수 없음 
-		if(songNumber.size() >= 6) {
-			CommonService.msg("곡을 더 이상 추가할 수 없습니다.");
-		}else {
-			songNumber.add(songDTO); // songDTO를 가져와
-			num1.setText(songNumber.get(0).getSongNum()); // DTO 안에 곡 번호를 가져와서 예약곡 리스트에 추가
-			insertReserveSong(); // 이전에 추가된 곡을 그 뒤로 띄움
-		}
-		
-	}
-	
-	// 우선 예약 기능
-	public void primaryReserveSong(SongDTO songDTO) {
-		if(songNumber.size() >= 6) {
-			CommonService.msg("곡을 더 이상 추가할 수 없습니다.");
-		}else {
-			songNumber.add(0, songDTO); // 기존에 0번에 있던 데이터는 1번으로 자동으로 밀려남 
-			
-			insertReserveSong(); // 예약곡 리스트 띄우기
-		}
-	}
-	
 	// 시작 버튼 누를 때
 	public void songStartProc() {
-		
 		if(endOfMedia) {
 			
 			if(songNumber.size() == 0) {
@@ -213,9 +182,7 @@ public class SongController implements Initializable{
 				//MediaView재생
 				songMediaView();
 			}
-			
 		} 
-		
 	}
 	
 	// 취소 버튼 누를 때 
@@ -234,7 +201,6 @@ public class SongController implements Initializable{
 			if(count <= 0) {
 				exit();
 			}		
-			
 		}
 	}
 	
@@ -242,62 +208,40 @@ public class SongController implements Initializable{
 	public void songOutProc() {
 		exit();
 	}
-	
-	
-	// 노래 일시정지
-	public void pause() {
-		if (mediaPlayer != null) {
-			mediaPlayer.pause();
-		}
-	}
-	
-	// 노래 일시정지 해제
-	public void pauseCancel() {
-		if (mediaPlayer != null) {
-			mediaPlayer.play();
-		}
-	}
-	
-	// 노래 마디점프
-	public void madiJump() {
-		if (mediaPlayer != null) {
-			System.out.println(mediaPlayer.getStatus().toString());
-			if (mediaPlayer.getStatus().toString().equals("PLAYING")) {
-				Duration now = mediaPlayer.getCurrentTime();
-				Duration later = new Duration(3000);
-				mediaPlayer.seek(now.add(later));
-				
-			}
+
+	//예약된 노래번호 띄우기
+	public void reserveSong(SongDTO songDTO) {
+		// 예약곡은 6개를 초과할 수 없음 
+		if(songNumber.size() >= 6) {
+			CommonService.msg("곡을 더 이상 추가할 수 없습니다.");
+		}else {
+			songNumber.add(songDTO); // songDTO를 가져와
+			num1.setText(songNumber.get(0).getSongNum()); // DTO 안에 곡 번호를 가져와서 예약곡 리스트에 추가
+			insertReserveSong(); // 이전에 추가된 곡을 그 뒤로 띄움
 		}
 		
 	}
 	
-	// 노래 예약 취소
-	public void cancelReserve() {
+	// 우선 예약 기능
+	public void primaryReserveSong(SongDTO songDTO) {
 		
-		if (songNumber.size() > 0) {
-			// 첫 번째 예약곡 지우기
-			songNumber.remove(0);
+		if(songNumber.size() >= 6) {
+			CommonService.msg("곡을 더 이상 추가할 수 없습니다.");
+		}else {
+			songNumber.add(0, songDTO); // 기존에 0번에 있던 데이터는 1번으로 자동으로 밀려남 
 			
-			// 예약곡 리스트 업데이트(기존 데이터 지우고 새로운 데이터 입력)
-			num1.setText("");num2.setText("");num3.setText("");
-			num4.setText("");num5.setText("");num6.setText("");
-			
-			insertReserveSong();
-			
-		} else {
-			CommonService.msg("예약된 곡이 없습니다.");
+			insertReserveSong(); // 예약곡 리스트 띄우기
 		}
-		
 	}
 	
 	public void exit() {
 		songSvc.roomAvailable(room);
-		CommonService.msg("노래방이 종료됩니다.");
+		Button okButton = CommonService.msg2("노래방이 종료됩니다.");
+		okButton.setOnAction(event -> {
+			closeForm();
+			
+		});
 		
-		sleep(1000);
-
-		closeForm();
 	}
 	
 	
@@ -327,6 +271,7 @@ public class SongController implements Initializable{
 		} catch(Exception e) {}
 	}
 	
+	// 노래방 화면 미디어 재생 및 띄우기
 	public void songMediaView() {
 		// songDB 곡 재생 count +1
 		songDto = songSvc.songPlay(songNumber.get(0).getSongNum());
@@ -350,7 +295,6 @@ public class SongController implements Initializable{
 				}
 				
 			});
-		
 		}
 		
 		// 남은 곡 수 숫자 업데이트
@@ -365,7 +309,12 @@ public class SongController implements Initializable{
 		
 		insertReserveSong();
 	}
-
+	
+	public void sound1() {
+		// 리모컨 버튼음
+		if (mediaPlayer == null || mediaPlayer.getStatus().toString().equals("STOPPED"))
+			CommonService.sound1();
+	}
 
 
 

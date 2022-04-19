@@ -57,15 +57,12 @@ public class RoomMenuController implements Initializable{	//메뉴선택 페이�
 		
 		loginDTO = status.getLoginDTO();
 		
+		// id 설정
 		customerId.setText(loginDTO.getId());
 		
-		
-		LoginDAO loginDao = new LoginDAO();
-		LoginDTO login= loginDao.selectId(loginDTO.getId());
-		
-		int tmp = login.getSongConut();
-		String tmp1 = Integer.toString(tmp);
-		remainSongLabel.setText(tmp1);
+		// songCount 설정
+		int tmp = loginDTO.getSongConut();
+		remainSongLabel.setText(Integer.toString(tmp));
 	}
 	
 	public void chargeProc() throws Exception{

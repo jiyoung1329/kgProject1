@@ -61,22 +61,14 @@ public class SelectController implements Initializable{
 		//DB에 있는 남은곡수 전달
 		loginDTO = status.getLoginDTO();
 		
-		LoginDAO loginDao = new LoginDAO();
-		LoginDTO login= loginDao.selectId(loginDTO.getId());
-		
-		int tmp = login.getSongConut();
-		String tmp1 = Integer.toString(tmp);	//문자열로 변환
-		remainCount.setText(tmp1);
+		int tmp = loginDTO.getSongConut();
+		remainCount.setText(Integer.toString(tmp));
 		
 		//DB에 있는 방번호 전달
 		selectDTO = status.getSelectDTO();
 		
-		roomChoiceDAO = new RoomChoiceDAO();
-		SelectDTO selectRoomNumber = roomChoiceDAO.selectNum(selectDTO.getNum());
-		
-		int room = selectRoomNumber.getNum();
-		String room1 = Integer.toString(room);
-		roomNumber.setText(room1);
+		int room = selectDTO.getNum();
+		roomNumber.setText(Integer.toString(room));
 		
 	}
 	

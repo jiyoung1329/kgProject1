@@ -176,6 +176,10 @@ public class RemoteControlController implements Initializable {
 	}
 	
 	public void inputNum(String num) {
+		
+		// 리모컨 버튼음
+		sound1();
+		
 		Label resNumTitle = (Label) songController.getSongForm().lookup("#resNumTitle");
 		Label resNum = (Label) songController.getSongForm().lookup("#resNum");
 		String songNum;
@@ -209,6 +213,9 @@ public class RemoteControlController implements Initializable {
 	
 	
 	public void cancel() {
+		// 리모컨 버튼음
+		sound1();
+		
 		Label resNumTitle = (Label) songController.getSongForm().lookup("#resNumTitle");
 		Label resNum = (Label) songController.getSongForm().lookup("#resNum");
 		if (resNum.getText().equals("")) {
@@ -226,6 +233,9 @@ public class RemoteControlController implements Initializable {
 		
 	}
 	public void start() {
+		// 리모컨 버튼음
+		sound1();
+		
 		Label resNumTitle = (Label) songController.getSongForm().lookup("#resNumTitle");
 		Label resNum = (Label) songController.getSongForm().lookup("#resNum");
 		resNumTitle.setStyle("-fx-background-color: #ffffff; -fx-opacity : 0");
@@ -249,7 +259,6 @@ public class RemoteControlController implements Initializable {
 				
 				// 노래가 재생중일때
 				MediaPlayer mediaPlayer = songController.getMediaPlayer();
-				System.out.println(mediaPlayer);
 				if (mediaPlayer != null && !mediaPlayer.getStatus().toString().equals("STOPPED")) {
 					CommonService.msg("현재 노래가 재생중입니다.");
 					
@@ -266,14 +275,13 @@ public class RemoteControlController implements Initializable {
 			}
 				
 		}
-		
-		
-		
-		
 			
 	}
 	
 	public void reserve() {
+		// 리모컨 버튼음
+		sound1();
+		
 		Label resNumTitle = (Label) songController.getSongForm().lookup("#resNumTitle");
 		Label resNum = (Label) songController.getSongForm().lookup("#resNum");
 		resNumTitle.setStyle("-fx-background-color: #ffffff; -fx-opacity : 0");
@@ -300,7 +308,11 @@ public class RemoteControlController implements Initializable {
 		}
 		
 	}
+	
 	public void primaryReserve() {
+		// 리모컨 버튼음
+		sound1();
+		
 		Label resNumTitle = (Label) songController.getSongForm().lookup("#resNumTitle");
 		Label resNum = (Label) songController.getSongForm().lookup("#resNum");
 
@@ -317,17 +329,32 @@ public class RemoteControlController implements Initializable {
 			
 		} 
 	}
+	
 	public void cancelReserve() {
+		// 리모컨 버튼음
+		sound1();
+		
 		songController.cancelReserve();
 	}
 	
 	public void popularChart() {
+		// 리모컨 버튼음
+		sound1();
+		
 		remoteService.popularChart();
 	}
+	
 	public void titleSearch() {
+		// 리모컨 버튼음
+		sound1();
+		
 		remoteService.titleSearch();
 	}
+	
 	public void singerSearch() {
+		// 리모컨 버튼음
+		sound1();
+		
 		remoteService.singerSearch();
 	}
 	
@@ -338,21 +365,24 @@ public class RemoteControlController implements Initializable {
 		if (pause.getText().equals("일시정지")) {
 			songController.pause();
 			pause.setText("일시정지해제");
-			Font font = Font.font("Hancom Gothic", FontWeight.BOLD, 16);
+			Font font = Font.loadFont("file:src/font/NanumBarunGothicBold.otf", 16);
+			System.out.println(font);
 			pause.setFont(font);
 			
 		} else if (pause.getText().equals("일시정지해제")) {
 			songController.pauseCancel();
 			pause.setText("일시정지");
-			Font font = Font.font("Hancom Gothic", FontWeight.BOLD, 18);
+			Font font = Font.loadFont("file:src/font/NanumBarunGothicBold.otf", 20);
 			pause.setFont(font);
 		}
 		
 	}
+	
 	public void madijump() {
 		songController.madiJump();
 		
 	}
+	
 	public void clap() {
 		try {
 			File clapEffect = new File("src/song/remotecontrol/clap.wav");
@@ -364,12 +394,20 @@ public class RemoteControlController implements Initializable {
 		}
 	}
 	
+	public void sound1() {
+		// 리모컨 버튼음
+		if (songController.getMediaPlayer() == null || songController.getMediaPlayer().getStatus().toString().equals("STOPPED"))
+			CommonService.sound1();
+	}
+	
 	public void reserveOpacityZero() {
 		Label resNumTitle = (Label) songController.getSongForm().lookup("#resNumTitle");
 		Label resNum = (Label) songController.getSongForm().lookup("#resNum");
 		resNumTitle.setStyle("-fx-background-color: #ffffff; -fx-opacity : 0");
 		resNum.setStyle("-fx-background-color: #ffffff; -fx-opacity : 0");
-		resNum.setText("");
+		Font font = Font.loadFont("file:src/font/NanumBarunGothicBold.otf", 20);
+		resNumTitle.setFont(font);
+		resNum.setFont(font);
 	}
 
 	public void reserveOpacityOne() {
@@ -377,6 +415,8 @@ public class RemoteControlController implements Initializable {
 		Label resNum = (Label) songController.getSongForm().lookup("#resNum");
 		resNumTitle.setStyle("-fx-background-color: #ffffff; -fx-opacity : 1");
 		resNum.setStyle("-fx-background-color: #ffffff; -fx-opacity : 1");
+		Font font = Font.loadFont("file:src/font/NanumBarunGothicBold.otf", 20);
+		resNumTitle.setFont(font);
+		resNum.setFont(font);
 	}
 }
-;

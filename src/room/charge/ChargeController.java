@@ -61,7 +61,8 @@ public class ChargeController implements Initializable{
 		sum = selectReaminTest + remainSong;
 		chargeDAO.remainSongUpdate(sum, loginDTO.getId());
 	
-		status.setLoginDTO(loginDAO.selectId(loginDTO.getId()));
+		// status의 loginDTO에 songCount 새로 설정
+		status.getLoginDTO().setSongConut(sum);
 		
 	}
 	
