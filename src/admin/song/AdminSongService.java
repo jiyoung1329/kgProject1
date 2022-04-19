@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import common.CommonDAO;
+import common.CommonService;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -34,22 +35,16 @@ public class AdminSongService extends AdminSongController {
 		con=common.makeConnection();
 	}
 
-	public void check(TextField songNumber, Button reg_button, int Number) {
+	public void check(TextField songNumber, Button reg_button, String number) {
 		String sql = "Select * from song where num=?";
 		try {
 			ps = con.prepareStatement(sql);
-			ps.setInt(1, Number);
+			ps.setString(1, number);
 			rs = ps.executeQuery();
 			if (rs.next()) {
-				alert = new Alert(AlertType.ERROR);
-				alert.setHeaderText("등록 불가");
-				alert.setContentText("노래번호가 중복됩니다");
-				alert.show();
+				CommonService.msg("노래번호가 중복됩니다");
 			} else {
-				alert = new Alert(AlertType.INFORMATION);
-				alert.setHeaderText("등록 가능");
-				alert.setContentText("등록 가능한 번호입니다.");
-				alert.show();
+				CommonService.msg("등록 가능한 번호입니다.");
 				songNumber.setDisable(true);
 				reg_button.setDisable(false);
 			}
@@ -62,9 +57,6 @@ public class AdminSongService extends AdminSongController {
 
 	public void regProc(TextField number, TextField name, TextField singer, TextField fileroot) {
 		String sql = "insert into song(num,title,singer) values (?,?,?)";
-		String reg_str = number.getText();
-		int reg_num;
-		reg_num = Integer.parseInt(reg_str);
 		try {
 			
 			
@@ -94,27 +86,18 @@ public class AdminSongService extends AdminSongController {
 					fos.close();
 					//파일복사 성공시 노래등록
 					ps = con.prepareStatement(sql);
-					ps.setInt(1, reg_num);
+					ps.setString(1, number.getText());
 					ps.setString(2, name.getText());
 					ps.setString(3, singer.getText());
 					rs = ps.executeQuery();
-					alert = new Alert(AlertType.INFORMATION);
-					alert.setHeaderText("등록 완료");
-					alert.setContentText("노래가 등록되었습니다.");
-					alert.show();
+					CommonService.msg("노래가 등록되었습니다.");
 					
 				} catch (IOException e) {
-					alert = new Alert(AlertType.ERROR);
-					alert.setHeaderText("등록 실패");
-					alert.setContentText("노래등록이 실패했습니다");
-					alert.show();
+					CommonService.msg("노래등록이 실패했습니다");
 					
 				}
 			} catch (FileNotFoundException e) {
-				alert = new Alert(AlertType.ERROR);
-				alert.setHeaderText("등록 실패");
-				alert.setContentText("노래등록이 실패했습니다");
-				alert.show();
+				CommonService.msg("노래등록이 실패했습니다");
 				
 			}
 
@@ -133,7 +116,7 @@ public class AdminSongService extends AdminSongController {
 
 	public void filereg(TextField fileroot) {
 		FileChooser filechoo = new FileChooser();
-		filechoo.getExtensionFilters().addAll(new ExtensionFilter("동영상 : Video Files", "*.mp4", "*.mpv", "*.mkv"));
+		filechoo.getExtensionFilters().addAll(new ExtensionFilter("동영상 : Video Files", "*.mp4", "*.webp", "*.mkv"));
 		File file = filechoo.showOpenDialog(null);
 		String files = file.toString();
 		fileroot.setText(files);

@@ -22,7 +22,7 @@
       <TextField fx:id="songName" layoutX="317.0" layoutY="236.0" prefHeight="50.0" prefWidth="450.0" style="-fx-background-radius: 50;" />
       <TextField fx:id="songSinger" layoutX="317.0" layoutY="329.0" prefHeight="50.0" prefWidth="450.0" style="-fx-background-radius: 50;" />
       <Button fx:id="Xbutton" layoutX="40.0" layoutY="482.0" mnemonicParsing="false" onAction="#close" prefHeight="86.0" prefWidth="73.0" style="-fx-background-color: transparent;" textFill="WHITE" />
-      <Button fx:id="file" layoutX="794.0" layoutY="414.0" mnemonicParsing="false" onAction="#filePrco" prefHeight="50.0" prefWidth="95.0" style="-fx-background-color: FFB84D; -fx-background-radius: 30;" text="찾아보기" textFill="#fffcfc">
+      <Button fx:id="file" layoutX="794.0" layoutY="414.0" mnemonicParsing="false" onAction="#fileProc" prefHeight="50.0" prefWidth="95.0" style="-fx-background-color: FFB84D; -fx-background-radius: 30;" text="찾아보기" textFill="#fffcfc">
          <font>
             <Font name="NanumBarunGothicOTF Bold" size="16.0" />
          </font>

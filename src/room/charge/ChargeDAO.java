@@ -23,7 +23,6 @@ public class ChargeDAO {
 	public void remainSongUpdate(int a, String b) {
 		String query = "UPDATE member SET songCount = ? WHERE id =?";
 		try {
-//			System.out.println("ChargeDAO : " + conn);
 			ps = conn.prepareStatement(query);
 			ps.setInt(1, a);
 			ps.setString(2, b);
@@ -38,7 +37,5 @@ public class ChargeDAO {
 			}
 		}
 	}
-	
-	
-
+		
 }

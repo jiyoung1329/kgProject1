@@ -21,37 +21,25 @@ import room.menu.RoomMenuController;
 
 public class ChargeController implements Initializable{
 	
-	@FXML
-	private RadioButton price1;
-	@FXML
-	private RadioButton price2;
-	@FXML
-	private RadioButton price3;
-	@FXML
-	private RadioButton price4;
-	@FXML
-	private Button chargePayButton;
-	@FXML
-	private Button chargeCancelButton;
-	@FXML
-	private ToggleGroup priceGroup;
-	
+	@FXML private RadioButton price1;
+	@FXML private RadioButton price2;
+	@FXML private RadioButton price3;
+	@FXML private RadioButton price4;
+	@FXML private Button chargePayButton;
+	@FXML private Button chargeCancelButton;
+	@FXML private ToggleGroup priceGroup;
+	@FXML private TextField roomMenuId;
+	@FXML private TextField remainSong;
 	private ChargeService chargeSvc;
 	private Parent chargeForm;
-	
-	//=========================
-	@FXML TextField roomMenuId;
-	@FXML TextField remainSong;
 	private Status status;
 	private LoginDTO loginDTO;
-//	private LoginDAO loginDAO;
-	LoginDAO loginDAO = new LoginDAO();
+	private LoginDAO loginDAO = new LoginDAO();
 	private RoomMenuController roomMenuController;
 	
 	public void setRoomMenuController(RoomMenuController roomMenuController) {
 		this.roomMenuController = roomMenuController;
 	}
-	
 	
 	public void remainSongInfo() {	//선택한 가격에 따른 정보전달
 		ChargeDAO chargeDAO = new ChargeDAO();
@@ -62,55 +50,36 @@ public class ChargeController implements Initializable{
 		int sum = 0;		
 		
 		if(price1.isSelected()) {
-			selectReaminTest=4;
-			sum = selectReaminTest + remainSong;
-			chargeDAO.remainSongUpdate(sum, loginDTO.getId());
-			
-			status.setLoginDTO(loginDAO.selectId(loginDTO.getId()));
-					
+			selectReaminTest = 4;
 		}else if(price2.isSelected()) {
 			selectReaminTest=22;
-			sum = selectReaminTest + remainSong;
-			chargeDAO.remainSongUpdate(sum, loginDTO.getId());
-		
-			status.setLoginDTO(loginDAO.selectId(loginDTO.getId()));
 		}else if(price3.isSelected()) {
 			selectReaminTest=45;
-			sum = selectReaminTest + remainSong;
-			chargeDAO.remainSongUpdate(sum, loginDTO.getId());
-		
-			status.setLoginDTO(loginDAO.selectId(loginDTO.getId()));
-		}else
+		}else {
 			selectReaminTest=250;
-			sum = selectReaminTest + remainSong;
-			chargeDAO.remainSongUpdate(sum, loginDTO.getId());
+		}
+		sum = selectReaminTest + remainSong;
+		chargeDAO.remainSongUpdate(sum, loginDTO.getId());
 	
-			status.setLoginDTO(loginDAO.selectId(loginDTO.getId()));
+		// status의 loginDTO에 songCount 새로 설정
+		status.getLoginDTO().setSongConut(sum);
 		
 	}
-	
-	//=========================
-	
-	
 	
 	public void setChargeForm(Parent chargeForm) {
 		this.chargeForm = chargeForm;
 	}
 	
 	public void chargeCancelProc() throws Exception {
-		chargeSvc.chargeCancelProc();//##0414
-		
+		chargeSvc.chargeCancelProc();
 		CommonService.windowClose(chargeForm);
 		
 	}
 	
 	public void chargePayProc() throws Exception{
-		remainSongInfo(); //#####
+		remainSongInfo();
 		chargeSvc.chargePayProc();
 		CommonService.windowClose(chargeForm);
-		
-		
-		
 	}
 
 	@Override

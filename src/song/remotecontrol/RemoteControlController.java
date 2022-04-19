@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import song.SongController;
@@ -177,16 +178,33 @@ public class RemoteControlController implements Initializable {
 	public void inputNum(String num) {
 		Label resNumTitle = (Label) songController.getSongForm().lookup("#resNumTitle");
 		Label resNum = (Label) songController.getSongForm().lookup("#resNum");
-		String songNum = resNum.getText() + num;
-		searchDTO = searchDAO.findSong(songNum);
-
-		reserveOpacityOne();
-		
-		if (searchDTO != null ) {
-			resNum.setText(songNum + " - " + searchDTO.getSongTitle() + " (" + searchDTO.getSongSinger() + ")");
+		String songNum;
+		// 기존의 검색 결과가 있을때
+		if (searchDTO != null) {
+			songNum = searchDTO.getSongNum() + num;
+			// 입력한 번호는 6자리를 넘지 않아야함
+			if (songNum.length() <= 6) {
+				resNum.setText(songNum);
+			}
+			searchDTO = null;
+			
 		} else {
-			resNum.setText(songNum);
+			songNum = resNum.getText() + num;
+			searchDTO = searchDAO.findSong(songNum);
+			
+			reserveOpacityOne();
+			
+			// 새로 검색한 노래가 있을떄
+			if (searchDTO != null ) {
+				resNum.setText(songNum + " - " + searchDTO.getSongTitle() + " (" + searchDTO.getSongSinger() + ")");
+			} else {
+				if (songNum.length() <= 6) {
+					resNum.setText(songNum);
+				}
+			}
+			
 		}
+		
 	}
 	
 	
@@ -200,6 +218,10 @@ public class RemoteControlController implements Initializable {
 			resNum.setText("");
 			
 		}
+		// 기존의 번호검색결과가 있을때 null값으로 초기화
+		if (searchDTO != null) {
+			searchDTO = null;
+		}
 		
 		
 	}
@@ -208,27 +230,41 @@ public class RemoteControlController implements Initializable {
 		Label resNum = (Label) songController.getSongForm().lookup("#resNum");
 		resNumTitle.setStyle("-fx-background-color: #ffffff; -fx-opacity : 0");
 		resNum.setStyle("-fx-background-color: #ffffff; -fx-opacity : 0");
-		resNum.setText("");
 		
-		if (searchDTO != null) {
-			SongDTO songdto = new SongDTO();
-			songdto.setSongNum(searchDTO.getSongNum());
-			songdto.setSongCount(searchDTO.getSongCount());
-			songdto.setSongLink(searchDTO.getSongLink());
-			
-			// 노래가 재생중이 아니면
-			if (songController.getMediaPlayer() != null) {
-				CommonService.msg("현재 노래가 재생중입니다.");
+		// 현재 입력된 곡이 없으면
+		if (resNum.getText().equals("")) {
+			if (songController.getSongNumber().size() == 0) {
+				CommonService.msg("현재 입력된 번호가 없습니다.");
 			} else {
-				songController.primaryReserveSong(songdto);
 				songController.songStartProc();
 			}
-			searchDTO = null;
-			
 		} else {
-			CommonService.msg("해당 번호의 노래가 없습니다.");
+			resNum.setText("");
+			// 노래 번호 검색 결과가 있을때
+			if (searchDTO != null) {
+				SongDTO songdto = new SongDTO();
+				songdto.setSongNum(searchDTO.getSongNum());
+				songdto.setSongCount(searchDTO.getSongCount());
+				songdto.setSongLink(searchDTO.getSongLink());
+				
+				// 노래가 재생중일때
+				MediaPlayer mediaPlayer = songController.getMediaPlayer();
+				if (mediaPlayer != null && !mediaPlayer.getStatus().toString().equals("STOPPED")) {
+					CommonService.msg("현재 노래가 재생중입니다.");
+					
+					
+				// 노래가 재생중이 아닐떄
+				} else {
+					songController.primaryReserveSong(songdto);
+					songController.songStartProc();
+				}
+				searchDTO = null;
+				
+			} else {
+				CommonService.msg("해당 번호의 노래가 없습니다.");
+			}
+				
 		}
-		
 			
 	}
 	
@@ -237,21 +273,29 @@ public class RemoteControlController implements Initializable {
 		Label resNum = (Label) songController.getSongForm().lookup("#resNum");
 		resNumTitle.setStyle("-fx-background-color: #ffffff; -fx-opacity : 0");
 		resNum.setStyle("-fx-background-color: #ffffff; -fx-opacity : 0");
-		resNum.setText("");
-		if (searchDTO != null) {
-			SongDTO songdto = new SongDTO();
-			songdto.setSongNum(searchDTO.getSongNum());
-			songdto.setSongCount(searchDTO.getSongCount());
-			songdto.setSongLink(searchDTO.getSongLink());
-			songController.reserveSong(songdto);
-			searchDTO = null;
-			
+		System.out.println(resNum);
+		// 현재 입력된 곡이 없으면
+		if (resNum.getText().equals("")) {
+			CommonService.msg("현재 입력된 번호가 없습니다.");
 		} else {
-			CommonService.msg("해당 번호의 노래가 없습니다.");
+			resNum.setText("");
+			// 노래 번호 검색 결과가 있을때
+			if (searchDTO != null) {
+				SongDTO songdto = new SongDTO();
+				songdto.setSongNum(searchDTO.getSongNum());
+				songdto.setSongCount(searchDTO.getSongCount());
+				songdto.setSongLink(searchDTO.getSongLink());
+				songController.reserveSong(songdto);
+				searchDTO = null;
+				
+			} else {
+				CommonService.msg("해당 번호의 노래가 없습니다.");
+			}
+						
 		}
 		
-		
 	}
+	
 	public void primaryReserve() {
 		Label resNumTitle = (Label) songController.getSongForm().lookup("#resNumTitle");
 		Label resNum = (Label) songController.getSongForm().lookup("#resNum");
@@ -269,6 +313,7 @@ public class RemoteControlController implements Initializable {
 			
 		} 
 	}
+	
 	public void cancelReserve() {
 		songController.cancelReserve();
 	}
@@ -276,9 +321,11 @@ public class RemoteControlController implements Initializable {
 	public void popularChart() {
 		remoteService.popularChart();
 	}
+	
 	public void titleSearch() {
 		remoteService.titleSearch();
 	}
+	
 	public void singerSearch() {
 		remoteService.singerSearch();
 	}
@@ -290,21 +337,24 @@ public class RemoteControlController implements Initializable {
 		if (pause.getText().equals("일시정지")) {
 			songController.pause();
 			pause.setText("일시정지해제");
-			Font font = Font.font("Hancom Gothic", FontWeight.BOLD, 16);
+			Font font = Font.loadFont("file:src/font/NanumBarunGothicBold.otf", 16);
+			System.out.println(font);
 			pause.setFont(font);
 			
 		} else if (pause.getText().equals("일시정지해제")) {
 			songController.pauseCancel();
 			pause.setText("일시정지");
-			Font font = Font.font("Hancom Gothic", FontWeight.BOLD, 18);
+			Font font = Font.loadFont("file:src/font/NanumBarunGothicBold.otf", 20);
 			pause.setFont(font);
 		}
 		
 	}
+	
 	public void madijump() {
 		songController.madiJump();
 		
 	}
+	
 	public void clap() {
 		try {
 			File clapEffect = new File("src/song/remotecontrol/clap.wav");
@@ -321,7 +371,9 @@ public class RemoteControlController implements Initializable {
 		Label resNum = (Label) songController.getSongForm().lookup("#resNum");
 		resNumTitle.setStyle("-fx-background-color: #ffffff; -fx-opacity : 0");
 		resNum.setStyle("-fx-background-color: #ffffff; -fx-opacity : 0");
-		resNum.setText("");
+		Font font = Font.loadFont("file:src/font/NanumBarunGothicBold.otf", 20);
+		resNumTitle.setFont(font);
+		resNum.setFont(font);
 	}
 
 	public void reserveOpacityOne() {
@@ -329,6 +381,8 @@ public class RemoteControlController implements Initializable {
 		Label resNum = (Label) songController.getSongForm().lookup("#resNum");
 		resNumTitle.setStyle("-fx-background-color: #ffffff; -fx-opacity : 1");
 		resNum.setStyle("-fx-background-color: #ffffff; -fx-opacity : 1");
+		Font font = Font.loadFont("file:src/font/NanumBarunGothicBold.otf", 20);
+		resNumTitle.setFont(font);
+		resNum.setFont(font);
 	}
 }
-;

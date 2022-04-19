@@ -17,42 +17,42 @@
             <Image url="@../../img/관리자회원관리.png" />
          </image>
       </ImageView>
-      <TextField fx:id="Search_Bar" layoutX="219.0" layoutY="113.0" prefHeight="50.0" prefWidth="600.0" style="-fx-background-radius: 45;">
+      <TextField fx:id="Search_Bar" layoutX="219.0" layoutY="113.0" prefHeight="40.0" prefWidth="600.0" style="-fx-background-radius: 45;">
          <font>
             <Font name="NanumBarunGothicOTF Bold" size="15.0" />
          </font></TextField>
-      <Button fx:id="right" layoutX="486.0" layoutY="192.0" mnemonicParsing="false" onAction="#right_move" prefHeight="51.0" prefWidth="45.0" text="-&gt;" />
-      <Button fx:id="left" layoutX="486.0" layoutY="448.0" mnemonicParsing="false" onAction="#left_move" prefHeight="51.0" prefWidth="45.0" text="&lt;-" />
-      <Button fx:id="delete_button" layoutX="885.0" layoutY="538.0" mnemonicParsing="false" onAction="#delete" prefHeight="50.0" prefWidth="95.0" style="-fx-background-color: FFB84D; -fx-background-radius: 25;" text="삭제" textFill="#fffcfc">
+      <Button fx:id="right" layoutX="479.0" layoutY="222.0" mnemonicParsing="false" onAction="#right_move" prefHeight="51.0" prefWidth="45.0" style="-fx-opacity: 0;" text="-&gt;" />
+      <Button fx:id="left" layoutX="486.0" layoutY="383.0" mnemonicParsing="false" onAction="#left_move" opacity="0.0" prefHeight="51.0" prefWidth="45.0" text="&lt;-" />
+      <Button fx:id="delete_button" layoutX="853.0" layoutY="513.0" mnemonicParsing="false" onAction="#delete" prefHeight="50.0" prefWidth="95.0" style="-fx-background-color: FFB84D; -fx-background-radius: 25;" text="삭제" textFill="#fffcfc">
          <opaqueInsets>
             <Insets left="10.0" right="10.0" />
          </opaqueInsets>
          <font>
             <Font name="NanumBarunGothicOTF Bold" size="19.0" />
          </font></Button>
-      <Button fx:id="reset" layoutX="780.0" layoutY="538.0" mnemonicParsing="false" onAction="#reset_all" prefHeight="50.0" prefWidth="95.0" style="-fx-background-color: FFB84D; -fx-background-radius: 25;" text="초기화" textFill="#fffcfc">
+      <Button fx:id="reset" layoutX="739.0" layoutY="513.0" mnemonicParsing="false" onAction="#reset_all" prefHeight="50.0" prefWidth="95.0" style="-fx-background-color: FFB84D; -fx-background-radius: 25;" text="초기화" textFill="#fffcfc">
          <font>
             <Font name="NanumBarunGothicOTF Bold" size="19.0" />
          </font></Button>
       <Button fx:id="Xbutton" layoutX="37.0" layoutY="498.0" mnemonicParsing="false" onAction="#close" prefHeight="80.0" prefWidth="79.0" style="-fx-background-color: transparent;" textFill="#ff0404" />
-      <ImageView fitHeight="51.0" fitWidth="45.0" layoutX="760.0" layoutY="113.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="780.0" layoutY="118.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../img/SearchIcon.png" />
          </image>
       </ImageView>
-      <Button fx:id="Search_button" layoutX="760.0" layoutY="113.0" mnemonicParsing="false" onAction="#search" prefHeight="50.0" prefWidth="45.0" style="-fx-background-color: transparent;" />
-      <TableView fx:id="table_one" layoutX="60.0" layoutY="172.0" prefHeight="327.0" prefWidth="372.0">
+      <Button fx:id="Search_button" layoutX="780.0" layoutY="118.0" mnemonicParsing="false" onAction="#search" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;" />
+      <TableView fx:id="table_one" layoutX="56.0" layoutY="176.0" prefHeight="300.0" prefWidth="350.0">
         <columns>
           <TableColumn fx:id="t1id" prefWidth="90.0" text="ID" />
-          <TableColumn fx:id="t1phone" prefWidth="181.0" text="전화 번호" />
-            <TableColumn fx:id="t1song" prefWidth="100.0" text="잔여 곡수" />
+          <TableColumn fx:id="t1phone" prefWidth="170.0" text="전화 번호" />
+            <TableColumn fx:id="t1song" prefWidth="89.0" text="잔여 곡수" />
         </columns>
       </TableView>
-      <TableView fx:id="table_two" layoutX="602.0" layoutY="172.0" prefHeight="327.0" prefWidth="372.0">
+      <TableView fx:id="table_two" layoutX="598.0" layoutY="176.0" prefHeight="300.0" prefWidth="350.0">
          <columns>
             <TableColumn fx:id="t2id" prefWidth="90.0" text="ID" />
-            <TableColumn fx:id="t2phone" prefWidth="181.0" text="전화 번호" />
-            <TableColumn fx:id="t2song" prefWidth="100.0" text="잔여 곡수" />
+            <TableColumn fx:id="t2phone" prefWidth="170.0" text="전화 번호" />
+            <TableColumn fx:id="t2song" prefWidth="89.0" text="잔여 곡수" />
          </columns>
       </TableView>
    </children>

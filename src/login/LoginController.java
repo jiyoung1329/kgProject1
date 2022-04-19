@@ -21,17 +21,15 @@ public class LoginController implements Initializable {
 	@FXML private Button loginButton;
 	@FXML private Button regButton;
 	@FXML private AnchorPane anchor;
-	
 	private Parent loginForm;
 	private LoginService loginSvc;
 	private MainController mainController;
 	
-	//------------
+
 	public void setId(TextField id) {
 		this.id = id;
 	}
-	//--------------
-	
+
 	public void setLoginForm(Parent loginForm) {
 		this.loginForm = loginForm;
 	}
@@ -39,9 +37,6 @@ public class LoginController implements Initializable {
 		this.mainController = mainController;
 	}
 	
-
-
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		loginSvc = new LoginService();
@@ -59,7 +54,6 @@ public class LoginController implements Initializable {
 				loginProc();
 			}
 		});
-
 	
 	}
 	
@@ -80,12 +74,7 @@ public class LoginController implements Initializable {
 	}
 	
 	public void regProc(){
-
 		mainController.open("Register"); // 회원가입 버튼 클릭시 String "Register" 받환
-	}
-	
-	public void adminOpen() {
-		mainController.open("Admin");
 	}
 	
 	public void idLengthCheck() {	//id 길이제한 8자
