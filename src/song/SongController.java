@@ -66,7 +66,6 @@ public class SongController implements Initializable{
 		this.songSearchController = songSearchController;
 	}
 	
-	
 	public RemoteControlController getRemoteController() {
 		return remoteController;
 	}
@@ -102,7 +101,6 @@ public class SongController implements Initializable{
 	public void setSongSearchForm(Parent searchForm) {
 		this.searchForm = searchForm;
 	}
-	
 	
 	public ArrayList<SongDTO> getSongNumber() {
 		return songNumber;
