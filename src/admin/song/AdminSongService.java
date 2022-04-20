@@ -62,7 +62,7 @@ public class AdminSongService extends AdminSongController {
 			
 			//파일복사파트
 			String origin = fileroot.getText();
-			String copydir = "./src/media";
+			String copydir = "./bin/media";
 			String copyfile = copydir + "/" + number.getText() + ".mp4";
 			String link = "/media/"+number.getText()+".mp4";
 			File originfile = new File(origin);
