@@ -58,6 +58,16 @@ public class PopularChartController implements Initializable {
 	}
 
 
+	public SongSearchDTO getSearchDTO() {
+		return searchDTO;
+	}
+
+
+	public void setSearchDTO(SongSearchDTO searchDTO) {
+		this.searchDTO = searchDTO;
+	}
+
+
 	// 화면창 생성과 동시에 노래 목록 띄우기
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

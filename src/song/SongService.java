@@ -56,6 +56,7 @@ public class SongService {
 			songController.getRemoteController().setSearchController(searchController);
 			
 			
+			
 			Scene scene = new Scene(songSearchForm);
 			
 			Stage nowStage = (Stage) songController.getSongForm().getScene().getWindow();

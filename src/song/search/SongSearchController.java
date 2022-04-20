@@ -52,6 +52,16 @@ public class SongSearchController implements Initializable{
 	public void setRemoteController(RemoteControlController remoteController) {
 		this.remoteController = remoteController;
 	}
+	
+	
+
+	public SongSearchDTO getSearchDTO() {
+		return searchDTO;
+	}
+
+	public void setSearchDTO(SongSearchDTO searchDTO) {
+		this.searchDTO = searchDTO;
+	}
 
 	// 화면창 생성과 동시에 노래 목록 띄우기
 	@Override

@@ -61,6 +61,7 @@ public class RemoteControlController implements Initializable {
 	
 	private Parent remoteForm;
 	private Parent songForm;
+	private Parent searchForm;
 	
 	private SongSearchDTO searchDTO;
 	private SongDTO songDTO;
@@ -289,7 +290,17 @@ public class RemoteControlController implements Initializable {
 
 		// 현재 입력된 곡이 없으면
 		if (resNum.getText().equals("")) {
-			CommonService.msg("현재 입력된 번호가 없습니다.");
+			// searchForm에 어떤 곡이 클릭 되어있다면
+			if (searchController.getSearchDTO() != null) {
+				SongDTO songdto = new SongDTO();
+				songdto.setSongNum(searchController.getSearchDTO().getSongNum());
+				songdto.setSongCount(searchController.getSearchDTO().getSongCount());
+				songdto.setSongLink(searchController.getSearchDTO().getSongLink());
+				songController.reserveSong(songdto);
+				
+			} else {
+				CommonService.msg("현재 입력된 번호가 없습니다.");
+			}
 		} else {
 			resNum.setText("");
 			// 노래 번호 검색 결과가 있을때
@@ -317,17 +328,36 @@ public class RemoteControlController implements Initializable {
 		Label resNum = (Label) songController.getSongForm().lookup("#resNum");
 
 		reserveOpacityZero();
-		resNum.setText("");
-		
-		if (searchDTO != null) {
-			SongDTO songdto = new SongDTO();
-			songdto.setSongNum(searchDTO.getSongNum());
-			songdto.setSongCount(searchDTO.getSongCount());
-			songdto.setSongLink(searchDTO.getSongLink());
-			songController.primaryReserveSong(songdto);
-			searchDTO = null;
+		// 현재 입력된 곡이 없으면
+		if (resNum.getText().equals("")) {
+			// searchForm에 어떤 곡이 클릭 되어있다면
+			if (searchController.getSearchDTO() != null) {
+				SongDTO songdto = new SongDTO();
+				songdto.setSongNum(searchController.getSearchDTO().getSongNum());
+				songdto.setSongCount(searchController.getSearchDTO().getSongCount());
+				songdto.setSongLink(searchController.getSearchDTO().getSongLink());
+				songController.primaryReserveSong(songdto);
+				
+			} else {
+				CommonService.msg("현재 입력된 번호가 없습니다.");
+			}
 			
-		} 
+		} else {
+			resNum.setText("");
+			// 노래 번호 검색 결과가 있을때
+			if (searchDTO != null) {
+				SongDTO songdto = new SongDTO();
+				songdto.setSongNum(searchDTO.getSongNum());
+				songdto.setSongCount(searchDTO.getSongCount());
+				songdto.setSongLink(searchDTO.getSongLink());
+				songController.primaryReserveSong(songdto);
+				searchDTO = null;
+				
+			} else {
+				CommonService.msg("해당 번호의 노래가 없습니다.");
+			}
+						
+		}
 	}
 	
 	public void cancelReserve() {
