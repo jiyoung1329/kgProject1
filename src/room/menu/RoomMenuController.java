@@ -7,6 +7,7 @@ import common.CommonService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -27,8 +28,9 @@ public class RoomMenuController implements Initializable{	//메뉴선택 페이�
 	private RoomMenuController roomMenuController;
 	private Status status;
 	private LoginDTO loginDTO;
-	@FXML Label customerId;
-	@FXML Label remainSongLabel;
+	@FXML private Label customerId;
+	@FXML private Label remainSongLabel;
+	@FXML private Button selectButton;
 	
 	public void setLoginDTO(LoginDTO loginDTO) {
 		this.loginDTO = loginDTO;
@@ -63,6 +65,13 @@ public class RoomMenuController implements Initializable{	//메뉴선택 페이�
 		// songCount 설정
 		int tmp = loginDTO.getSongConut();
 		remainSongLabel.setText(Integer.toString(tmp));
+		
+		// songCount가 0이면 select버튼은 disabled
+		if (tmp <= 0) {
+			selectButton.setDisable(true);
+		} else {
+			selectButton.setDisable(false);
+		}
 	}
 	
 	public void chargeProc() throws Exception{
