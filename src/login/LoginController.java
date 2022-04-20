@@ -20,11 +20,15 @@ public class LoginController implements Initializable {
 	@FXML private PasswordField pw;
 	@FXML private Button loginButton;
 	@FXML private Button regButton;
+
 	@FXML private AnchorPane anchor;
 	private Parent loginForm;
 	private LoginService loginSvc;
 	private MainController mainController;
 	
+	public TextField getId() {
+		return id;
+	}
 
 	public void setId(TextField id) {
 		this.id = id;
@@ -63,6 +67,7 @@ public class LoginController implements Initializable {
 		if(loginDto != null) {					// 메인서비스에서 LoginDTO자료형으로 받아옮. null값이 아닐경우
 			if(loginDto.getIsAdmin() == 1){		// 받아온 LoginDTO의 isAdmin 값이 1일경우 String "Admin"반환
 				mainController.open("Admin");
+				CommonService.windowClose(loginForm);
 			}else {								// isAdmin값이 1이 아닐경우 String "RoomChoice"반환
 			CommonService.windowClose(loginForm); // 로그인메뉴 종료
 			mainController.open("RoomChoice");
