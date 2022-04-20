@@ -18,6 +18,7 @@ import common.CommonDAO;
 import common.CommonService;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.FileChooser;
@@ -55,7 +56,7 @@ public class AdminSongService extends AdminSongController {
 
 	}
 
-	public void regProc(TextField number, TextField name, TextField singer, TextField fileroot) {
+	public void regProc(TextField number, TextField name, TextField singer, TextField fileroot,Label label) {
 		String sql = "insert into song(num,title,singer,Link) values (?,?,?,?)";
 		try {
 			
@@ -69,7 +70,7 @@ public class AdminSongService extends AdminSongController {
 			File copyfiles = new File(copyfile);
 			File dirCopyFile = new File(copydir);
 			double bytes = originfile.length();
-			double copys;
+			double copys=0,per;
 			//디렉터리가 없으면 만들어주는 파트
 			if (!dirCopyFile.exists()) { 
 				dirCopyFile.mkdirs();
@@ -78,11 +79,14 @@ public class AdminSongService extends AdminSongController {
 			try {
 				FileInputStream fis = new FileInputStream(originfile);
 				FileOutputStream fos = new FileOutputStream(copyfiles);
-				
 				int filebyte = 0;
 				try {
 					while ((filebyte = fis.read()) != -1) {
 						fos.write(filebyte);
+						copys++;
+						per=copys/bytes*100;
+						label.setText(Double.toString(per));
+						System.out.println(label.getText());
 					}
 					fis.close();
 					fos.close();

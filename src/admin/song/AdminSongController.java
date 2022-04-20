@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
@@ -21,6 +22,7 @@ public class AdminSongController implements Initializable {
 	@FXML private Button reg_button;
 	@FXML private Button check;
 	@FXML private TextField fileroot;
+	@FXML private Label label;
 	private Parent songform;
 	private AdminSongService ssvc;
 	private AdminSongController scon;
@@ -70,7 +72,7 @@ public class AdminSongController implements Initializable {
 	}
 	
 	public void regProc() {
-		ssvc.regProc(songNumber, songName,songSinger,fileroot);
+		ssvc.regProc(songNumber, songName,songSinger,fileroot,label);
 	}
 	
 	public void resetProc() {
