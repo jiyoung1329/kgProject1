@@ -36,7 +36,7 @@
             <Font name="NanumBarunGothicOTF Bold" size="16.0" />
          </font>
       </Button>
-      <TextField fx:id="fileroot" layoutX="317.0" layoutY="414.0" prefHeight="50.0" prefWidth="450.0" style="-fx-background-radius: 50;">
+      <TextField fx:id="fileroot" disable="true" layoutX="317.0" layoutY="414.0" prefHeight="50.0" prefWidth="450.0" style="-fx-background-radius: 50;">
          <font>
             <Font name="NanumBarunGothicOTF Bold" size="16.0" />
          </font></TextField>
